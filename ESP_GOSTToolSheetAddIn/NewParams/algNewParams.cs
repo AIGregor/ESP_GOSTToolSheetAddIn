@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESP_GOSTToolSheetAddIn
 {
-    public class Class1
+    class algNewParams
     {
     }
 }
