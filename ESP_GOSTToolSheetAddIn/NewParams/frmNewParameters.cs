@@ -16,5 +16,25 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             InitializeComponent();
         }
+
+        private void frmNewParameters_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
