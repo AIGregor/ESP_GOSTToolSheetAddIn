@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ESP_GOSTToolSheetAddIn.Properties {
+namespace ESP_GOSTToolSheetAddIn.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ESP_GOSTToolSheetAddIn.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESP_GOSTToolSheetAddIn.Properties.StringResource", typeof(StringResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESP_GOSTToolSheetAddIn.Resources.StringResource", typeof(StringResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,51 +57,6 @@ namespace ESP_GOSTToolSheetAddIn.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to espToolType.txt.
-        /// </summary>
-        internal static string pathToolType {
-            get {
-                return ResourceManager.GetString("pathToolType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ToolparamName.
-        /// </summary>
-        internal static string xmlAttriduteName {
-            get {
-                return ResourceManager.GetString("xmlAttriduteName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tool.
-        /// </summary>
-        internal static string xmlElementName {
-            get {
-                return ResourceManager.GetString("xmlElementName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NewParameter.
-        /// </summary>
-        internal static string xmlNewAdditionalParameter {
-            get {
-                return ResourceManager.GetString("xmlNewAdditionalParameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AdditionalParameters.xml.
-        /// </summary>
-        internal static string xmlPathToolsParams {
-            get {
-                return ResourceManager.GetString("xmlPathToolsParams", resourceCulture);
             }
         }
     }
