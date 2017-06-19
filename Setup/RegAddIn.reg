@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect]
+"Description"="Автоматическое формирование карты наладка по ГОСТ в формате файла EXCEL"
+"FriendlyName"="ГОСТ - Карта наладки инструмента"
+"LoadBehavior"=dword:00000001	

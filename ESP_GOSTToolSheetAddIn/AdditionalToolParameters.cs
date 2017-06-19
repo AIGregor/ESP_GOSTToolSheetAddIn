@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.IO;
 using ESP_GOSTToolSheetAddIn.Resources;
@@ -43,7 +40,7 @@ namespace ESP_GOSTToolSheetAddIn
         /*
          * Создание XML файла
          */
-        public bool creatPatternFile(string FileName)
+        public static bool creatPatternFile(string FileName)
         {
             //создание документа
             XmlDocument XmlDoc = new XmlDocument();
@@ -63,22 +60,26 @@ namespace ESP_GOSTToolSheetAddIn
 
             // Файла имен и создание корневых элементов
             string text = "";
-            using (StreamReader fs = new StreamReader(StringResource.pathToolType))
+            // .net читает только UTF8 - надо преобразовывать для отображения русского текста
+            Encoding enc = Encoding.GetEncoding(1251);
+            using (StreamReader fs = new StreamReader(StringResource.txtPathToolType, enc))
             {
                 while (true)
                 {
                     // Читаем строку из файла во временную переменную.
                     string temp = fs.ReadLine();
-                    if (temp == null) break; // Если достигнут конец файла, прерываем считывание.
+
+                    if (temp == null)
+                        break; // Если достигнут конец файла, прерываем считывание.
 
                     string sToolName = getToolName(temp);
                     string sToolID = getToolID(temp);
-
-                    /*<ToolType name="abc"></ToolType>*/
+                    string sToolLabel = getToolLable(temp);
 
                     XmlElement ElementTools = XmlDoc.CreateElement(StringResource.xmlElementName); //создание корневого элемента
-                    ElementTools.SetAttribute("ToolName", sToolName); //создание атрибута
-                    ElementTools.SetAttribute("ToolID", sToolID);
+                    ElementTools.SetAttribute(StringResource.xmlToolName, sToolName); //создание атрибута
+                    ElementTools.SetAttribute(StringResource.xmlToolID, sToolID);
+                    ElementTools.SetAttribute(StringResource.xmlToolLabel, sToolLabel);
                     root.AppendChild(ElementTools);
 
                     text += temp; // Пишем считанную строку в итоговую переменную.
@@ -89,17 +90,45 @@ namespace ESP_GOSTToolSheetAddIn
             return true;
         }
 
-        string getToolName(string sSourceString)
+        static string getToolName(string sSourceString)
         {
             int startName = sSourceString.LastIndexOf("=") + 2;
-            string result = sSourceString.Substring(startName);
+
+            string result = "";
+            int i = startName;
+            while (sSourceString[i] != '\t' && sSourceString[i] != ' ' && i < sSourceString.Length)
+            {
+                result += sSourceString[i];
+                i++;
+            }
+
+            //int tabIndx = sSourceString.IndexOf("\t");
+            //int spaceIndx = sSourceString.IndexOf(" ");
+            //int dashIndx = sSourceString.IndexOf("-");
+
+            //if (spaceIndx > 0)
+            //    tabIndx = Math.Min(tabIndx, spaceIndx);
+
+            //if (tabIndx < 0)
+            //    tabIndx = dashIndx;            
+
+            //if (tabIndx >= startName || dashIndx >= startName)
+            //    result = sSourceString.Substring(startName, Math.Min(tabIndx, dashIndx) - startName);
+
             return result;
         }
 
-        string getToolID(string sSourceString)
+        static string getToolID(string sSourceString)
         {
             int endID = sSourceString.IndexOf(" ");
             string result = sSourceString.Substring(0, endID);
+            return result;
+        }
+
+        static string getToolLable(string sSourceString)
+        {
+            int startCapture = sSourceString.IndexOf("-") + 2;
+            string result = sSourceString.Substring(startCapture);
             return result;
         }
 

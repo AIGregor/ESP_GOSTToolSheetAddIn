@@ -46,11 +46,11 @@
   <ItemGroup>
     <Compile Include="AdditionalToolParameters.cs" />
     <Compile Include="EspritDataBase.cs" />
-    <Compile Include="Forms\EspToolsParameters.cs">
+    <Compile Include="Forms\frmEspToolsParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EspToolsParameters.Designer.cs">
-      <DependentUpon>EspToolsParameters.cs</DependentUpon>
+    <Compile Include="Forms\frmEspToolsParameters.Designer.cs">
+      <DependentUpon>frmEspToolsParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainFrame.cs">
       <SubType>Form</SubType>
@@ -71,11 +71,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\ToolName.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToolName.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\StringResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -187,8 +182,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\EspToolsParameters.resx">
-      <DependentUpon>EspToolsParameters.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmEspToolsParameters.resx">
+      <DependentUpon>frmEspToolsParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrame.resx">
       <DependentUpon>MainFrame.cs</DependentUpon>
@@ -200,17 +195,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ToolName.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ToolName.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\StringResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ToolName.txt" />
+    <None Include="Resources\ToolName.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="EspToolParams.xml">

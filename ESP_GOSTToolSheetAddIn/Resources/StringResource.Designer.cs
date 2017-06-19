@@ -59,5 +59,59 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resources\ToolName.txt.
+        /// </summary>
+        internal static string txtPathToolType {
+            get {
+                return ResourceManager.GetString("txtPathToolType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to espTool.
+        /// </summary>
+        internal static string xmlElementName {
+            get {
+                return ResourceManager.GetString("xmlElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EspritToolsParameters.xml.
+        /// </summary>
+        internal static string xmlPathToolsParams {
+            get {
+                return ResourceManager.GetString("xmlPathToolsParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ToolID.
+        /// </summary>
+        internal static string xmlToolID {
+            get {
+                return ResourceManager.GetString("xmlToolID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ToolLabel.
+        /// </summary>
+        internal static string xmlToolLabel {
+            get {
+                return ResourceManager.GetString("xmlToolLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ToolName.
+        /// </summary>
+        internal static string xmlToolName {
+            get {
+                return ResourceManager.GetString("xmlToolName", resourceCulture);
+            }
+        }
     }
 }
