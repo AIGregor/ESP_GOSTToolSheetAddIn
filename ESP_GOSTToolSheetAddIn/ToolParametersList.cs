@@ -9,9 +9,20 @@ namespace ESP_GOSTToolSheetAddIn
 {
     class ToolParametersList
     {
-        ToolParameter[] parameters;
-        String toolType;
-        String toolID;
+        List<ToolParameter> parameters = new List<ToolParameter>();
+
+        ToolParametersList(Technology tToolType)
+        {
+        }
+
+        public ToolParametersList()
+        {
+        }
+
+        public void AddParameter(ToolParameter newParameter)
+        {
+            parameters.Add(newParameter);
+        }
 
         bool getXMLParametersList(string path) {
             return false;

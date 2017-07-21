@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("123");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("123");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("123");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEspToolsParameters));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listEspGostParams = new System.Windows.Forms.ListView();
             this.clmNewParametersName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbSortToolList = new System.Windows.Forms.ComboBox();
             this.lstTools = new System.Windows.Forms.ListBox();
@@ -43,29 +40,25 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripCreate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripModify = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCreate = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // listEspGostParams
             // 
-            this.listView1.AllowDrop = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listEspGostParams.AllowDrop = true;
+            this.listEspGostParams.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmNewParametersName});
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8,
-            listViewItem9});
-            this.listView1.Location = new System.Drawing.Point(407, 28);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(160, 354);
-            this.listView1.TabIndex = 7;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listEspGostParams.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listEspGostParams.Location = new System.Drawing.Point(533, 28);
+            this.listEspGostParams.Name = "listEspGostParams";
+            this.listEspGostParams.Size = new System.Drawing.Size(270, 354);
+            this.listEspGostParams.TabIndex = 7;
+            this.listEspGostParams.UseCompatibleStateImageBehavior = false;
+            this.listEspGostParams.View = System.Windows.Forms.View.Details;
             // 
             // clmNewParametersName
             // 
@@ -100,9 +93,10 @@
             this.listEspStandardParameters.AllowDrop = true;
             this.listEspStandardParameters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            this.listEspStandardParameters.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listEspStandardParameters.Location = new System.Drawing.Point(241, 28);
             this.listEspStandardParameters.Name = "listEspStandardParameters";
-            this.listEspStandardParameters.Size = new System.Drawing.Size(160, 354);
+            this.listEspStandardParameters.Size = new System.Drawing.Size(286, 354);
             this.listEspStandardParameters.TabIndex = 7;
             this.listEspStandardParameters.UseCompatibleStateImageBehavior = false;
             this.listEspStandardParameters.View = System.Windows.Forms.View.Details;
@@ -116,7 +110,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(330, 388);
+            this.btnOK.Location = new System.Drawing.Point(566, 388);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 9;
@@ -125,7 +119,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(411, 388);
+            this.btnCancel.Location = new System.Drawing.Point(647, 388);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 10;
@@ -134,7 +128,7 @@
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(492, 388);
+            this.btnApply.Location = new System.Drawing.Point(728, 388);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 11;
@@ -148,11 +142,10 @@
             this.toolStripCreate,
             this.toolStripSeparator1,
             this.toolStripDelete,
-            this.toolStripSeparator2,
-            this.toolStripModify});
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(581, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(814, 25);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -163,6 +156,16 @@
             this.toolStripAdd.Name = "toolStripAdd";
             this.toolStripAdd.Size = new System.Drawing.Size(79, 22);
             this.toolStripAdd.Text = "Добавить";
+            this.toolStripAdd.Click += new System.EventHandler(this.toolStripAdd_Click);
+            // 
+            // toolStripCreate
+            // 
+            this.toolStripCreate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCreate.Image")));
+            this.toolStripCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripCreate.Name = "toolStripCreate";
+            this.toolStripCreate.Size = new System.Drawing.Size(70, 22);
+            this.toolStripCreate.Text = "Создать";
+            this.toolStripCreate.Click += new System.EventHandler(this.toolStripCreate_Click);
             // 
             // toolStripSeparator1
             // 
@@ -182,34 +185,18 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripModify
-            // 
-            this.toolStripModify.Image = ((System.Drawing.Image)(resources.GetObject("toolStripModify.Image")));
-            this.toolStripModify.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripModify.Name = "toolStripModify";
-            this.toolStripModify.Size = new System.Drawing.Size(81, 22);
-            this.toolStripModify.Text = "Изменить";
-            // 
-            // toolStripCreate
-            // 
-            this.toolStripCreate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCreate.Image")));
-            this.toolStripCreate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCreate.Name = "toolStripCreate";
-            this.toolStripCreate.Size = new System.Drawing.Size(70, 22);
-            this.toolStripCreate.Text = "Создать";
-            // 
             // frmEspToolsParameters
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 422);
+            this.ClientSize = new System.Drawing.Size(814, 422);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.listEspStandardParameters);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listEspGostParams);
             this.Controls.Add(this.cbSortToolList);
             this.Controls.Add(this.lstTools);
             this.DoubleBuffered = true;
@@ -227,7 +214,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listEspGostParams;
         private System.Windows.Forms.ColumnHeader clmNewParametersName;
         private System.Windows.Forms.ComboBox cbSortToolList;
         private System.Windows.Forms.ListBox lstTools;
@@ -241,7 +228,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripModify;
         private System.Windows.Forms.ToolStripButton toolStripCreate;
     }
 }

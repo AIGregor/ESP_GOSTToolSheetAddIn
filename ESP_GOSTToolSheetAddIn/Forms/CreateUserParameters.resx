@@ -117,25 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="msgNewParamError" xml:space="preserve">
-    <value>ОШИБКА! Значение нового параметра не задано !</value>
-  </data>
-  <data name="txtPathToolType" xml:space="preserve">
-    <value>Resources\ToolName.txt</value>
-  </data>
-  <data name="xmlElementName" xml:space="preserve">
-    <value>espTool</value>
-  </data>
-  <data name="xmlPathToolsParams" xml:space="preserve">
-    <value>EspritToolsParameters.xml</value>
-  </data>
-  <data name="xmlToolID" xml:space="preserve">
-    <value>ToolID</value>
-  </data>
-  <data name="xmlToolLabel" xml:space="preserve">
-    <value>ToolLabel</value>
-  </data>
-  <data name="xmlToolName" xml:space="preserve">
-    <value>ToolName</value>
-  </data>
 </root>

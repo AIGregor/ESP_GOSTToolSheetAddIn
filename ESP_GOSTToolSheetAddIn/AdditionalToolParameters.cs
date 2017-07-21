@@ -12,7 +12,7 @@ namespace ESP_GOSTToolSheetAddIn
  * Конструктор 
  * Создание XML файла с пустым списком параметров
  */
-        public AdditionalToolParameters()
+        public AdditionalToolParameters() : base()
         {
 
         }

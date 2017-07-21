@@ -46,6 +46,12 @@
   <ItemGroup>
     <Compile Include="AdditionalToolParameters.cs" />
     <Compile Include="EspritDataBase.cs" />
+    <Compile Include="Forms\CreateUserParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateUserParameters.Designer.cs">
+      <DependentUpon>CreateUserParameters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmEspToolsParameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="GostTool.cs" />
     <Compile Include="ToolParameter.cs" />
     <Compile Include="ToolParametersList.cs" />
   </ItemGroup>
@@ -182,6 +189,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\CreateUserParameters.resx">
+      <DependentUpon>CreateUserParameters.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEspToolsParameters.resx">
       <DependentUpon>frmEspToolsParameters.cs</DependentUpon>
     </EmbeddedResource>

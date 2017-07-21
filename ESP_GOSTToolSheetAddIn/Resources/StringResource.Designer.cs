@@ -61,6 +61,15 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ОШИБКА! Значение нового параметра не задано !.
+        /// </summary>
+        internal static string msgNewParamError {
+            get {
+                return ResourceManager.GetString("msgNewParamError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resources\ToolName.txt.
         /// </summary>
         internal static string txtPathToolType {

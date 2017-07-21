@@ -15,7 +15,6 @@
 14 = ToolMillCustom 			- Пользовательская Фреза
 15 = ToolLatheCustom 			- Пользовательская Пластина
 16 = ToolLatheTurning 			- Токарная Пластина
-//17 = ToolLatheGrooving 			- Канавочная Пластина
 18 = ToolLatheTopNotch 			- Резьбовая Пластина для Крупной Резьбы
 19 = ToolLatheLayDown 			- Резьбовая Пластина для Мелкой Резьбы
 20 = ToolMillThreadMill 		- Резьбафреза
