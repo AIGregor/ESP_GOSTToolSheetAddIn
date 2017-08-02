@@ -22,7 +22,8 @@ namespace ESP_GOSTToolSheetAddIn
     /// </summary>
     public partial class frmEspToolsParameters : Form
     {
-        GostTool[] gostToolsArray;       
+        GostTool[] gostToolsArray;
+        Technology g_espTool = null;
 
         public frmEspToolsParameters()
         {
@@ -59,40 +60,22 @@ namespace ESP_GOSTToolSheetAddIn
                     XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
                     string sToolName = singleNodeName.Value;
 
+                    if (i == 0)
+                    {
+                        fillFrmList(sToolName);
+                    }
+
                     gostToolsArray[i] = new GostTool();
                     gostToolsArray[i].toolID = iToolId;
                     gostToolsArray[i].toolLabel = sToolLabel;
-                    gostToolsArray[i].toolName = sToolName;
+                    gostToolsArray[i].toolName = sToolName;                    
                     i++;
                                         
                     lstTools.Items.Add(sToolLabel);
                 }
             }
 
-            //Tools m_espToolsList = new Tools();
-
-            // По инструменту загружаем список параметров, заполняя форму.
-            ToolMillEndMill tlBallMill = new ToolMillEndMill();
-
-            Technology espTool = (Technology)tlBallMill;
-
-            List<string> lstParameters = new List<string>();
-
-            IEnumerator enumerator = espTool.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                Parameter item = (Parameter)enumerator.Current;
-                string sValue = item.Name;
-                lstParameters.Add(sValue);
-                //listEspStandardParameters.Items.Add(dValue);
-            }
-
-            lstParameters.Sort();
-            foreach (string sValue in lstParameters)
-                listEspStandardParameters.Items.Add(sValue);
-
-            // Устанавливаем списокк сортировки "Все инструменты"
-            cbSortToolList.SelectedItem = 1;
+            // Устанавливаем список сортировки "Все инструменты"
             lstTools.SelectedIndex = 0;
         }
 
@@ -105,7 +88,7 @@ namespace ESP_GOSTToolSheetAddIn
         {
             listEspGostParams.Items.Add(e.Data.ToString());
         }
-
+//----------------------------------------------------------------------------------------
         // Выбор инструмента из списка
         private void lstTools_Click(object sender, EventArgs e)
         {
@@ -127,36 +110,17 @@ namespace ESP_GOSTToolSheetAddIn
             string sClassName = xmlCollection.Item(0).Value;
 
             fillFrmList(sClassName);
-            Console.WriteLine("test");
-            
-            //Type tType = typeof(ToolMillEndMill);
-            //string assemblyName = tType.AssemblyQualifiedName.ToString();
-            // Хитрая штука - вытаскиваем имя класса инструмента и потом получаем тип класса
-            // из текстового имени класса
-            //string sGetType = "EspritTechnology." + sClassName + ", ESP_GOSTToolSheetAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
-            //Type elementType = Type.GetType(sGetType);
-            
-            //Type tType = typeof(ToolMillEndMill);
-            //string assemblyName = tType.AssemblyQualifiedName.ToString();
-
-            //string sGetType = "EspritTechnology.ToolLatheMiniBoring, ESP_GOSTToolSheetAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
-            //Type elementType = Type.GetType(sGetType);
-
-            //if (elementType != null)
-            //{
-            //    object list = Activator.CreateInstance(elementType);
-            //    Technology tSelectedTool = (Technology) list;
-            //}
-            
-            //Type listType = typeof(List<>).MakeGenericType(new Type[] { elementType });
-            //object list = Activator.CreateInstance<"EspritTechnology.ToolLatheGroove">();
-
-            //object list = Activator.CreateInstance("ToolMillUndercutMill"); Activator.CreateInstance<Person>();
-            //object list = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance("EspritTechnology.ToolLatheGroove");
-            //echnology tSelectedTool = (Technology) list;
-            
+            Console.WriteLine("test");                       
         }
 
+        private Technology getTechnologyByName(String strTechName)
+        {
+            g_espTool = (Technology)new ToolMillEndMill();
+            return g_espTool;
+        }
+
+
+        //----------------------------------------------------------------------------------------
         void fillFrmList(string sClassName)
         {
             Technology espTool = null;
@@ -260,27 +224,28 @@ namespace ESP_GOSTToolSheetAddIn
                     espTool = (Technology)ToolMillUndercutMill;
                     break;
             }
-
-            List<string> lstParameters = new List<string>();
+            // Очистить форму
+            listEspStandardParameters.Items.Clear();
 
             IEnumerator enumerator = espTool.GetEnumerator();
             while (enumerator.MoveNext())
             {
                 Parameter item = (Parameter)enumerator.Current;
-                string sValue = item.Name;
-                lstParameters.Add(sValue);
-                //listEspStandardParameters.Items.Add(dValue);
+
+                string[] arrParams = new string[3];
+                arrParams[0] = item.Caption;
+                arrParams[1] = item.Name;
+                arrParams[2] = item.ClCode.ToString();
+
+                ListViewItem newItem = new ListViewItem(arrParams);
+                listEspStandardParameters.Items.Add(newItem);
             }
 
-            lstParameters.Sort();
-            MessageBox.Show(lstParameters.Count().ToString());
-
-            listEspStandardParameters.Items.Clear();
-
-            foreach (string sValue in lstParameters)
-                listEspStandardParameters.Items.Add(sValue);
+            listEspStandardParameters.Sort();                                   
+            MessageBox.Show(listEspStandardParameters.Items.Count.ToString());
         }
 
+//----------------------------------------------------------------------------------------
         private void toolStripAdd_Click(object sender, EventArgs e)
         {
             // Получили название инструмента
@@ -288,14 +253,15 @@ namespace ESP_GOSTToolSheetAddIn
 
             for (int i = 0; i < gostToolsArray.Count(); i++)
             {
-                if (String.Equals(gostToolsArray[i].toolName, sToolTypeName))
+                if (String.Equals(gostToolsArray[i].toolLabel, sToolTypeName))
                 {
                     replaceSelectedElements(i);
                     break;
                 }
             }                       
         }
-//----------------------------------------------------------------------------------------
+
+        //----------------------------------------------------------------------------------------
         private void replaceSelectedElements(int gostToolNumber)
         {
             int count = listEspStandardParameters.SelectedItems.Count;
@@ -303,22 +269,30 @@ namespace ESP_GOSTToolSheetAddIn
             {
                 // Надо записать имя выбранного паремтра
                 ToolParameter newParameter = new ToolParameter();
+                string[] arrParams = new string[4];
+                arrParams[0] =  listEspStandardParameters.SelectedItems[0].SubItems[0].Text;
+                arrParams[1] =  listEspStandardParameters.SelectedItems[0].SubItems[1].Text;
+                arrParams[2] = StringResource.xmlParamStandartType;
+                arrParams[3] =  listEspStandardParameters.SelectedItems[0].SubItems[2].Text;
 
-                string sItemName = listEspStandardParameters.SelectedItems[0].Text;
-                if (!String.Equals(sItemName, ""))
+                if (!String.Equals(arrParams[0], ""))
                 {
-                    // Добавить в список для карты наладки
-                    listEspGostParams.Items.Add(sItemName);
+                    // Добавить в список на форме для карты наладки
+                    ListViewItem newItem = new ListViewItem(arrParams);
+                    listEspGostParams.Items.Add(newItem);
+
                     // Удалить из списка стандартный парметров
                     listEspStandardParameters.SelectedItems[0].Remove();
-                    // Загрузить в структуру
-                    newParameter.ParameterName = sItemName;
-                    gostToolsArray[gostToolNumber].addParameter(newParameter);                  
+
+                    newParameter.Name = arrParams[1];
+                    newParameter.CLCode = int.Parse(arrParams[3]);
+
+                    gostToolsArray[gostToolNumber].addParameter(newParameter);
                 }
             }
         }
 
-//----------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------
         private void toolStripCreate_Click(object sender, EventArgs e)
         {
             CreateUserParameters frmNewUserParameter = new CreateUserParameters(this);
@@ -329,7 +303,7 @@ namespace ESP_GOSTToolSheetAddIn
         {
             // Надо записать имя выбранного паремтра
             ToolParameter newParameter = new ToolParameter();
-            newParameter.ParameterName = sUserParamName;
+            newParameter.Name = sUserParamName;
 
             // Получили название инструмента
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
@@ -346,5 +320,59 @@ namespace ESP_GOSTToolSheetAddIn
             }
         }
 
+        private void toolStripDelete_Click(object sender, EventArgs e)
+        {
+            string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
+            int iCurrentTool = 0;
+
+            for (int i = 0; i < gostToolsArray.Count(); i++)
+            {
+                if (String.Equals(gostToolsArray[i].toolLabel, sToolTypeName))
+                {
+                    iCurrentTool = i;
+                }
+            }
+
+            int count = listEspGostParams.SelectedItems.Count;
+            for (int j = 0; j < count; j++)
+            {
+                string[] arrParams = new string[3];
+                arrParams[0] = listEspGostParams.SelectedItems[0].SubItems[0].Text;
+                arrParams[1] = listEspGostParams.SelectedItems[0].SubItems[1].Text;
+                arrParams[2] = listEspGostParams.SelectedItems[0].SubItems[3].Text;
+
+                // Если тип стандартный
+                if (String.Equals(listEspGostParams.SelectedItems[0].SubItems[2].Text, StringResource.xmlParamStandartType))
+                {
+                    // Возвращаем в список стандартный параметров
+                    ListViewItem newItem = new ListViewItem(arrParams);
+                    listEspStandardParameters.Items.Add(newItem);
+                }
+                 // Удаление через Cl Code
+                 gostToolsArray[iCurrentTool].removeParameter(int.Parse(arrParams[2]));
+                // Удаление строки
+                listEspGostParams.SelectedItems[j].Remove();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("OK");
+            // TODO: Из массива gostToolsArray[iCurrentTool] записать все параметры в XML файл
+            // который потом будет использоваться для заполнения карты наладки и
+            // закрыть форму 
+
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Apply");
+            //TODO: Только записать параметры в файл для текущего инструмента
+        }
     }
 }

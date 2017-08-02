@@ -29,111 +29,54 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEspToolsParameters));
-            this.listEspGostParams = new System.Windows.Forms.ListView();
-            this.clmNewParametersName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cbSortToolList = new System.Windows.Forms.ComboBox();
             this.lstTools = new System.Windows.Forms.ListBox();
-            this.listEspStandardParameters = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnApply = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripCreate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.listEspStandardParameters = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listEspGostParams = new System.Windows.Forms.ListView();
+            this.clmNewParametersName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmNewParameterName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmNewParameterType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmNewParameterClCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnOK = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // listEspGostParams
-            // 
-            this.listEspGostParams.AllowDrop = true;
-            this.listEspGostParams.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clmNewParametersName});
-            this.listEspGostParams.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listEspGostParams.Location = new System.Drawing.Point(533, 28);
-            this.listEspGostParams.Name = "listEspGostParams";
-            this.listEspGostParams.Size = new System.Drawing.Size(270, 354);
-            this.listEspGostParams.TabIndex = 7;
-            this.listEspGostParams.UseCompatibleStateImageBehavior = false;
-            this.listEspGostParams.View = System.Windows.Forms.View.Details;
-            // 
-            // clmNewParametersName
-            // 
-            this.clmNewParametersName.Text = "Параметры для карты наладки";
-            this.clmNewParametersName.Width = 138;
-            // 
-            // cbSortToolList
-            // 
-            this.cbSortToolList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbSortToolList.FormattingEnabled = true;
-            this.cbSortToolList.Items.AddRange(new object[] {
-            "Все инструменты",
-            "Фрезерный инструмент",
-            "Токарный инструмент"});
-            this.cbSortToolList.Location = new System.Drawing.Point(12, 28);
-            this.cbSortToolList.Name = "cbSortToolList";
-            this.cbSortToolList.Size = new System.Drawing.Size(223, 21);
-            this.cbSortToolList.TabIndex = 6;
             // 
             // lstTools
             // 
+            this.lstTools.Dock = System.Windows.Forms.DockStyle.Left;
             this.lstTools.FormattingEnabled = true;
-            this.lstTools.Location = new System.Drawing.Point(12, 56);
+            this.lstTools.Location = new System.Drawing.Point(0, 0);
             this.lstTools.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstTools.Name = "lstTools";
-            this.lstTools.Size = new System.Drawing.Size(223, 355);
+            this.lstTools.Size = new System.Drawing.Size(252, 520);
             this.lstTools.TabIndex = 5;
             this.lstTools.Click += new System.EventHandler(this.lstTools_Click);
             // 
-            // listEspStandardParameters
-            // 
-            this.listEspStandardParameters.AllowDrop = true;
-            this.listEspStandardParameters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.listEspStandardParameters.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listEspStandardParameters.Location = new System.Drawing.Point(241, 28);
-            this.listEspStandardParameters.Name = "listEspStandardParameters";
-            this.listEspStandardParameters.Size = new System.Drawing.Size(286, 354);
-            this.listEspStandardParameters.TabIndex = 7;
-            this.listEspStandardParameters.UseCompatibleStateImageBehavior = false;
-            this.listEspStandardParameters.View = System.Windows.Forms.View.Details;
-            this.listEspStandardParameters.DragDrop += new System.Windows.Forms.DragEventHandler(this.listEspStandardParameters_DragDrop);
-            this.listEspStandardParameters.DragEnter += new System.Windows.Forms.DragEventHandler(this.listEspStandardParameters_DragEnter);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Все параметры инстремунта";
-            this.columnHeader1.Width = 139;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Location = new System.Drawing.Point(566, 388);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 9;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(647, 388);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(823, 488);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(76, 23);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // btnApply
-            // 
-            this.btnApply.Location = new System.Drawing.Point(728, 388);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
-            this.btnApply.TabIndex = 11;
-            this.btnApply.Text = "Применить";
-            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // toolStrip1
             // 
@@ -143,9 +86,9 @@
             this.toolStripSeparator1,
             this.toolStripDelete,
             this.toolStripSeparator2});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(252, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(814, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(738, 25);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -179,55 +122,173 @@
             this.toolStripDelete.Name = "toolStripDelete";
             this.toolStripDelete.Size = new System.Drawing.Size(71, 22);
             this.toolStripDelete.Text = "Удалить";
+            this.toolStripDelete.Click += new System.EventHandler(this.toolStripDelete_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(258, 28);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.listEspStandardParameters);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.listEspGostParams);
+            this.splitContainer1.Size = new System.Drawing.Size(720, 454);
+            this.splitContainer1.SplitterDistance = 372;
+            this.splitContainer1.TabIndex = 15;
+            // 
+            // listEspStandardParameters
+            // 
+            this.listEspStandardParameters.AllowDrop = true;
+            this.listEspStandardParameters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader3,
+            this.columnHeader2});
+            this.listEspStandardParameters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listEspStandardParameters.FullRowSelect = true;
+            this.listEspStandardParameters.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listEspStandardParameters.Location = new System.Drawing.Point(0, 0);
+            this.listEspStandardParameters.Name = "listEspStandardParameters";
+            this.listEspStandardParameters.Size = new System.Drawing.Size(372, 454);
+            this.listEspStandardParameters.TabIndex = 17;
+            this.listEspStandardParameters.UseCompatibleStateImageBehavior = false;
+            this.listEspStandardParameters.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Параметры инстремунта";
+            this.columnHeader1.Width = 256;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Имя параметра";
+            this.columnHeader3.Width = 130;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "CL Code";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // listEspGostParams
+            // 
+            this.listEspGostParams.AllowDrop = true;
+            this.listEspGostParams.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmNewParametersName,
+            this.clmNewParameterName,
+            this.clmNewParameterType,
+            this.clmNewParameterClCode});
+            this.listEspGostParams.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listEspGostParams.FullRowSelect = true;
+            this.listEspGostParams.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listEspGostParams.Location = new System.Drawing.Point(0, 0);
+            this.listEspGostParams.Name = "listEspGostParams";
+            this.listEspGostParams.Size = new System.Drawing.Size(344, 454);
+            this.listEspGostParams.TabIndex = 18;
+            this.listEspGostParams.UseCompatibleStateImageBehavior = false;
+            this.listEspGostParams.View = System.Windows.Forms.View.Details;
+            // 
+            // clmNewParametersName
+            // 
+            this.clmNewParametersName.Text = "Параметры для карты наладки";
+            this.clmNewParametersName.Width = 227;
+            // 
+            // clmNewParameterName
+            // 
+            this.clmNewParameterName.Text = "Имя параметра";
+            this.clmNewParameterName.Width = 136;
+            // 
+            // clmNewParameterType
+            // 
+            this.clmNewParameterType.Text = "Тип параметры";
+            this.clmNewParameterType.Width = 120;
+            // 
+            // clmNewParameterClCode
+            // 
+            this.clmNewParameterClCode.Text = "CL Code";
+            // 
+            // btnOK
+            // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Location = new System.Drawing.Point(741, 488);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(76, 23);
+            this.btnOK.TabIndex = 10;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // btnApply
+            // 
+            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApply.Location = new System.Drawing.Point(902, 488);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(76, 23);
+            this.btnApply.TabIndex = 10;
+            this.btnApply.Text = "Применить";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
             // frmEspToolsParameters
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 422);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(990, 520);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.listEspStandardParameters);
-            this.Controls.Add(this.listEspGostParams);
-            this.Controls.Add(this.cbSortToolList);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lstTools);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEspToolsParameters";
             this.Text = "Параметры инструмента для карте наладки";
             this.Load += new System.EventHandler(this.EspToolsParameters_Load);
             this.Shown += new System.EventHandler(this.frmEspToolsParameters_Shown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listEspGostParams;
-        private System.Windows.Forms.ColumnHeader clmNewParametersName;
-        private System.Windows.Forms.ComboBox cbSortToolList;
         private System.Windows.Forms.ListBox lstTools;
-        private System.Windows.Forms.ListView listEspStandardParameters;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripAdd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripCreate;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListView listEspStandardParameters;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ListView listEspGostParams;
+        private System.Windows.Forms.ColumnHeader clmNewParametersName;
+        private System.Windows.Forms.ColumnHeader clmNewParameterName;
+        private System.Windows.Forms.ColumnHeader clmNewParameterType;
+        private System.Windows.Forms.ColumnHeader clmNewParameterClCode;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnApply;
     }
 }

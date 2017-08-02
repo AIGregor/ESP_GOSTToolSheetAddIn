@@ -24,6 +24,22 @@ namespace ESP_GOSTToolSheetAddIn
             parameters.Add(newParameter);
         }
 
+        public void RemoveParameter(ToolParameter oldParameter)
+        {
+            parameters.Remove(oldParameter);
+        }
+
+        public void removeParameter(int ClCode)
+        {
+            foreach (ToolParameter item in parameters)
+            {
+                if (item.CLCode == ClCode)
+                {
+                    parameters.Remove(item);
+                }
+            }
+        }
+
         bool getXMLParametersList(string path) {
             return false;
         }

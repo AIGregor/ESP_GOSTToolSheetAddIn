@@ -88,6 +88,24 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стандартный.
+        /// </summary>
+        internal static string xmlParamStandartType {
+            get {
+                return ResourceManager.GetString("xmlParamStandartType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользовательский.
+        /// </summary>
+        internal static string xmlParamUserType {
+            get {
+                return ResourceManager.GetString("xmlParamUserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EspritToolsParameters.xml.
         /// </summary>
         internal static string xmlPathToolsParams {

@@ -126,6 +126,12 @@
   <data name="xmlElementName" xml:space="preserve">
     <value>espTool</value>
   </data>
+  <data name="xmlParamStandartType" xml:space="preserve">
+    <value>Стандартный</value>
+  </data>
+  <data name="xmlParamUserType" xml:space="preserve">
+    <value>Пользовательский</value>
+  </data>
   <data name="xmlPathToolsParams" xml:space="preserve">
     <value>EspritToolsParameters.xml</value>
   </data>

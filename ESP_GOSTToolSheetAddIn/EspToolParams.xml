@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <EspritToolsParameters>  
+
   <EspTool name="espMillToolEndMill" ID="1">
-	<Parameter name="ToolNumber"/>
-    <Parameter name="CuttingLength"/>
+	  <Parameter name="ToolNumber" type="standart"/>
+    <Parameter name="CuttingLength" type="user"/>
   </EspTool>
-  
   
 </EspritToolsParameters>

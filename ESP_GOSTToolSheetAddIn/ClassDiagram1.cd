@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ESP_GOSTToolSheetAddIn.AdditionalToolParameters">
+    <Position X="0.5" Y="1" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAAAAAAAAAAAAAAAAAAAAAAEUAAAAAAAAEAAIACA=</HashCode>
+      <FileName>AdditionalToolParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ESP_GOSTToolSheetAddIn.Connect" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="7.75" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>gABAAAAAAAAAAABAAAQAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connect.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ESP_GOSTToolSheetAddIn.GostTool">
+    <Position X="8" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAAAEIAAAAAAAAAAAAAAAAQAACAAAA=</HashCode>
+      <FileName>GostTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ESP_GOSTToolSheetAddIn.ToolParameter">
+    <Position X="8.25" Y="7.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCAAAAIgAAAAAAAAABBAAAAEAAAAAAA=</HashCode>
+      <FileName>ToolParameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ESP_GOSTToolSheetAddIn.ToolParametersList">
+    <Position X="2.5" Y="4.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAACAQAAABAAAAAAAACAAAA=</HashCode>
+      <FileName>ToolParametersList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ESP_GOSTToolSheetAddIn.Forms.CreateUserParameters">
+    <Position X="4.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIABCAAARAABACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\CreateUserParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

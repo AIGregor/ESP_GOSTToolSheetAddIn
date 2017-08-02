@@ -8,28 +8,29 @@ namespace ESP_GOSTToolSheetAddIn
 {
     class ToolParameter
     {
-        public String ParameterName = "";
-        public String ParameterValue = "";
+        public String Name = "";
+        public String Value = "";
+        public int CLCode = 0;
         int ID = 0;
 
         String getName() {
-            return ParameterName;
+            return Name;
         }
 
         void setName(String newName) {
-            ParameterName = newName;
+            Name = newName;
         }
 
         string getValue() {
-            return ParameterValue;
+            return Value;
         }
 
         void setValue(string newValue) {
-            ParameterValue = newValue;
+            Value = newValue;
         }
 
         void setValue(int newValue) {
-            ParameterValue = newValue.ToString();
+            Value = newValue.ToString();
         }
     }
 }
