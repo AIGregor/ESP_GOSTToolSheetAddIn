@@ -13,6 +13,7 @@ using EspritTools;
 using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using System.Collections;
+using System.IO;
 
 namespace ESP_GOSTToolSheetAddIn
 {
@@ -77,6 +78,10 @@ namespace ESP_GOSTToolSheetAddIn
 
             // Устанавливаем список сортировки "Все инструменты"
             lstTools.SelectedIndex = 0;
+            // Загрузить параметры из файла
+            loadPatternParameterFile(gostToolsArray);
+            // Заполнить список для отчета
+            fillFrmReportList(gostToolsArray[0].toolName);
         }
 
         private void listEspStandardParameters_DragEnter(object sender, DragEventArgs e)
@@ -110,15 +115,38 @@ namespace ESP_GOSTToolSheetAddIn
             string sClassName = xmlCollection.Item(0).Value;
 
             fillFrmList(sClassName);
+            listEspGostParams.Items.Clear();
+            fillFrmReportList(sClassName);
+
             Console.WriteLine("test");                       
         }
 
-        private Technology getTechnologyByName(String strTechName)
+        //----------------------------------------------------------------------------------------
+        private void fillFrmReportList(String toolName)
         {
-            g_espTool = (Technology)new ToolMillEndMill();
-            return g_espTool;
-        }
+            // находим инструмент из списка
+            for (int i = 0; i < gostToolsArray.Count(); i++)
+            {
+                if (String.Equals(gostToolsArray[i].toolName, toolName))
+                {
+                    for (int j = 0; j < gostToolsArray[i].parameters.Count(); j++)
+                    {
+                        ToolParameter reportParameter = gostToolsArray[i].parameters.getParameter(j);
+                        string[] arrParams = new string[4];
+                        arrParams[0] = reportParameter.Capture;
+                        arrParams[1] = reportParameter.Name;
+                        arrParams[2] = reportParameter.Type;
+                        arrParams[3] = reportParameter.CLCode.ToString();
 
+                        // Добавить в список на форме для карты наладки
+                        ListViewItem newItem = new ListViewItem(arrParams);
+                        listEspGostParams.Items.Add(newItem);                        
+                    }
+                    break;
+                }
+            }
+
+        }
 
         //----------------------------------------------------------------------------------------
         void fillFrmList(string sClassName)
@@ -242,10 +270,10 @@ namespace ESP_GOSTToolSheetAddIn
             }
 
             listEspStandardParameters.Sort();                                   
-            MessageBox.Show(listEspStandardParameters.Items.Count.ToString());
+            // MessageBox.Show(listEspStandardParameters.Items.Count.ToString());
         }
 
-//----------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------
         private void toolStripAdd_Click(object sender, EventArgs e)
         {
             // Получили название инструмента
@@ -284,9 +312,11 @@ namespace ESP_GOSTToolSheetAddIn
                     // Удалить из списка стандартный парметров
                     listEspStandardParameters.SelectedItems[0].Remove();
 
+                    newParameter.Capture = arrParams[0];
                     newParameter.Name = arrParams[1];
+                    newParameter.Type = arrParams[2];
                     newParameter.CLCode = int.Parse(arrParams[3]);
-
+                    
                     gostToolsArray[gostToolNumber].addParameter(newParameter);
                 }
             }
@@ -304,6 +334,7 @@ namespace ESP_GOSTToolSheetAddIn
             // Надо записать имя выбранного паремтра
             ToolParameter newParameter = new ToolParameter();
             newParameter.Name = sUserParamName;
+            newParameter.Type = StringResource.xmlParamUserType;
 
             // Получили название инструмента
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
@@ -320,6 +351,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
         }
 
+        //----------------------------------------------------------------------------------------
         private void toolStripDelete_Click(object sender, EventArgs e)
         {
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
@@ -354,25 +386,70 @@ namespace ESP_GOSTToolSheetAddIn
                 listEspGostParams.SelectedItems[j].Remove();
             }
         }
-
+        //----------------------------------------------------------------------------------------
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //----------------------------------------------------------------------------------------
         private void btnOK_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("OK");
+            //MessageBox.Show("OK");
             // TODO: Из массива gostToolsArray[iCurrentTool] записать все параметры в XML файл
             // который потом будет использоваться для заполнения карты наладки и
-            // закрыть форму 
-
+            // закрыть форму             
+            AdditionalToolParameters.savePatternParameterFile(gostToolsArray);
+            this.Close();
         }
 
+        //----------------------------------------------------------------------------------------
         private void btnApply_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Apply");
+            //MessageBox.Show("Apply");
             //TODO: Только записать параметры в файл для текущего инструмента
+            AdditionalToolParameters.savePatternParameterFile(gostToolsArray);
         }
+
+        //----------------------------------------------------------------------------------------
+        private void loadPatternParameterFile(GostTool[] toolsArray)
+        {
+            if (!File.Exists(StringResource.xmlPathPattrenFileName))
+            {
+                AdditionalToolParameters.creatPatternFile(StringResource.xmlPathPattrenFileName);
+                return;
+            }
+
+            XmlDocument XmlDoc = new XmlDocument();
+            XmlDoc.Load(StringResource.xmlPathPattrenFileName);
+            // get root element
+            XmlElement xmlRoot = XmlDoc.DocumentElement;
+            // select all tools
+            XmlNodeList allToolsList = xmlRoot.SelectNodes(StringResource.xmlElementName);
+            int index = 0;
+            foreach (XmlNode nodeTool in allToolsList)
+            {
+                XmlNode singleNodeName = nodeTool.SelectSingleNode("@" + StringResource.xmlToolName);
+                string sToolName = singleNodeName.Value;
+                if (String.Equals(sToolName, toolsArray[index].toolName))
+                {
+                    XmlNodeList parametersList = nodeTool.ChildNodes;
+                    for (int i = 0; i < parametersList.Count; i++)
+                    {
+                        ToolParameter newParam = new ToolParameter();
+                        newParam.Name = parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterName).Value;
+                        newParam.Capture = parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterCapture).Value;
+                        newParam.Type = parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterType).Value;
+                        newParam.CLCode = int.Parse( parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterClCode).Value );
+
+                        gostToolsArray[index].addParameter(newParam);
+                    }
+                }
+                index++;
+            }
+        }
+
+
+
     }
 }

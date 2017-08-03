@@ -9,8 +9,10 @@ namespace ESP_GOSTToolSheetAddIn
     class ToolParameter
     {
         public String Name = "";
+        public String Capture = "";
         public String Value = "";
         public int CLCode = 0;
+        public String Type = "";
         int ID = 0;
 
         String getName() {

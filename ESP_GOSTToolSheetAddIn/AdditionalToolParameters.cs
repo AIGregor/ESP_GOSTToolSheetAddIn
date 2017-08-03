@@ -37,9 +37,7 @@ namespace ESP_GOSTToolSheetAddIn
             return false;
         }
 
-        /*
-         * Создание XML файла
-         */
+         // Создание XML файла
         public static bool creatPatternFile(string FileName)
         {
             //создание документа
@@ -82,7 +80,7 @@ namespace ESP_GOSTToolSheetAddIn
                     ElementTools.SetAttribute(StringResource.xmlToolLabel, sToolLabel);
                     root.AppendChild(ElementTools);
 
-                    text += temp; // Пишем считанную строку в итоговую переменную.
+                    //text += temp; // Пишем считанную строку в итоговую переменную.
                 }
             }
 
@@ -131,6 +129,65 @@ namespace ESP_GOSTToolSheetAddIn
             string result = sSourceString.Substring(startCapture);
             return result;
         }
+
+        public static bool savePatternParameterFile(GostTool[] toolsArray)
+        {
+            // если файл не существует
+            if (File.Exists(StringResource.xmlPathPattrenFileName))
+            {
+                File.Delete(StringResource.xmlPathPattrenFileName);    
+            }
+            createPatternParameterFile(toolsArray);
+
+            return true;
+        }
+
+        // создание файла параметров
+        static void createPatternParameterFile(GostTool[] toolsArray)
+        {
+            //создание документа
+            XmlDocument XmlDoc = new XmlDocument();
+
+            /*<?xml version="1.0" encoding="utf-8" ?> */
+            //создание объявления (декларации) документа
+            XmlDeclaration XmlDec = XmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
+            //добавляем в документ
+            XmlDoc.AppendChild(XmlDec);
+
+            XmlComment Comment0 = XmlDoc.CreateComment("Параметры для карты наладки"); //комментарий уровня root            
+            XmlDoc.AppendChild(Comment0); //добавляем в документ
+
+            /*<ToolType name="abc"></ToolType>*/
+            XmlElement root = XmlDoc.CreateElement("EspritReportParameters"); //создание корневого элемента
+            XmlDoc.AppendChild(root); //добавляем в документ
+
+            // Запись инструмента и параметров в файл
+            for (int i = 0; i < toolsArray.Length; i++)
+            {
+                // Создание инструмента
+                XmlElement ElementTools = XmlDoc.CreateElement(StringResource.xmlElementName); //создание корневого элемента
+                ElementTools.SetAttribute(StringResource.xmlToolName, toolsArray[i].toolName); //создание атрибута
+                ElementTools.SetAttribute(StringResource.xmlToolID, toolsArray[i].toolID.ToString());              
+                root.AppendChild(ElementTools);
+                // Запись параметров
+                for (int j = 0; j < toolsArray[i].parameters.Count(); j++)
+                {
+                    ToolParameter toolParam = toolsArray[i].parameters.getParameter(j);
+
+                    XmlElement elementParameter = XmlDoc.CreateElement(StringResource.xmlParameterXMLName);
+                    elementParameter.SetAttribute(StringResource.xmlParameterName, toolParam.Name);
+                    elementParameter.SetAttribute(StringResource.xmlParameterClCode, toolParam.CLCode.ToString());
+                    elementParameter.SetAttribute(StringResource.xmlParameterType, toolParam.Type);
+                    elementParameter.SetAttribute(StringResource.xmlParameterCapture, toolParam.Capture);
+                    ElementTools.AppendChild(elementParameter);
+                }
+            }
+
+            XmlDoc.Save(StringResource.xmlPathPattrenFileName); //сохраняем в документ
+        }
+
+
+
 
     }
 }

@@ -126,6 +126,21 @@
   <data name="xmlElementName" xml:space="preserve">
     <value>espTool</value>
   </data>
+  <data name="xmlParameterCapture" xml:space="preserve">
+    <value>ParameterCapture</value>
+  </data>
+  <data name="xmlParameterClCode" xml:space="preserve">
+    <value>ParameterClCode</value>
+  </data>
+  <data name="xmlParameterName" xml:space="preserve">
+    <value>ParameterName</value>
+  </data>
+  <data name="xmlParameterType" xml:space="preserve">
+    <value>ParameterType</value>
+  </data>
+  <data name="xmlParameterXMLName" xml:space="preserve">
+    <value>espParameter</value>
+  </data>
   <data name="xmlParamStandartType" xml:space="preserve">
     <value>Стандартный</value>
   </data>
@@ -134,6 +149,9 @@
   </data>
   <data name="xmlPathToolsParams" xml:space="preserve">
     <value>EspritToolsParameters.xml</value>
+  </data>
+  <data name="xmlPathPattrenFileName" xml:space="preserve">
+    <value>EspritReportParameters.xml</value>
   </data>
   <data name="xmlToolID" xml:space="preserve">
     <value>ToolID</value>

@@ -88,6 +88,51 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ParameterCapture.
+        /// </summary>
+        internal static string xmlParameterCapture {
+            get {
+                return ResourceManager.GetString("xmlParameterCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ParameterClCode.
+        /// </summary>
+        internal static string xmlParameterClCode {
+            get {
+                return ResourceManager.GetString("xmlParameterClCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ParameterName.
+        /// </summary>
+        internal static string xmlParameterName {
+            get {
+                return ResourceManager.GetString("xmlParameterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ParameterType.
+        /// </summary>
+        internal static string xmlParameterType {
+            get {
+                return ResourceManager.GetString("xmlParameterType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to espParameter.
+        /// </summary>
+        internal static string xmlParameterXMLName {
+            get {
+                return ResourceManager.GetString("xmlParameterXMLName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стандартный.
         /// </summary>
         internal static string xmlParamStandartType {
@@ -102,6 +147,15 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         internal static string xmlParamUserType {
             get {
                 return ResourceManager.GetString("xmlParamUserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EspritReportParameters.xml.
+        /// </summary>
+        internal static string xmlPathPattrenFileName {
+            get {
+                return ResourceManager.GetString("xmlPathPattrenFileName", resourceCulture);
             }
         }
         

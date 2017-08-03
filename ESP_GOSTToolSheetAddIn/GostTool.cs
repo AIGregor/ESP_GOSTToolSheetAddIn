@@ -9,7 +9,7 @@ namespace ESP_GOSTToolSheetAddIn
 {
     class GostTool
     {
-        ToolParametersList parameters = new ToolParametersList(); // Список всех параметров
+        public ToolParametersList parameters = new ToolParametersList(); // Список всех параметров
         public Technology techTool = null;
         public String toolType = ""; // тип Mill/Turn
         public String toolName = "";
