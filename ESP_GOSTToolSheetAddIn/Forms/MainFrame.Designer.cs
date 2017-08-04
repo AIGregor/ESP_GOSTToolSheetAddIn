@@ -28,49 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrame));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.базаДанныхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemSaveDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemUpdataDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowPatternFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.параметрыДляКартыНаладкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.содержаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оДополненииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.MenuItemReportSetting = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemHelpContent = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.btnSaveInFile = new System.Windows.Forms.Button();
+            this.tbFIOControl = new System.Windows.Forms.TextBox();
+            this.tbFIOAccept = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbFIOCheck = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbFIODev = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tbCncMachineName = new System.Windows.Forms.TextBox();
+            this.tbCNCName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tbDetailSign = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tbDetailName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbCompanyName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listDocumentTools = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvReportToolParameters = new System.Windows.Forms.DataGridView();
+            this.btnGenerate = new System.Windows.Forms.Button();
+            this.dsReportParameters = new System.Data.DataSet();
+            this.dtReportParams = new System.Data.DataTable();
+            this.dColParamName = new System.Data.DataColumn();
+            this.dColParamValue = new System.Data.DataColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -78,50 +80,52 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReportToolParameters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsReportParameters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtReportParams)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.базаДанныхToolStripMenuItem,
-            this.настройкаToolStripMenuItem,
-            this.справкаToolStripMenuItem});
+            this.MenuItemDataBase,
+            this.MenuItemSettings,
+            this.MenuItemHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(672, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(708, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // базаДанныхToolStripMenuItem
+            // MenuItemDataBase
             // 
-            this.базаДанныхToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem,
-            this.обновитьToolStripMenuItem});
-            this.базаДанныхToolStripMenuItem.Name = "базаДанныхToolStripMenuItem";
-            this.базаДанныхToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.базаДанныхToolStripMenuItem.Text = "База знаний";
+            this.MenuItemDataBase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemSaveDataBase,
+            this.MenuItemUpdataDataBase});
+            this.MenuItemDataBase.Name = "MenuItemDataBase";
+            this.MenuItemDataBase.Size = new System.Drawing.Size(85, 20);
+            this.MenuItemDataBase.Text = "База знаний";
             // 
-            // сохранитьToolStripMenuItem
+            // MenuItemSaveDataBase
             // 
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.MenuItemSaveDataBase.Name = "MenuItemSaveDataBase";
+            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(132, 22);
+            this.MenuItemSaveDataBase.Text = "Сохранить";
             // 
-            // обновитьToolStripMenuItem
+            // MenuItemUpdataDataBase
             // 
-            this.обновитьToolStripMenuItem.Name = "обновитьToolStripMenuItem";
-            this.обновитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.обновитьToolStripMenuItem.Text = "Обновить";
+            this.MenuItemUpdataDataBase.Name = "MenuItemUpdataDataBase";
+            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(132, 22);
+            this.MenuItemUpdataDataBase.Text = "Обновить";
             // 
-            // настройкаToolStripMenuItem
+            // MenuItemSettings
             // 
-            this.настройкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowPatternFileMenuItem,
-            this.параметрыДляКартыНаладкиToolStripMenuItem});
-            this.настройкаToolStripMenuItem.Name = "настройкаToolStripMenuItem";
-            this.настройкаToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.настройкаToolStripMenuItem.Text = "Настройка";
+            this.MenuItemReportSetting});
+            this.MenuItemSettings.Name = "MenuItemSettings";
+            this.MenuItemSettings.Size = new System.Drawing.Size(78, 20);
+            this.MenuItemSettings.Text = "Настройка";
             // 
             // ShowPatternFileMenuItem
             // 
@@ -130,116 +134,95 @@
             this.ShowPatternFileMenuItem.Text = "Шаблон параметров инструментов";
             this.ShowPatternFileMenuItem.Click += new System.EventHandler(this.ShowPatternFileMenuItem_Click);
             // 
-            // параметрыДляКартыНаладкиToolStripMenuItem
+            // MenuItemReportSetting
             // 
-            this.параметрыДляКартыНаладкиToolStripMenuItem.Name = "параметрыДляКартыНаладкиToolStripMenuItem";
-            this.параметрыДляКартыНаладкиToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
-            this.параметрыДляКартыНаладкиToolStripMenuItem.Text = "Параметры карты наладки";
+            this.MenuItemReportSetting.Name = "MenuItemReportSetting";
+            this.MenuItemReportSetting.Size = new System.Drawing.Size(269, 22);
+            this.MenuItemReportSetting.Text = "Параметры карты наладки";
             // 
-            // справкаToolStripMenuItem
+            // MenuItemHelp
             // 
-            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.содержаниеToolStripMenuItem,
-            this.оДополненииToolStripMenuItem});
-            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.справкаToolStripMenuItem.Text = "Справка";
+            this.MenuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemHelpContent,
+            this.MenuItemHelpAbout});
+            this.MenuItemHelp.Name = "MenuItemHelp";
+            this.MenuItemHelp.Size = new System.Drawing.Size(65, 20);
+            this.MenuItemHelp.Text = "Справка";
             // 
-            // содержаниеToolStripMenuItem
+            // MenuItemHelpContent
             // 
-            this.содержаниеToolStripMenuItem.Name = "содержаниеToolStripMenuItem";
-            this.содержаниеToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.содержаниеToolStripMenuItem.Text = "Содержание";
+            this.MenuItemHelpContent.Name = "MenuItemHelpContent";
+            this.MenuItemHelpContent.Size = new System.Drawing.Size(154, 22);
+            this.MenuItemHelpContent.Text = "Содержание";
             // 
-            // оДополненииToolStripMenuItem
+            // MenuItemHelpAbout
             // 
-            this.оДополненииToolStripMenuItem.Name = "оДополненииToolStripMenuItem";
-            this.оДополненииToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.оДополненииToolStripMenuItem.Text = "О дополнении";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(672, 25);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(192, 22);
-            this.toolStripButton1.Text = "Сгенерировать карту наладки";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.MenuItemHelpAbout.Name = "MenuItemHelpAbout";
+            this.MenuItemHelpAbout.Size = new System.Drawing.Size(154, 22);
+            this.MenuItemHelpAbout.Text = "О дополнении";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 52);
+            this.tabControl1.Location = new System.Drawing.Point(12, 71);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(648, 302);
+            this.tabControl1.Size = new System.Drawing.Size(686, 363);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Controls.Add(this.textBox5);
-            this.tabPage3.Controls.Add(this.textBox4);
+            this.tabPage3.Controls.Add(this.btnSaveInFile);
+            this.tabPage3.Controls.Add(this.tbFIOControl);
+            this.tabPage3.Controls.Add(this.tbFIOAccept);
             this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.textBox3);
+            this.tabPage3.Controls.Add(this.tbFIOCheck);
             this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.textBox2);
+            this.tabPage3.Controls.Add(this.tbFIODev);
             this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.textBox9);
-            this.tabPage3.Controls.Add(this.textBox8);
+            this.tabPage3.Controls.Add(this.tbCncMachineName);
+            this.tabPage3.Controls.Add(this.tbCNCName);
             this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.textBox7);
+            this.tabPage3.Controls.Add(this.tbDetailSign);
             this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.textBox6);
+            this.tabPage3.Controls.Add(this.tbDetailName);
             this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.tbCompanyName);
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(640, 276);
+            this.tabPage3.Size = new System.Drawing.Size(678, 337);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Параметры карты наладки";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnSaveInFile
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(440, 241);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(194, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Сохранить в текущем файле";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSaveInFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSaveInFile.Location = new System.Drawing.Point(478, 302);
+            this.btnSaveInFile.Name = "btnSaveInFile";
+            this.btnSaveInFile.Size = new System.Drawing.Size(194, 29);
+            this.btnSaveInFile.TabIndex = 2;
+            this.btnSaveInFile.Text = "Сохранить в текущем файле";
+            this.btnSaveInFile.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // tbFIOControl
             // 
-            this.textBox5.Location = new System.Drawing.Point(104, 94);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(170, 20);
-            this.textBox5.TabIndex = 1;
+            this.tbFIOControl.Location = new System.Drawing.Point(104, 94);
+            this.tbFIOControl.Name = "tbFIOControl";
+            this.tbFIOControl.Size = new System.Drawing.Size(170, 20);
+            this.tbFIOControl.TabIndex = 1;
             // 
-            // textBox4
+            // tbFIOAccept
             // 
-            this.textBox4.Location = new System.Drawing.Point(104, 68);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(170, 20);
-            this.textBox4.TabIndex = 1;
+            this.tbFIOAccept.Location = new System.Drawing.Point(104, 68);
+            this.tbFIOAccept.Name = "tbFIOAccept";
+            this.tbFIOAccept.Size = new System.Drawing.Size(170, 20);
+            this.tbFIOAccept.TabIndex = 1;
             // 
             // label5
             // 
@@ -250,12 +233,12 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "ФИО Н.контр.";
             // 
-            // textBox3
+            // tbFIOCheck
             // 
-            this.textBox3.Location = new System.Drawing.Point(104, 42);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(170, 20);
-            this.textBox3.TabIndex = 1;
+            this.tbFIOCheck.Location = new System.Drawing.Point(104, 42);
+            this.tbFIOCheck.Name = "tbFIOCheck";
+            this.tbFIOCheck.Size = new System.Drawing.Size(170, 20);
+            this.tbFIOCheck.TabIndex = 1;
             // 
             // label4
             // 
@@ -266,12 +249,12 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "ФИО Утв.";
             // 
-            // textBox2
+            // tbFIODev
             // 
-            this.textBox2.Location = new System.Drawing.Point(104, 16);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 20);
-            this.textBox2.TabIndex = 1;
+            this.tbFIODev.Location = new System.Drawing.Point(104, 16);
+            this.tbFIODev.Name = "tbFIODev";
+            this.tbFIODev.Size = new System.Drawing.Size(170, 20);
+            this.tbFIODev.TabIndex = 1;
             // 
             // label3
             // 
@@ -282,19 +265,19 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "ФИО Пров.";
             // 
-            // textBox9
+            // tbCncMachineName
             // 
-            this.textBox9.Location = new System.Drawing.Point(452, 120);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(170, 20);
-            this.textBox9.TabIndex = 1;
+            this.tbCncMachineName.Location = new System.Drawing.Point(452, 120);
+            this.tbCncMachineName.Name = "tbCncMachineName";
+            this.tbCncMachineName.Size = new System.Drawing.Size(170, 20);
+            this.tbCncMachineName.TabIndex = 1;
             // 
-            // textBox8
+            // tbCNCName
             // 
-            this.textBox8.Location = new System.Drawing.Point(452, 94);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(170, 20);
-            this.textBox8.TabIndex = 1;
+            this.tbCNCName.Location = new System.Drawing.Point(452, 94);
+            this.tbCNCName.Name = "tbCNCName";
+            this.tbCNCName.Size = new System.Drawing.Size(170, 20);
+            this.tbCNCName.TabIndex = 1;
             // 
             // label9
             // 
@@ -305,12 +288,12 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Наименование станка";
             // 
-            // textBox7
+            // tbDetailSign
             // 
-            this.textBox7.Location = new System.Drawing.Point(452, 68);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(170, 20);
-            this.textBox7.TabIndex = 1;
+            this.tbDetailSign.Location = new System.Drawing.Point(452, 68);
+            this.tbDetailSign.Name = "tbDetailSign";
+            this.tbDetailSign.Size = new System.Drawing.Size(170, 20);
+            this.tbDetailSign.TabIndex = 1;
             // 
             // label8
             // 
@@ -321,12 +304,12 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Наименование УП";
             // 
-            // textBox6
+            // tbDetailName
             // 
-            this.textBox6.Location = new System.Drawing.Point(452, 42);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(170, 20);
-            this.textBox6.TabIndex = 1;
+            this.tbDetailName.Location = new System.Drawing.Point(452, 42);
+            this.tbDetailName.Name = "tbDetailName";
+            this.tbDetailName.Size = new System.Drawing.Size(170, 20);
+            this.tbDetailName.TabIndex = 1;
             // 
             // label7
             // 
@@ -337,12 +320,12 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Обозначение детали";
             // 
-            // textBox1
+            // tbCompanyName
             // 
-            this.textBox1.Location = new System.Drawing.Point(452, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 20);
-            this.textBox1.TabIndex = 1;
+            this.tbCompanyName.Location = new System.Drawing.Point(452, 16);
+            this.tbCompanyName.Name = "tbCompanyName";
+            this.tbCompanyName.Size = new System.Drawing.Size(170, 20);
+            this.tbCompanyName.TabIndex = 1;
             // 
             // label6
             // 
@@ -377,7 +360,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(640, 276);
+            this.tabPage1.Size = new System.Drawing.Size(678, 337);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Текущий документ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -390,44 +373,88 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.listView1);
+            this.splitContainer1.Panel1.Controls.Add(this.listDocumentTools);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(634, 270);
-            this.splitContainer1.SplitterDistance = 211;
+            this.splitContainer1.Panel2.Controls.Add(this.dgvReportToolParameters);
+            this.splitContainer1.Size = new System.Drawing.Size(672, 331);
+            this.splitContainer1.SplitterDistance = 315;
             this.splitContainer1.TabIndex = 0;
             // 
-            // listView1
+            // listDocumentTools
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listDocumentTools.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
             this.columnHeader1});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(211, 270);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listDocumentTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listDocumentTools.FullRowSelect = true;
+            this.listDocumentTools.Location = new System.Drawing.Point(0, 0);
+            this.listDocumentTools.MultiSelect = false;
+            this.listDocumentTools.Name = "listDocumentTools";
+            this.listDocumentTools.Size = new System.Drawing.Size(315, 331);
+            this.listDocumentTools.TabIndex = 6;
+            this.listDocumentTools.UseCompatibleStateImageBehavior = false;
+            this.listDocumentTools.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "ID Инструмента";
+            this.columnHeader2.Width = 141;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Используемые инструменты";
+            this.columnHeader1.Text = "Тип инструмента";
             this.columnHeader1.Width = 177;
             // 
-            // dataGridView1
+            // dgvReportToolParameters
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvReportToolParameters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReportToolParameters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReportToolParameters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(419, 270);
-            this.dataGridView1.TabIndex = 7;
+            this.dgvReportToolParameters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvReportToolParameters.Location = new System.Drawing.Point(0, 0);
+            this.dgvReportToolParameters.Name = "dgvReportToolParameters";
+            this.dgvReportToolParameters.Size = new System.Drawing.Size(353, 331);
+            this.dgvReportToolParameters.TabIndex = 7;
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnGenerate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerate.Location = new System.Drawing.Point(0, 24);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(708, 41);
+            this.btnGenerate.TabIndex = 2;
+            this.btnGenerate.Text = "Сгенерировать карту наладки";
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            // 
+            // dsReportParameters
+            // 
+            this.dsReportParameters.DataSetName = "NewDataSet";
+            this.dsReportParameters.Tables.AddRange(new System.Data.DataTable[] {
+            this.dtReportParams});
+            // 
+            // dtReportParams
+            // 
+            this.dtReportParams.Columns.AddRange(new System.Data.DataColumn[] {
+            this.dColParamName,
+            this.dColParamValue});
+            this.dtReportParams.TableName = "ReportParameters";
+            // 
+            // dColParamName
+            // 
+            this.dColParamName.Caption = "Название параметра";
+            this.dColParamName.ColumnName = "clmParameterName";
+            // 
+            // dColParamValue
+            // 
+            this.dColParamValue.Caption = "Значение параметра";
+            this.dColParamValue.ColumnName = "clmParameterValue";
             // 
             // Column1
             // 
@@ -438,26 +465,25 @@
             // Column2
             // 
             this.Column2.FillWeight = 200F;
-            this.Column2.HeaderText = "Значение парамерта";
+            this.Column2.HeaderText = "Значение параметра";
             this.Column2.Name = "Column2";
             // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 366);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(708, 445);
+            this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainFrame";
             this.Text = "ГОСТ 3.14.04-86 Карта наладки";
+            this.Shown += new System.EventHandler(this.MainFrame_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -466,7 +492,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReportToolParameters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsReportParameters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtReportParams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,44 +502,48 @@
 
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem базаДанныхToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemDataBase;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSettings;
         private System.Windows.Forms.ToolStripMenuItem ShowPatternFileMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem параметрыДляКартыНаладкиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem содержаниеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оДополненииToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemReportSetting;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemHelp;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemHelpContent;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemHelpAbout;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem обновитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSaveDataBase;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemUpdataDataBase;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listDocumentTools;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridView dgvReportToolParameters;
+        private System.Windows.Forms.TextBox tbFIOCheck;
+        private System.Windows.Forms.TextBox tbFIODev;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbCompanyName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbFIOControl;
+        private System.Windows.Forms.TextBox tbFIOAccept;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tbDetailSign;
+        private System.Windows.Forms.TextBox tbDetailName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox tbCncMachineName;
+        private System.Windows.Forms.TextBox tbCNCName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveInFile;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Data.DataSet dsReportParameters;
+        private System.Data.DataTable dtReportParams;
+        private System.Data.DataColumn dColParamName;
+        private System.Data.DataColumn dColParamValue;
     }
 }

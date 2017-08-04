@@ -41,46 +41,53 @@ namespace ESP_GOSTToolSheetAddIn
         // загрузка параметров формы
         private void frmEspToolsParameters_Shown(object sender, EventArgs e)
         {
-            // Загружаем из файл-шаблона названия инструмента, заполняя форму.
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(StringResource.xmlPathToolsParams);
-            XmlElement xRoot = xDoc.DocumentElement;
+            //// Загружаем из файл-шаблона названия инструмента, заполняя форму.
+            //XmlDocument xDoc = new XmlDocument();
+            //xDoc.Load(StringResource.xmlPathToolsParams);
+            //XmlElement xRoot = xDoc.DocumentElement;
 
-            // выбор всех инструментов
-            XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
-            // Создание массива инструментов
-            AdditionalToolParameters.gostToolsArray = new GostTool[childnodes.Count-1];
-            int i = 0;
-            foreach (XmlNode node in childnodes)
-            {                
-                int iToolId = int.Parse(node.SelectSingleNode("@" + StringResource.xmlToolID).Value);
-                if (iToolId != 0)
-                {
-                    XmlNode singleNodeLable = node.SelectSingleNode("@" + StringResource.xmlToolLabel);
-                    string sToolLabel = singleNodeLable.Value;
-                    XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
-                    string sToolName = singleNodeName.Value;
+            //// выбор всех инструментов
+            //XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
+            //// Создание массива инструментов
+            //AdditionalToolParameters.gostToolsArray = new GostTool[childnodes.Count-1];
+            //int i = 0;
+            //foreach (XmlNode node in childnodes)
+            //{                
+            //    int iToolId = int.Parse(node.SelectSingleNode("@" + StringResource.xmlToolID).Value);
+            //    if (iToolId != 0)
+            //    {
+            //        XmlNode singleNodeLable = node.SelectSingleNode("@" + StringResource.xmlToolLabel);
+            //        string sToolLabel = singleNodeLable.Value;
+            //        XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
+            //        string sToolName = singleNodeName.Value;
 
-                    if (i == 0)
-                    {
-                        fillFrmList(sToolName);
-                    }
+            //        if (i == 0)
+            //        {
+            //            fillFrmList(sToolName);
+            //        }
 
-                     AdditionalToolParameters.gostToolsArray[i] = new GostTool();
-                     AdditionalToolParameters.gostToolsArray[i].toolID = iToolId;
-                     AdditionalToolParameters.gostToolsArray[i].toolLabel = sToolLabel;
-                     AdditionalToolParameters.gostToolsArray[i].toolName = sToolName;                    
-                    i++;
-                                        
-                    lstTools.Items.Add(sToolLabel);
-                }
+            //         AdditionalToolParameters.gostToolsArray[i] = new GostTool();
+            //         AdditionalToolParameters.gostToolsArray[i].toolID = iToolId;
+            //         AdditionalToolParameters.gostToolsArray[i].toolLabel = sToolLabel;
+            //         AdditionalToolParameters.gostToolsArray[i].toolName = sToolName;                    
+            //        i++;
+
+            //        lstTools.Items.Add(sToolLabel);
+            //    }
+            //}
+
+            // Заполняем список инструментов доступных в системе
+            foreach (GostTool curTool in AdditionalToolParameters.gostToolsArray)
+            {
+                lstTools.Items.Add(curTool.toolLabel);
             }
-
-            // Устанавливаем список сортировки "Все инструменты"
+            // Выделяем первый инструмент в списке
             lstTools.SelectedIndex = 0;
+            //Заполняем список параметров инструментов для первого интсремента в списке
+            fillFrmList(AdditionalToolParameters.gostToolsArray[0].toolName);                        
             // Загрузить параметры из файла
-            loadPatternParameterFile( AdditionalToolParameters.gostToolsArray);
-            // Заполнить список для отчета
+            //loadPatternParameterFile( AdditionalToolParameters.gostToolsArray);
+            // Заполнить список параметров инструменты, которые надо отобразить в отчете
             fillFrmReportList( AdditionalToolParameters.gostToolsArray[0].toolName);
         }
 
@@ -149,6 +156,7 @@ namespace ESP_GOSTToolSheetAddIn
         }
 
         //----------------------------------------------------------------------------------------
+        // Заполнение списка на форме стандартных параметров инструмента
         void fillFrmList(string sClassName)
         {
             Technology espTool = null;
@@ -218,6 +226,10 @@ namespace ESP_GOSTToolSheetAddIn
                 case "ToolLatheTurning":
                     ToolLatheTurning ToolLatheTurning = new ToolLatheTurning();
                     espTool = (Technology)ToolLatheTurning;
+                    break;
+                case "":
+                    ToolLatheGroove ToolLatherGroove = new ToolLatheGroove();
+                    espTool = (Technology) ToolLatherGroove;
                     break;
                 case "ToolLatheTopNotch":
                     ToolLatheTopNotch ToolLatheTopNotch = new ToolLatheTopNotch();

@@ -14,6 +14,7 @@ namespace ESP_GOSTToolSheetAddIn
         public String toolType = ""; // тип Mill/Turn
         public String toolName = "";
         public String toolLabel = "";
+        public String toolDocumentID = "";
         public int toolID = 0;
 
         public GostTool()

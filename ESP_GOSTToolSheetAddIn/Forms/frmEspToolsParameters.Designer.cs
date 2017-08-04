@@ -63,14 +63,14 @@
             this.lstTools.Location = new System.Drawing.Point(0, 0);
             this.lstTools.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstTools.Name = "lstTools";
-            this.lstTools.Size = new System.Drawing.Size(252, 520);
+            this.lstTools.Size = new System.Drawing.Size(249, 420);
             this.lstTools.TabIndex = 5;
             this.lstTools.Click += new System.EventHandler(this.lstTools_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(823, 488);
+            this.btnCancel.Location = new System.Drawing.Point(477, 388);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 23);
             this.btnCancel.TabIndex = 10;
@@ -86,9 +86,9 @@
             this.toolStripSeparator1,
             this.toolStripDelete,
             this.toolStripSeparator2});
-            this.toolStrip1.Location = new System.Drawing.Point(252, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(249, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(738, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(395, 25);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -144,8 +144,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listEspGostParams);
-            this.splitContainer1.Size = new System.Drawing.Size(720, 454);
-            this.splitContainer1.SplitterDistance = 372;
+            this.splitContainer1.Size = new System.Drawing.Size(374, 354);
+            this.splitContainer1.SplitterDistance = 193;
             this.splitContainer1.TabIndex = 15;
             // 
             // listEspStandardParameters
@@ -160,7 +160,7 @@
             this.listEspStandardParameters.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listEspStandardParameters.Location = new System.Drawing.Point(0, 0);
             this.listEspStandardParameters.Name = "listEspStandardParameters";
-            this.listEspStandardParameters.Size = new System.Drawing.Size(372, 454);
+            this.listEspStandardParameters.Size = new System.Drawing.Size(193, 354);
             this.listEspStandardParameters.TabIndex = 17;
             this.listEspStandardParameters.UseCompatibleStateImageBehavior = false;
             this.listEspStandardParameters.View = System.Windows.Forms.View.Details;
@@ -193,7 +193,7 @@
             this.listEspGostParams.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listEspGostParams.Location = new System.Drawing.Point(0, 0);
             this.listEspGostParams.Name = "listEspGostParams";
-            this.listEspGostParams.Size = new System.Drawing.Size(344, 454);
+            this.listEspGostParams.Size = new System.Drawing.Size(177, 354);
             this.listEspGostParams.TabIndex = 18;
             this.listEspGostParams.UseCompatibleStateImageBehavior = false;
             this.listEspGostParams.View = System.Windows.Forms.View.Details;
@@ -220,7 +220,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(741, 488);
+            this.btnOK.Location = new System.Drawing.Point(395, 388);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(76, 23);
             this.btnOK.TabIndex = 10;
@@ -231,7 +231,7 @@
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(902, 488);
+            this.btnApply.Location = new System.Drawing.Point(556, 388);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(76, 23);
             this.btnApply.TabIndex = 10;
@@ -245,7 +245,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(990, 520);
+            this.ClientSize = new System.Drawing.Size(644, 420);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnOK);

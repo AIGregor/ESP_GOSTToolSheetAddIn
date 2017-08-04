@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 using System.IO;
+using System.Collections.Generic;
 using ESP_GOSTToolSheetAddIn.Resources;
 
 namespace ESP_GOSTToolSheetAddIn
@@ -12,7 +13,8 @@ namespace ESP_GOSTToolSheetAddIn
         * Конструктор 
         * Создание XML файла с пустым списком параметров
         */
-        static public GostTool[] gostToolsArray;
+        static public GostTool[] gostToolsArray; // Массив всех инструментов и параметров которые надо показать в отчете
+        static public List<GostTool> gostReportToolsArray = new List<GostTool>(); // Массив инструментов из текущего документа
 
         public AdditionalToolParameters() : base()
         {
@@ -188,8 +190,82 @@ namespace ESP_GOSTToolSheetAddIn
             XmlDoc.Save(StringResource.xmlPathPattrenFileName); //сохраняем в документ
         }
 
+        public static void LoadToolsParameters()
+        {
+            // Загружаем из файл-шаблона названия инструмента, заполняя форму.
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(StringResource.xmlPathToolsParams);
+            XmlElement xRoot = xDoc.DocumentElement;
 
+            // выбор всех инструментов
+            XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
+            // Создание массива инструментов
+            gostToolsArray = new GostTool[childnodes.Count - 1];
+            int i = 0;
+            foreach (XmlNode node in childnodes)
+            {
+                int iToolId = int.Parse(node.SelectSingleNode("@" + StringResource.xmlToolID).Value);
+                if (iToolId != 0)
+                {
+                    XmlNode singleNodeLable = node.SelectSingleNode("@" + StringResource.xmlToolLabel);
+                    string sToolLabel = singleNodeLable.Value;
+                    XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
+                    string sToolName = singleNodeName.Value;
 
+                    gostToolsArray[i] = new GostTool();
+                    gostToolsArray[i].toolID = iToolId;
+                    gostToolsArray[i].toolLabel = sToolLabel;
+                    gostToolsArray[i].toolName = sToolName;
+                    i++;
+                }
+            }
+            
+            if (!File.Exists(StringResource.xmlPathPattrenFileName))
+            {
+                creatPatternFile(StringResource.xmlPathPattrenFileName);
+                return;
+            }
 
+            XmlDocument XmlDoc = new XmlDocument();
+            XmlDoc.Load(StringResource.xmlPathPattrenFileName);
+            // get root element
+            XmlElement xmlRoot = XmlDoc.DocumentElement;
+            // select all tools
+            XmlNodeList allToolsList = xmlRoot.SelectNodes(StringResource.xmlElementName);
+            int index = 0;
+            foreach (XmlNode nodeTool in allToolsList)
+            {
+                XmlNode singleNodeName = nodeTool.SelectSingleNode("@" + StringResource.xmlToolName);
+                string sToolName = singleNodeName.Value;
+                if (String.Equals(sToolName, gostToolsArray[index].toolName))
+                {
+                    XmlNodeList parametersList = nodeTool.ChildNodes;
+                    for (int j = 0; j < parametersList.Count; j++)
+                    {
+                        ToolParameter newParam = new ToolParameter();
+                        newParam.Name = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterName).Value;
+                        newParam.Capture = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterCapture).Value;
+                        newParam.Type = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterType).Value;
+                        newParam.CLCode = int.Parse(parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterClCode).Value);
+
+                        gostToolsArray[index].addParameter(newParam);
+                    }
+                }
+                index++;
+            }
+        }
+
+        public static GostTool getGostTool(int toolType)
+        {
+            // находим инструмент из списка
+            for (int i = 0; i < gostToolsArray.Length; i++)
+            {
+                if (String.Equals(gostToolsArray[i].toolID, toolType))
+                {
+                    return gostToolsArray[i];
+                }
+            }
+            return null;
+         }
     }
 }

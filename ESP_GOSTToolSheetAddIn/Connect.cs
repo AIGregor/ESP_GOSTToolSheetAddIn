@@ -22,7 +22,10 @@ namespace ESP_GOSTToolSheetAddIn
     {
         int sCookie = 0;
         int newCommand = 0;
-        Esprit.Application sEspApp;
+        /// <summary>
+        /// Объект запущенной программы ESPRIT
+        /// </summary>
+        static public Esprit.Application sEspApp;
         EspritCommands.AddIn sAddIn;
 
         /// <summary>
