@@ -16,5 +16,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             InitializeComponent();
         }
+
+        private void ShowPatternFileMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEspToolsParameters frmSettingsToolsParams = new frmEspToolsParameters();
+            frmSettingsToolsParams.Show();
+        }
     }
 }

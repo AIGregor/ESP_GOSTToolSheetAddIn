@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="msgNewParamError" xml:space="preserve">
+  <data name="msgErrorNewParam" xml:space="preserve">
     <value>ОШИБКА! Значение нового параметра не задано !</value>
   </data>
   <data name="txtPathToolType" xml:space="preserve">
@@ -161,5 +161,8 @@
   </data>
   <data name="xmlToolName" xml:space="preserve">
     <value>ToolName</value>
+  </data>
+  <data name="menuName" xml:space="preserve">
+    <value>&amp;Создать Карту наладки - ГОСТ </value>
   </data>
 </root>

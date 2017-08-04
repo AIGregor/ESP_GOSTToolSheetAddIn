@@ -31,7 +31,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             if (txtUserParameterName.Text != "")
                 m_parentFrame.addNewUserParameter(txtUserParameterName.Text);
             else
-                MessageBox.Show(StringResource.msgNewParamError);
+                MessageBox.Show(StringResource.msgErrorNewParam);
 
             this.Close();
         }

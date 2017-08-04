@@ -160,6 +160,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="EspritMenus">
+      <Guid>{CB25E99F-4F40-4ED5-A078-7E0204E6FE19}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="EspritTechnology">
       <Guid>{56893DA1-C5C2-41FD-AC09-2E90F4B2FF30}</Guid>
       <VersionMajor>2</VersionMajor>

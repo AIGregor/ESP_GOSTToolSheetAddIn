@@ -23,7 +23,7 @@ namespace ESP_GOSTToolSheetAddIn
     /// </summary>
     public partial class frmEspToolsParameters : Form
     {
-        GostTool[] gostToolsArray;
+        GostTool[] localArreyTool = AdditionalToolParameters.gostToolsArray;
         Technology g_espTool = null;
 
         public frmEspToolsParameters()
@@ -49,7 +49,7 @@ namespace ESP_GOSTToolSheetAddIn
             // выбор всех инструментов
             XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
             // Создание массива инструментов
-            gostToolsArray = new GostTool[childnodes.Count-1];
+            AdditionalToolParameters.gostToolsArray = new GostTool[childnodes.Count-1];
             int i = 0;
             foreach (XmlNode node in childnodes)
             {                
@@ -66,10 +66,10 @@ namespace ESP_GOSTToolSheetAddIn
                         fillFrmList(sToolName);
                     }
 
-                    gostToolsArray[i] = new GostTool();
-                    gostToolsArray[i].toolID = iToolId;
-                    gostToolsArray[i].toolLabel = sToolLabel;
-                    gostToolsArray[i].toolName = sToolName;                    
+                     AdditionalToolParameters.gostToolsArray[i] = new GostTool();
+                     AdditionalToolParameters.gostToolsArray[i].toolID = iToolId;
+                     AdditionalToolParameters.gostToolsArray[i].toolLabel = sToolLabel;
+                     AdditionalToolParameters.gostToolsArray[i].toolName = sToolName;                    
                     i++;
                                         
                     lstTools.Items.Add(sToolLabel);
@@ -79,9 +79,9 @@ namespace ESP_GOSTToolSheetAddIn
             // Устанавливаем список сортировки "Все инструменты"
             lstTools.SelectedIndex = 0;
             // Загрузить параметры из файла
-            loadPatternParameterFile(gostToolsArray);
+            loadPatternParameterFile( AdditionalToolParameters.gostToolsArray);
             // Заполнить список для отчета
-            fillFrmReportList(gostToolsArray[0].toolName);
+            fillFrmReportList( AdditionalToolParameters.gostToolsArray[0].toolName);
         }
 
         private void listEspStandardParameters_DragEnter(object sender, DragEventArgs e)
@@ -125,13 +125,13 @@ namespace ESP_GOSTToolSheetAddIn
         private void fillFrmReportList(String toolName)
         {
             // находим инструмент из списка
-            for (int i = 0; i < gostToolsArray.Count(); i++)
+            for (int i = 0; i <  AdditionalToolParameters.gostToolsArray.Count(); i++)
             {
-                if (String.Equals(gostToolsArray[i].toolName, toolName))
+                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolName, toolName))
                 {
-                    for (int j = 0; j < gostToolsArray[i].parameters.Count(); j++)
+                    for (int j = 0; j <  AdditionalToolParameters.gostToolsArray[i].parameters.Count(); j++)
                     {
-                        ToolParameter reportParameter = gostToolsArray[i].parameters.getParameter(j);
+                        ToolParameter reportParameter =  AdditionalToolParameters.gostToolsArray[i].parameters.getParameter(j);
                         string[] arrParams = new string[4];
                         arrParams[0] = reportParameter.Capture;
                         arrParams[1] = reportParameter.Name;
@@ -279,9 +279,9 @@ namespace ESP_GOSTToolSheetAddIn
             // Получили название инструмента
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
 
-            for (int i = 0; i < gostToolsArray.Count(); i++)
+            for (int i = 0; i <  AdditionalToolParameters.gostToolsArray.Count(); i++)
             {
-                if (String.Equals(gostToolsArray[i].toolLabel, sToolTypeName))
+                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolLabel, sToolTypeName))
                 {
                     replaceSelectedElements(i);
                     break;
@@ -317,7 +317,7 @@ namespace ESP_GOSTToolSheetAddIn
                     newParameter.Type = arrParams[2];
                     newParameter.CLCode = int.Parse(arrParams[3]);
                     
-                    gostToolsArray[gostToolNumber].addParameter(newParameter);
+                     AdditionalToolParameters.gostToolsArray[gostToolNumber].addParameter(newParameter);
                 }
             }
         }
@@ -339,13 +339,13 @@ namespace ESP_GOSTToolSheetAddIn
             // Получили название инструмента
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
 
-            for (int i = 0; i < gostToolsArray.Count(); i++)
+            for (int i = 0; i <  AdditionalToolParameters.gostToolsArray.Count(); i++)
             {
-                if (String.Equals(gostToolsArray[i].toolName, sToolTypeName))
+                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolName, sToolTypeName))
                 {
                     // Добавить в список для карты наладки
                     listEspGostParams.Items.Add(sUserParamName);
-                    gostToolsArray[i].addParameter(newParameter);
+                     AdditionalToolParameters.gostToolsArray[i].addParameter(newParameter);
                     break;
                 }
             }
@@ -357,9 +357,9 @@ namespace ESP_GOSTToolSheetAddIn
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
             int iCurrentTool = 0;
 
-            for (int i = 0; i < gostToolsArray.Count(); i++)
+            for (int i = 0; i <  AdditionalToolParameters.gostToolsArray.Count(); i++)
             {
-                if (String.Equals(gostToolsArray[i].toolLabel, sToolTypeName))
+                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolLabel, sToolTypeName))
                 {
                     iCurrentTool = i;
                 }
@@ -381,7 +381,7 @@ namespace ESP_GOSTToolSheetAddIn
                     listEspStandardParameters.Items.Add(newItem);
                 }
                  // Удаление через Cl Code
-                 gostToolsArray[iCurrentTool].removeParameter(int.Parse(arrParams[2]));
+                  AdditionalToolParameters.gostToolsArray[iCurrentTool].removeParameter(int.Parse(arrParams[2]));
                 // Удаление строки
                 listEspGostParams.SelectedItems[j].Remove();
             }
@@ -396,10 +396,10 @@ namespace ESP_GOSTToolSheetAddIn
         private void btnOK_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("OK");
-            // TODO: Из массива gostToolsArray[iCurrentTool] записать все параметры в XML файл
+            // TODO: Из массива  AdditionalToolParameters.gostToolsArray[iCurrentTool] записать все параметры в XML файл
             // который потом будет использоваться для заполнения карты наладки и
             // закрыть форму             
-            AdditionalToolParameters.savePatternParameterFile(gostToolsArray);
+            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray);
             this.Close();
         }
 
@@ -408,7 +408,7 @@ namespace ESP_GOSTToolSheetAddIn
         {
             //MessageBox.Show("Apply");
             //TODO: Только записать параметры в файл для текущего инструмента
-            AdditionalToolParameters.savePatternParameterFile(gostToolsArray);
+            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray);
         }
 
         //----------------------------------------------------------------------------------------
@@ -442,7 +442,7 @@ namespace ESP_GOSTToolSheetAddIn
                         newParam.Type = parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterType).Value;
                         newParam.CLCode = int.Parse( parametersList[i].SelectSingleNode("@" + StringResource.xmlParameterClCode).Value );
 
-                        gostToolsArray[index].addParameter(newParam);
+                         AdditionalToolParameters.gostToolsArray[index].addParameter(newParam);
                     }
                 }
                 index++;

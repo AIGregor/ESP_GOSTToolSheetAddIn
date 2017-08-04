@@ -61,11 +61,20 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Создать Карту наладки - ГОСТ .
+        /// </summary>
+        internal static string menuName {
+            get {
+                return ResourceManager.GetString("menuName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ОШИБКА! Значение нового параметра не задано !.
         /// </summary>
-        internal static string msgNewParamError {
+        internal static string msgErrorNewParam {
             get {
-                return ResourceManager.GetString("msgNewParamError", resourceCulture);
+                return ResourceManager.GetString("msgErrorNewParam", resourceCulture);
             }
         }
         

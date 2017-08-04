@@ -9,9 +9,11 @@ namespace ESP_GOSTToolSheetAddIn
     class AdditionalToolParameters : ToolParametersList
     {
         /* 
- * Конструктор 
- * Создание XML файла с пустым списком параметров
- */
+        * Конструктор 
+        * Создание XML файла с пустым списком параметров
+        */
+        static public GostTool[] gostToolsArray;
+
         public AdditionalToolParameters() : base()
         {
 
