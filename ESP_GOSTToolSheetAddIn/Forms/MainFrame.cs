@@ -17,12 +17,18 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void ShowPatternFileMenuItem_Click(object sender, EventArgs e)
         {
             frmEspToolsParameters frmSettingsToolsParams = new frmEspToolsParameters();
-            frmSettingsToolsParams.Show();
+            frmSettingsToolsParams.ShowDialog();
         }
 
         // Перед тем как показать форму считываем инструмент из файла и заполняем поля
         private void MainFrame_Shown(object sender, EventArgs e)
-        {      
+        {
+            InitMainForm();
+        }
+
+        // Заполнение главного окна
+        private void InitMainForm()
+        {
             // Загружаем параметры инструменты из файла
             AdditionalToolParameters.LoadToolsParameters();
             // Собираем инструмент из текущего документа
@@ -30,11 +36,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             currentTool = curDocument.Tools;
             // Идум по списку инструментов в документе
             foreach (Tool Tool in currentTool)
-            {            
+            {
                 // Добавляем инструмент в массив отчета
                 addReportTool(Tool);
 
-                Technology toolTech = (Technology) Tool;
+                Technology toolTech = (Technology)Tool;
                 string[] reportTool = new string[2];
                 reportTool[0] = toolTech.Caption;
                 reportTool[1] = toolTech.Name;
@@ -42,49 +48,54 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 ListViewItem newReportTool = new ListViewItem(reportTool);
                 listDocumentTools.Items.Add(newReportTool);
             }
+            // Заполнить 
+            fillFormReportToolParameters(0);
         }
 
         // Добавить инструмент в список для отчета
         private void addReportTool(Tool newReportTool)
         {
+            if (newReportTool == null)
+                return;
+
             Trace.WriteLine("Tool style - " + newReportTool.ToolStyle);
-            GostTool gostReportTool = AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle);
+            GostTool gostReportTool = new GostTool(AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle));
+            //gostReportTool = AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle);
+            
             // Сохраняем ID инструмента
             gostReportTool.toolDocumentID = newReportTool.ToolID;
             // Сохраняем Capture
             Technology toolTech = (Technology) newReportTool;
             gostReportTool.toolType = toolTech.Name;
-
-            addValue(newReportTool, gostReportTool);
-            AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);
-        }
-
-        // Записываем значение параметра из документа в структуру
-        private void addValue(Tool newRepotTool, GostTool toolParams)
-        {
-            for (int i = 0; i < toolParams.parameters.Count(); i++)
-            {
-                Technology reportTechTool = (Technology) newRepotTool;
-                Parameter curParam = reportTechTool[toolParams.parameters.getParameter(i).Name];
-                toolParams.parameters.getParameter(0).Value = Convert.ToString(curParam.Value);
-            }
+            // Записать значения параметров из инструмента
+            gostReportTool.addParametersValue(newReportTool);
+            // Добавить инструмент для отчета в массив
+            AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);                       
         }
 
         // Добавить параметры в форму 
         private void fillFormReportToolParameters(int index)
         {
+            if (AdditionalToolParameters.gostReportToolsArray.Count == 0)
+                return;
+
             GostTool reportTool = AdditionalToolParameters.gostReportToolsArray[index];
 
             for (int j = 0; j < reportTool.parameters.Count(); j++)
             {
-                DataGridViewRow reportParameter = new DataGridViewRow();
-                reportParameter.Cells[0].Value = reportTool.parameters.getParameter(j).Capture;
-                reportParameter.Cells[1].Value = reportTool.parameters.getParameter(j).Value;
-                dgvReportToolParameters.Rows.Add(reportParameter);
+                //DataGridViewRow reportParameter = new DataGridViewRow();
+                String strCapture = reportTool.parameters.getParameter(j).Capture;
+                String strValue = reportTool.parameters.getParameter(j).Value;
+                dgvReportToolParameters.Rows.Add(strCapture, strValue);
             }   
         }
 
-
-
+        // Загружаем парметры выбранного инструмента
+        private void listDocumentTools_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection selectIndex = listDocumentTools.SelectedIndices;
+            dgvReportToolParameters.Rows.Clear();
+            fillFormReportToolParameters(selectIndex[0]);
+        }
     }
 }

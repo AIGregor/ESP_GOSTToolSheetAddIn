@@ -199,6 +199,13 @@ namespace ESP_GOSTToolSheetAddIn
 
             // выбор всех инструментов
             XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
+
+            // Очистить массив, при повторной загрузке парметров
+            if (gostToolsArray != null)
+            {
+                Array.Clear(gostToolsArray, 0, gostToolsArray.Length);
+            }
+
             // Создание массива инструментов
             gostToolsArray = new GostTool[childnodes.Count - 1];
             int i = 0;

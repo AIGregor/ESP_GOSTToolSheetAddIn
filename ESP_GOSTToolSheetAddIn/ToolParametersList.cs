@@ -19,6 +19,15 @@ namespace ESP_GOSTToolSheetAddIn
         {
         }
 
+        public ToolParametersList(ToolParametersList priveousParameters)
+        {
+            for (int i = 0; i < priveousParameters.parameters.Count; i++)
+            {
+                ToolParameter newToolParameter = new ToolParameter(priveousParameters.parameters[i]);
+                parameters.Add(newToolParameter);
+            }
+        }
+
         public int Count()
         {
             return parameters.Count();
@@ -37,6 +46,13 @@ namespace ESP_GOSTToolSheetAddIn
         public ToolParameter getParameter(int index)
         {     
             ToolParameter result = parameters[index];
+            return result;
+        }
+
+        public ToolParameter getParameter(string ParameterName)
+        {
+            ToolParameter result;
+            result = parameters.Find(x => x.Name == ParameterName);
             return result;
         }
 

@@ -15,6 +15,20 @@ namespace ESP_GOSTToolSheetAddIn
         public String Type = "";
         int ID = 0;
 
+        public ToolParameter()
+        {
+        }
+
+        public ToolParameter(ToolParameter toolParameter)
+        {
+            Name = toolParameter.Name;
+            Capture = toolParameter.Capture;
+            Value = toolParameter.Value;
+            CLCode = toolParameter.CLCode;
+            Type = toolParameter.Type;
+            ID = toolParameter.ID;
+        }
+
         String getName() {
             return Name;
         }

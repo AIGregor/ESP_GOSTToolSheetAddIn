@@ -65,13 +65,13 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dgvReportToolParameters = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.dsReportParameters = new System.Data.DataSet();
             this.dtReportParams = new System.Data.DataTable();
             this.dColParamName = new System.Data.DataColumn();
             this.dColParamValue = new System.Data.DataColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -165,7 +165,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 71);
+            this.tabControl1.Location = new System.Drawing.Point(12, 77);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(686, 363);
@@ -396,6 +396,7 @@
             this.listDocumentTools.TabIndex = 6;
             this.listDocumentTools.UseCompatibleStateImageBehavior = false;
             this.listDocumentTools.View = System.Windows.Forms.View.Details;
+            this.listDocumentTools.Click += new System.EventHandler(this.listDocumentTools_Click);
             // 
             // columnHeader2
             // 
@@ -420,15 +421,26 @@
             this.dgvReportToolParameters.Size = new System.Drawing.Size(353, 331);
             this.dgvReportToolParameters.TabIndex = 7;
             // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 150F;
+            this.Column1.HeaderText = "Название параметра";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 200F;
+            this.Column2.HeaderText = "Значение параметра";
+            this.Column2.Name = "Column2";
+            // 
             // btnGenerate
             // 
-            this.btnGenerate.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnGenerate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGenerate.Location = new System.Drawing.Point(0, 24);
+            this.btnGenerate.Location = new System.Drawing.Point(12, 30);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(708, 41);
+            this.btnGenerate.Size = new System.Drawing.Size(686, 41);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Сгенерировать карту наладки";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -456,23 +468,11 @@
             this.dColParamValue.Caption = "Значение параметра";
             this.dColParamValue.ColumnName = "clmParameterValue";
             // 
-            // Column1
-            // 
-            this.Column1.FillWeight = 150F;
-            this.Column1.HeaderText = "Название параметра";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 200F;
-            this.Column2.HeaderText = "Значение параметра";
-            this.Column2.Name = "Column2";
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 445);
+            this.ClientSize = new System.Drawing.Size(708, 452);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);

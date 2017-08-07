@@ -392,10 +392,10 @@ namespace ESP_GOSTToolSheetAddIn
                     ListViewItem newItem = new ListViewItem(arrParams);
                     listEspStandardParameters.Items.Add(newItem);
                 }
-                 // Удаление через Cl Code
-                  AdditionalToolParameters.gostToolsArray[iCurrentTool].removeParameter(int.Parse(arrParams[2]));
-                // Удаление строки
-                listEspGostParams.SelectedItems[j].Remove();
+                 // Удаление через Cl Code          
+                 AdditionalToolParameters.gostToolsArray[iCurrentTool].removeParameter(arrParams[1]);
+                // Удаление строки, удаляем с начала
+                listEspGostParams.SelectedItems[0].Remove();
             }
         }
         //----------------------------------------------------------------------------------------
