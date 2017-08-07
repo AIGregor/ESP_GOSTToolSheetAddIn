@@ -444,6 +444,7 @@
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Сгенерировать карту наладки";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // dsReportParameters
             // 

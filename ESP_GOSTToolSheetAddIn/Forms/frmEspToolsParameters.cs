@@ -227,7 +227,7 @@ namespace ESP_GOSTToolSheetAddIn
                     ToolLatheTurning ToolLatheTurning = new ToolLatheTurning();
                     espTool = (Technology)ToolLatheTurning;
                     break;
-                case "":
+                case "ToolLatheGroove":
                     ToolLatheGroove ToolLatherGroove = new ToolLatheGroove();
                     espTool = (Technology) ToolLatherGroove;
                     break;

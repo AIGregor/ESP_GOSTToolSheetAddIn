@@ -97,5 +97,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             dgvReportToolParameters.Rows.Clear();
             fillFormReportToolParameters(selectIndex[0]);
         }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            // Копировать рамку Excel в назначенную папку
+
+            // Заполнить файл данными параметров интсрументов
+
+            // Если записываем название инструмента, объединяем несколько областей
+
+            // Сохранить файл
+
+        }
     }
 }
