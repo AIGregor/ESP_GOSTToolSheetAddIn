@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using EspritTechnology;
+using ESP_GOSTToolSheetAddIn.Resources;
 
 namespace ESP_GOSTToolSheetAddIn.Forms
 {
@@ -109,5 +111,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             // Сохранить файл
 
         }
+
+        private void CopyPatternFile(String destinationFileName)
+        {
+            FileInfo copyFI = new FileInfo(StringResource.excelReportFile);
+        }
+
     }
 }

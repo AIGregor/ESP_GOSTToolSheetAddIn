@@ -165,4 +165,7 @@
   <data name="menuName" xml:space="preserve">
     <value>&amp;Создать Карту наладки - ГОСТ </value>
   </data>
+  <data name="excelReportFile" xml:space="preserve">
+    <value>F4.xlsx</value>
+  </data>
 </root>

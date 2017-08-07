@@ -221,7 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="Resources\F4.xlsx" />
+    <None Include="Resources\F4.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\F4a.xlsx" />
     <None Include="Resources\ToolName.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
