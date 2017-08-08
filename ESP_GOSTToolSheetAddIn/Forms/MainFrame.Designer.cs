@@ -139,6 +139,7 @@
             this.MenuItemReportSetting.Name = "MenuItemReportSetting";
             this.MenuItemReportSetting.Size = new System.Drawing.Size(269, 22);
             this.MenuItemReportSetting.Text = "Параметры карты наладки";
+            this.MenuItemReportSetting.Click += new System.EventHandler(this.MenuItemReportSetting_Click);
             // 
             // MenuItemHelp
             // 

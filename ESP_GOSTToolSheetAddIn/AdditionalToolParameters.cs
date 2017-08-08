@@ -15,7 +15,8 @@ namespace ESP_GOSTToolSheetAddIn
         */
         static public GostTool[] gostToolsArray; // Массив всех инструментов и параметров которые надо показать в отчете
         static public List<GostTool> gostReportToolsArray = new List<GostTool>(); // Массив инструментов из текущего документа
-
+        static public ReportFields gostReportFields = new ReportFields();
+        
         public AdditionalToolParameters() : base()
         {
 

@@ -99,23 +99,34 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             dgvReportToolParameters.Rows.Clear();
             fillFormReportToolParameters(selectIndex[0]);
         }
-
+        
+        // Генерация карты наладки
         private void btnGenerate_Click(object sender, EventArgs e)
+        {           
+            GenerateFileReport("E:\\0001. ESPRIT\\Projects\\032_Отчет Звезда\\Тех. задание\\" + StringResource.excelReportFile);
+        }
+
+        private void GenerateFileReport(String distFileName)
         {
             // Копировать рамку Excel в назначенную папку
-
-            // Заполнить файл данными параметров интсрументов
+            CopyPatternFileTo(distFileName);
+            // Открыть файл
 
             // Если записываем название инструмента, объединяем несколько областей
 
             // Сохранить файл
-
         }
 
-        private void CopyPatternFile(String destinationFileName)
+        private void CopyPatternFileTo(String destinationFileName)
         {
-            FileInfo copyFI = new FileInfo(StringResource.excelReportFile);
+            FileInfo copyFI = new FileInfo(StringResource.excelTemplateReportFile);
+            copyFI.CopyTo(destinationFileName);
         }
 
+        private void MenuItemReportSetting_Click(object sender, EventArgs e)
+        {
+            frmReportSettings reportSettings = new frmReportSettings();
+            reportSettings.ShowDialog();
+        }
     }
 }

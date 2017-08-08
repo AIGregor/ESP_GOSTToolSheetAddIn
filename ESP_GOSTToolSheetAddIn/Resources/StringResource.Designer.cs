@@ -61,11 +61,20 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F4.xlsx.
+        ///   Looks up a localized string similar to Карта наладки ГОСТ.xlsx.
         /// </summary>
         internal static string excelReportFile {
             get {
                 return ResourceManager.GetString("excelReportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resources\F4.xlsx.
+        /// </summary>
+        internal static string excelTemplateReportFile {
+            get {
+                return ResourceManager.GetString("excelTemplateReportFile", resourceCulture);
             }
         }
         
