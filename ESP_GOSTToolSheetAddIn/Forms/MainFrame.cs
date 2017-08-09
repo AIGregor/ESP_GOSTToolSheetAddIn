@@ -113,7 +113,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             CopyPatternFileTo(distFileName);
             // Заполнение файла шаблона
             AdditionalToolParameters.gostReportFields.FillFileReport(distFileName);
-            //AdditionalToolParameters.gostReportFields.addNewSheet(distFileName);
+            //AdditionalToolParameters.gostReportFields.testAddNewSheet(distFileName);
         }
 
         private void CopyPatternFileTo(String destinationFileName)
