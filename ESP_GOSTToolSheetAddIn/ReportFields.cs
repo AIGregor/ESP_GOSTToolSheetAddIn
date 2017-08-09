@@ -10,24 +10,147 @@ namespace ESP_GOSTToolSheetAddIn
 {
     class ReportFields
     {
-        public String FIODev;
-        public String FIOChecker;
-        public String FIOAccepter;
-        public String FIONormChecker;
+        private string fIODev;          // ФИО Разработчика
+        private string fIOChecker;      // ФИО Проверяющего
+        private string fIOAccepter;     // ФИО утверждающего
+        private string fIONormChecker;  // ФИО норма контроль
 
-        public String CompanyName;
-        public String DetailName;
-        public String DetailDesignation;
-        public String CNCProgName;
-        public String CNCMachineName;
+        private string companyName;     // Компания
+        private string detailName;      // Название детали
+        private string detailDesignation;   // Обозначение детали
+        private string cNCProgName;     // Название программы
+        private string cNCMachineName;  // Название станка
 
         private int currentNumber = 0;
-        private int currentRow = 15; // Начальная строка
+        private int currentSheetNumber = 1;
+        private int currentRow = 13; // Начальная строка
         private bool mainSheet = true;
 
         private Excel.Application  excelApp;
         private Excel.Workbook     excelWBook;
         private Excel.Worksheet    excelWSheet;
+
+        object misValue = System.Reflection.Missing.Value;
+
+        public string FIODev
+        {
+            get
+            {
+                return fIODev;
+            }
+
+            set
+            {
+                fIODev = value;
+                Connect.sEspDocument.DocumentProperties.Author = fIODev;
+            }
+        }
+
+        public string FIOChecker
+        {
+            get
+            {
+                return fIOChecker;
+            }
+
+            set
+            {
+                fIOChecker = value;
+            }
+        }
+
+        public string FIOAccepter
+        {
+            get
+            {
+                return fIOAccepter;
+            }
+
+            set
+            {
+                fIOAccepter = value;
+            }
+        }
+
+        public string FIONormChecker
+        {
+            get
+            {
+                return fIONormChecker;
+            }
+
+            set
+            {
+                fIONormChecker = value;
+            }
+        }
+
+        public string CompanyName
+        {
+            get
+            {
+                return companyName;
+            }
+
+            set
+            {
+                companyName = value;
+                Connect.sEspDocument.DocumentProperties.Company = companyName;
+            }
+        }
+
+        public string DetailName
+        {
+            get
+            {
+                return detailName;
+            }
+
+            set
+            {
+                detailName = value;
+                Connect.sEspDocument.DocumentProperties.Title = detailName;
+            }
+        }
+
+        public string DetailDesignation
+        {
+            get
+            {
+                return detailDesignation;
+            }
+
+            set
+            {
+                detailDesignation = value;
+            }
+        }
+
+        public string CNCProgName
+        {
+            get
+            {
+                return cNCProgName;
+            }
+
+            set
+            {
+                cNCProgName = value;
+            }
+        }
+
+        public string CNCMachineName
+        {
+            get
+            {
+                return cNCMachineName;
+            }
+
+            set
+            {
+                cNCMachineName = value;
+            }
+        }
 
         public ReportFields()
         {
@@ -133,10 +256,12 @@ namespace ESP_GOSTToolSheetAddIn
             currentNumber++;
             currentRow++;
 
-            if (currentNumber > 16 || currentNumber % 17 == 0)
+            if (currentNumber % 17 == 0)
             {
                 // TODO: Создание нового листа форма 4A и переход на него
                 currentRow = 12;
+                mainSheet = false;
+                currentSheetNumber++;
                 addNewSheetForm4A();
             }
         }
@@ -144,17 +269,46 @@ namespace ESP_GOSTToolSheetAddIn
         private void addNewSheetForm4A()
         {
             // TODO: Перейти на новый лист или скопировать если необходимо
+            int sheetCount = excelWBook.Worksheets.Count;
+            Excel.Worksheet newSheet = excelWBook.Worksheets[2];
+
+            if (currentSheetNumber > 2)
+            {
+                newSheet.Copy(misValue, excelWBook.Worksheets[sheetCount]);
+            }            
+            excelWSheet = excelWBook.Sheets[currentSheetNumber];
         }
 
-        private void FillFileReport(String distFileName)
+        public void testAddNewSheet(string distFileName)
         {
-
-            object misValue = System.Reflection.Missing.Value;
-
             excelApp = new Excel.Application();
             excelWBook = excelApp.Workbooks.Open(distFileName, null, false, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", true, false, null, true, 1, 0);
             // Заполняем главный лист
             excelWSheet = (Excel.Worksheet)excelWBook.Worksheets.Item[1];
+            excelWSheet.Name = "Лист " + currentSheetNumber;
+
+            int i = 10;
+            while (i > 0)
+            {
+                addNewSheetForm4A();
+                i--;
+            }
+
+            excelWBook.Close(true, misValue, misValue);
+            excelApp.Quit();
+
+            releaseOdject(excelWSheet);
+            releaseOdject(excelWBook);
+            releaseOdject(excelApp);
+        }
+
+        public void FillFileReport(string distFileName)
+        {
+            excelApp = new Excel.Application();
+            excelWBook = excelApp.Workbooks.Open(distFileName, null, false, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", true, false, null, true, 1, 0);
+            // Заполняем главный лист
+            excelWSheet = (Excel.Worksheet)excelWBook.Worksheets.Item[1];
+            excelWSheet.Name = "Лист " + currentSheetNumber;
             // Заполняем "шапку"
             fillCompanyName();
             fillDetailName();

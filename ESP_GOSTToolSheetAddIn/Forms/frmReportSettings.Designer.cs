@@ -34,6 +34,8 @@
             this.btnSelectDistFolder = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCompanyName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -54,7 +56,8 @@
             // 
             // btnSelectDistFolder
             // 
-            this.btnSelectDistFolder.Location = new System.Drawing.Point(292, 23);
+            this.btnSelectDistFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectDistFolder.Location = new System.Drawing.Point(295, 23);
             this.btnSelectDistFolder.Name = "btnSelectDistFolder";
             this.btnSelectDistFolder.Size = new System.Drawing.Size(75, 23);
             this.btnSelectDistFolder.TabIndex = 2;
@@ -63,7 +66,8 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(292, 90);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(295, 102);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -72,18 +76,37 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(211, 90);
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Location = new System.Drawing.Point(214, 102);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Название организации";
+            // 
+            // txtCompanyName
+            // 
+            this.txtCompanyName.Location = new System.Drawing.Point(15, 68);
+            this.txtCompanyName.Name = "txtCompanyName";
+            this.txtCompanyName.Size = new System.Drawing.Size(352, 20);
+            this.txtCompanyName.TabIndex = 6;
+            // 
             // frmReportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 123);
+            this.ClientSize = new System.Drawing.Size(381, 136);
+            this.Controls.Add(this.txtCompanyName);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSelectDistFolder);
@@ -107,5 +130,7 @@
         private System.Windows.Forms.Button btnSelectDistFolder;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCompanyName;
     }
 }

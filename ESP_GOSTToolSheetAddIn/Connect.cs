@@ -26,6 +26,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// Объект запущенной программы ESPRIT
         /// </summary>
         static public Esprit.Application sEspApp;
+        static public Esprit.Document sEspDocument;
         EspritCommands.AddIn sAddIn;
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace ESP_GOSTToolSheetAddIn
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
             sEspApp = (Esprit.Application)Application;
+            sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;
             sCookie = sAddIn.GetCookie();
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);

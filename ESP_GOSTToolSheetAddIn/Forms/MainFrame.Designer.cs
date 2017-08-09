@@ -217,6 +217,7 @@
             this.tbFIOControl.Name = "tbFIOControl";
             this.tbFIOControl.Size = new System.Drawing.Size(170, 20);
             this.tbFIOControl.TabIndex = 1;
+            this.tbFIOControl.Leave += new System.EventHandler(this.tbFIOControl_Leave);
             // 
             // tbFIOAccept
             // 
@@ -224,6 +225,7 @@
             this.tbFIOAccept.Name = "tbFIOAccept";
             this.tbFIOAccept.Size = new System.Drawing.Size(170, 20);
             this.tbFIOAccept.TabIndex = 1;
+            this.tbFIOAccept.Leave += new System.EventHandler(this.tbFIOAccept_Leave);
             // 
             // label5
             // 
@@ -240,6 +242,7 @@
             this.tbFIOCheck.Name = "tbFIOCheck";
             this.tbFIOCheck.Size = new System.Drawing.Size(170, 20);
             this.tbFIOCheck.TabIndex = 1;
+            this.tbFIOCheck.Leave += new System.EventHandler(this.tbFIOCheck_Leave);
             // 
             // label4
             // 
@@ -256,6 +259,7 @@
             this.tbFIODev.Name = "tbFIODev";
             this.tbFIODev.Size = new System.Drawing.Size(170, 20);
             this.tbFIODev.TabIndex = 1;
+            this.tbFIODev.Leave += new System.EventHandler(this.tbFIODev_Leave);
             // 
             // label3
             // 
@@ -272,6 +276,7 @@
             this.tbCncMachineName.Name = "tbCncMachineName";
             this.tbCncMachineName.Size = new System.Drawing.Size(170, 20);
             this.tbCncMachineName.TabIndex = 1;
+            this.tbCncMachineName.Leave += new System.EventHandler(this.tbCncMachineName_Leave);
             // 
             // tbCNCName
             // 
@@ -279,6 +284,7 @@
             this.tbCNCName.Name = "tbCNCName";
             this.tbCNCName.Size = new System.Drawing.Size(170, 20);
             this.tbCNCName.TabIndex = 1;
+            this.tbCNCName.Leave += new System.EventHandler(this.tbCNCName_Leave);
             // 
             // label9
             // 
@@ -295,6 +301,7 @@
             this.tbDetailSign.Name = "tbDetailSign";
             this.tbDetailSign.Size = new System.Drawing.Size(170, 20);
             this.tbDetailSign.TabIndex = 1;
+            this.tbDetailSign.Leave += new System.EventHandler(this.tbDetailSign_Leave);
             // 
             // label8
             // 
@@ -311,6 +318,7 @@
             this.tbDetailName.Name = "tbDetailName";
             this.tbDetailName.Size = new System.Drawing.Size(170, 20);
             this.tbDetailName.TabIndex = 1;
+            this.tbDetailName.Leave += new System.EventHandler(this.tbDetailName_Leave);
             // 
             // label7
             // 
@@ -327,6 +335,7 @@
             this.tbCompanyName.Name = "tbCompanyName";
             this.tbCompanyName.Size = new System.Drawing.Size(170, 20);
             this.tbCompanyName.TabIndex = 1;
+            this.tbCompanyName.Leave += new System.EventHandler(this.tbCompanyName_Leave);
             // 
             // label6
             // 

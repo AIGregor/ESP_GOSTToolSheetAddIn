@@ -35,6 +35,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             AdditionalToolParameters.LoadToolsParameters();
             // Собираем инструмент из текущего документа
             Esprit.Document curDocument = Connect.sEspApp.Document;
+            Connect.sEspDocument = curDocument;
             currentTool = curDocument.Tools;
             // Идум по списку инструментов в документе
             foreach (Tool Tool in currentTool)
@@ -110,11 +111,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             // Копировать рамку Excel в назначенную папку
             CopyPatternFileTo(distFileName);
-            // Открыть файл
-
-            // Если записываем название инструмента, объединяем несколько областей
-
-            // Сохранить файл
+            // Заполнение файла шаблона
+            AdditionalToolParameters.gostReportFields.FillFileReport(distFileName);
+            //AdditionalToolParameters.gostReportFields.addNewSheet(distFileName);
         }
 
         private void CopyPatternFileTo(String destinationFileName)
@@ -127,6 +126,51 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             frmReportSettings reportSettings = new frmReportSettings();
             reportSettings.ShowDialog();
+        }
+
+        private void tbFIODev_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.FIODev = tbFIODev.Text;
+        }
+
+        private void tbFIOCheck_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.FIOChecker = tbFIOCheck.Text;
+        }
+
+        private void tbFIOAccept_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.FIOAccepter = tbFIOAccept.Text;
+        }
+
+        private void tbFIOControl_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.FIONormChecker = tbFIOControl.Text;
+        }
+
+        private void tbCompanyName_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.CompanyName = tbCompanyName.Text;
+        }
+
+        private void tbDetailName_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.DetailName = tbDetailName.Text;
+        }
+
+        private void tbDetailSign_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.DetailDesignation = tbDetailSign.Text;
+        }
+
+        private void tbCNCName_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.CNCProgName = tbCNCName.Text;
+        }
+
+        private void tbCncMachineName_Leave(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportFields.CNCMachineName = tbCncMachineName.Text;
         }
     }
 }
