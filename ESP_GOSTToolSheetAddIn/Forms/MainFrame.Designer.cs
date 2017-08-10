@@ -94,7 +94,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(708, 24);
-            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // MenuItemDataBase
@@ -207,7 +207,8 @@
             this.btnSaveInFile.Location = new System.Drawing.Point(478, 302);
             this.btnSaveInFile.Name = "btnSaveInFile";
             this.btnSaveInFile.Size = new System.Drawing.Size(194, 29);
-            this.btnSaveInFile.TabIndex = 2;
+            this.btnSaveInFile.TabIndex = 0;
+            this.btnSaveInFile.TabStop = false;
             this.btnSaveInFile.Text = "Сохранить в текущем файле";
             this.btnSaveInFile.UseVisualStyleBackColor = true;
             // 
@@ -216,7 +217,7 @@
             this.tbFIOControl.Location = new System.Drawing.Point(104, 94);
             this.tbFIOControl.Name = "tbFIOControl";
             this.tbFIOControl.Size = new System.Drawing.Size(170, 20);
-            this.tbFIOControl.TabIndex = 1;
+            this.tbFIOControl.TabIndex = 3;
             this.tbFIOControl.Leave += new System.EventHandler(this.tbFIOControl_Leave);
             // 
             // tbFIOAccept
@@ -224,7 +225,7 @@
             this.tbFIOAccept.Location = new System.Drawing.Point(104, 68);
             this.tbFIOAccept.Name = "tbFIOAccept";
             this.tbFIOAccept.Size = new System.Drawing.Size(170, 20);
-            this.tbFIOAccept.TabIndex = 1;
+            this.tbFIOAccept.TabIndex = 2;
             this.tbFIOAccept.Leave += new System.EventHandler(this.tbFIOAccept_Leave);
             // 
             // label5
@@ -258,7 +259,7 @@
             this.tbFIODev.Location = new System.Drawing.Point(104, 16);
             this.tbFIODev.Name = "tbFIODev";
             this.tbFIODev.Size = new System.Drawing.Size(170, 20);
-            this.tbFIODev.TabIndex = 1;
+            this.tbFIODev.TabIndex = 0;
             this.tbFIODev.Leave += new System.EventHandler(this.tbFIODev_Leave);
             // 
             // label3
@@ -275,7 +276,7 @@
             this.tbCncMachineName.Location = new System.Drawing.Point(452, 120);
             this.tbCncMachineName.Name = "tbCncMachineName";
             this.tbCncMachineName.Size = new System.Drawing.Size(170, 20);
-            this.tbCncMachineName.TabIndex = 1;
+            this.tbCncMachineName.TabIndex = 8;
             this.tbCncMachineName.Leave += new System.EventHandler(this.tbCncMachineName_Leave);
             // 
             // tbCNCName
@@ -283,7 +284,7 @@
             this.tbCNCName.Location = new System.Drawing.Point(452, 94);
             this.tbCNCName.Name = "tbCNCName";
             this.tbCNCName.Size = new System.Drawing.Size(170, 20);
-            this.tbCNCName.TabIndex = 1;
+            this.tbCNCName.TabIndex = 7;
             this.tbCNCName.Leave += new System.EventHandler(this.tbCNCName_Leave);
             // 
             // label9
@@ -300,7 +301,7 @@
             this.tbDetailSign.Location = new System.Drawing.Point(452, 68);
             this.tbDetailSign.Name = "tbDetailSign";
             this.tbDetailSign.Size = new System.Drawing.Size(170, 20);
-            this.tbDetailSign.TabIndex = 1;
+            this.tbDetailSign.TabIndex = 6;
             this.tbDetailSign.Leave += new System.EventHandler(this.tbDetailSign_Leave);
             // 
             // label8
@@ -317,7 +318,7 @@
             this.tbDetailName.Location = new System.Drawing.Point(452, 42);
             this.tbDetailName.Name = "tbDetailName";
             this.tbDetailName.Size = new System.Drawing.Size(170, 20);
-            this.tbDetailName.TabIndex = 1;
+            this.tbDetailName.TabIndex = 5;
             this.tbDetailName.Leave += new System.EventHandler(this.tbDetailName_Leave);
             // 
             // label7
@@ -334,7 +335,7 @@
             this.tbCompanyName.Location = new System.Drawing.Point(452, 16);
             this.tbCompanyName.Name = "tbCompanyName";
             this.tbCompanyName.Size = new System.Drawing.Size(170, 20);
-            this.tbCompanyName.TabIndex = 1;
+            this.tbCompanyName.TabIndex = 4;
             this.tbCompanyName.Leave += new System.EventHandler(this.tbCompanyName_Leave);
             // 
             // label6
@@ -403,7 +404,7 @@
             this.listDocumentTools.MultiSelect = false;
             this.listDocumentTools.Name = "listDocumentTools";
             this.listDocumentTools.Size = new System.Drawing.Size(315, 331);
-            this.listDocumentTools.TabIndex = 6;
+            this.listDocumentTools.TabIndex = 0;
             this.listDocumentTools.UseCompatibleStateImageBehavior = false;
             this.listDocumentTools.View = System.Windows.Forms.View.Details;
             this.listDocumentTools.Click += new System.EventHandler(this.listDocumentTools_Click);
@@ -429,7 +430,7 @@
             this.dgvReportToolParameters.Location = new System.Drawing.Point(0, 0);
             this.dgvReportToolParameters.Name = "dgvReportToolParameters";
             this.dgvReportToolParameters.Size = new System.Drawing.Size(353, 331);
-            this.dgvReportToolParameters.TabIndex = 7;
+            this.dgvReportToolParameters.TabIndex = 0;
             // 
             // Column1
             // 
@@ -451,7 +452,7 @@
             this.btnGenerate.Location = new System.Drawing.Point(12, 30);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(686, 41);
-            this.btnGenerate.TabIndex = 2;
+            this.btnGenerate.TabIndex = 0;
             this.btnGenerate.Text = "Сгенерировать карту наладки";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);

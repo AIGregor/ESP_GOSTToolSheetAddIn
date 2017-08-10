@@ -26,6 +26,23 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void MainFrame_Shown(object sender, EventArgs e)
         {
             InitMainForm();
+            // Заполняем поля для шапки
+            fillHatsFields(); 
+        }
+
+        private void fillHatsFields()
+        {
+            AdditionalToolParameters.gostReportFields.getFIOFieldsFromDocument();
+
+            tbFIOCheck.Text         = AdditionalToolParameters.gostReportFields.FIOChecker; 
+            tbFIODev.Text           = AdditionalToolParameters.gostReportFields.FIODev;
+            tbFIOControl.Text       = AdditionalToolParameters.gostReportFields.FIONormChecker;
+            tbFIOAccept.Text        = AdditionalToolParameters.gostReportFields.FIOAccepter;
+            tbDetailSign.Text       = AdditionalToolParameters.gostReportFields.DetailDesignation;
+            tbDetailName.Text       = AdditionalToolParameters.gostReportFields.DetailName;
+            tbCncMachineName.Text   = AdditionalToolParameters.gostReportFields.CNCMachineName;
+            tbCNCName.Text          = AdditionalToolParameters.gostReportFields.CNCProgName;
+            tbCompanyName.Text      = AdditionalToolParameters.gostReportFields.CompanyName;
         }
 
         // Заполнение главного окна

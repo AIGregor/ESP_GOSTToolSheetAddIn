@@ -298,6 +298,10 @@ namespace ESP_GOSTToolSheetAddIn
             int sheetCount = excelWBook.Worksheets.Count;
             Excel.Worksheet newSheet = excelWBook.Worksheets[sheetCount];
             
+            // Снять защиту с листа
+            if (sheetCount == 2)
+                newSheet.Unprotect("rogachev");
+
             // Копируем на перед один чистый лист
             newSheet.Copy(misValue, excelWBook.Worksheets[sheetCount]);
             
@@ -347,6 +351,13 @@ namespace ESP_GOSTToolSheetAddIn
                 totalSheetNumber++;
         }
 
+        public void getFIOFieldsFromDocument()
+        {
+            // TODO: Заполнить до конца кто где должен храниться
+            fIODev = Connect.sEspDocument.DocumentProperties.Author;
+            companyName = Connect.sEspDocument.DocumentProperties.Company;
+        }
+
         public void testAddNewSheet(string distFileName)
         {
             excelApp = new Excel.Application();
@@ -385,8 +396,16 @@ namespace ESP_GOSTToolSheetAddIn
         {
             excelApp = new Excel.Application();
             excelWBook = excelApp.Workbooks.Open(distFileName, null, false, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", true, false, null, true, 1, 0);
+
+            //Снять защиту с книги после копирования
+            excelWBook.Unprotect("rogachev");
+
             // Заполняем главный лист
             excelWSheet = (Excel.Worksheet)excelWBook.Worksheets.Item[1];
+
+            //Снять защиту с листа
+            excelWSheet.Unprotect("rogachev");
+
             //excelWSheet.Name = "Лист " + currentSheetNumber;
             // Заполняем "шапку"
             fillCompanyName();

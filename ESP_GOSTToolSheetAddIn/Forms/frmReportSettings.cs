@@ -16,5 +16,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             InitializeComponent();
         }
+
+        private void btnSelectDistFolder_Click(object sender, EventArgs e)
+        {
+            dlgDistFolderBrowser.ShowDialog();
+            tbReportField.Text = dlgDistFolderBrowser.SelectedPath;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            AdditionalToolParameters.gostReportSettings.ReportPath = tbReportField.Text;
+            AdditionalToolParameters.gostReportSettings.DefaultReportName = tbDefaultReportName.Text;
+        }
     }
 }
