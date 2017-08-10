@@ -97,6 +97,15 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 80000.
+        /// </summary>
+        internal static string startUserCLCodeNumber {
+            get {
+                return ResourceManager.GetString("startUserCLCodeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resources\ToolName.txt.
         /// </summary>
         internal static string txtPathToolType {

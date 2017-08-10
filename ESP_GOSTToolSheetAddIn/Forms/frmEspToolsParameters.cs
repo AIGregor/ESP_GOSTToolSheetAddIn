@@ -159,6 +159,7 @@ namespace ESP_GOSTToolSheetAddIn
         // Заполнение списка на форме стандартных параметров инструмента
         void fillFrmList(string sClassName)
         {
+            //TODO: Переписать - Tutorial 144:  A Closer Look at the Parameter Object
             Technology espTool = null;
 
             switch (sClassName)
@@ -343,20 +344,38 @@ namespace ESP_GOSTToolSheetAddIn
         //----------------------------------------------------------------------------------------
         public void addNewUserParameter(string sUserParamName)
         {
-            // Надо записать имя выбранного паремтра
-            ToolParameter newParameter = new ToolParameter();
-            newParameter.Name = sUserParamName;
-            newParameter.Type = StringResource.xmlParamUserType;
-
             // Получили название инструмента
             string sToolTypeName = lstTools.GetItemText(lstTools.SelectedItem);
-
+            // Ищем нужный инструмент
             for (int i = 0; i <  AdditionalToolParameters.gostToolsArray.Count(); i++)
             {
-                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolName, sToolTypeName))
+                if (String.Equals( AdditionalToolParameters.gostToolsArray[i].toolLabel, sToolTypeName))
                 {
+                    int newUserClCode = AdditionalToolParameters.gostToolsArray[i].getMaxClCodeValue();
+                    if (newUserClCode < int.Parse(StringResource.startUserCLCodeNumber))
+                    {
+                        newUserClCode = int.Parse(StringResource.startUserCLCodeNumber);
+                    }
+                    else
+                    {
+                        newUserClCode++;
+                    }
+
+                    // Надо записать имя выбранного паремтра
+                    ToolParameter newParameter = new ToolParameter();
+                    newParameter.Capture = sUserParamName;
+                    newParameter.Type = StringResource.xmlParamUserType;
+                    newParameter.CLCode = newUserClCode;
+
+                    string[] arrParams = new string[4];
+                    arrParams[0] = newParameter.Capture;
+                    arrParams[1] = "---";
+                    arrParams[2] = StringResource.xmlParamUserType;
+                    arrParams[3] = newUserClCode.ToString();
+
                     // Добавить в список для карты наладки
-                    listEspGostParams.Items.Add(sUserParamName);
+                    ListViewItem newItem = new ListViewItem(arrParams);                    
+                    listEspGostParams.Items.Add(newItem);
                      AdditionalToolParameters.gostToolsArray[i].addParameter(newParameter);
                     break;
                 }

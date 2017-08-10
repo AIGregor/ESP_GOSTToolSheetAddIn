@@ -171,4 +171,7 @@
   <data name="excelReportFile" xml:space="preserve">
     <value>Карта наладки ГОСТ.xlsx</value>
   </data>
+  <data name="startUserCLCodeNumber" xml:space="preserve">
+    <value>80000</value>
+  </data>
 </root>
