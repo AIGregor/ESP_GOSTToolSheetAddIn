@@ -97,6 +97,15 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ОШИБКА. Отсутствует актуальная лицензия дополнения.  .
+        /// </summary>
+        internal static string msgErrorSecurityAccess {
+            get {
+                return ResourceManager.GetString("msgErrorSecurityAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 80000.
         /// </summary>
         internal static string startUserCLCodeNumber {

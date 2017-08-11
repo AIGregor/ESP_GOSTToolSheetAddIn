@@ -174,4 +174,7 @@
   <data name="startUserCLCodeNumber" xml:space="preserve">
     <value>80000</value>
   </data>
+  <data name="msgErrorSecurityAccess" xml:space="preserve">
+    <value>ОШИБКА. Отсутствует актуальная лицензия дополнения.  </value>
+  </data>
 </root>

@@ -36,7 +36,6 @@
             this.ShowPatternFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemReportSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemHelpContent = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -109,13 +108,13 @@
             // MenuItemSaveDataBase
             // 
             this.MenuItemSaveDataBase.Name = "MenuItemSaveDataBase";
-            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(132, 22);
+            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(152, 22);
             this.MenuItemSaveDataBase.Text = "Сохранить";
             // 
             // MenuItemUpdataDataBase
             // 
             this.MenuItemUpdataDataBase.Name = "MenuItemUpdataDataBase";
-            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(132, 22);
+            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(152, 22);
             this.MenuItemUpdataDataBase.Text = "Обновить";
             // 
             // MenuItemSettings
@@ -144,17 +143,10 @@
             // MenuItemHelp
             // 
             this.MenuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemHelpContent,
             this.MenuItemHelpAbout});
             this.MenuItemHelp.Name = "MenuItemHelp";
             this.MenuItemHelp.Size = new System.Drawing.Size(65, 20);
             this.MenuItemHelp.Text = "Справка";
-            // 
-            // MenuItemHelpContent
-            // 
-            this.MenuItemHelpContent.Name = "MenuItemHelpContent";
-            this.MenuItemHelpContent.Size = new System.Drawing.Size(154, 22);
-            this.MenuItemHelpContent.Text = "Содержание";
             // 
             // MenuItemHelpAbout
             // 
@@ -519,7 +511,6 @@
         private System.Windows.Forms.ToolStripMenuItem ShowPatternFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MenuItemReportSetting;
         private System.Windows.Forms.ToolStripMenuItem MenuItemHelp;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemHelpContent;
         private System.Windows.Forms.ToolStripMenuItem MenuItemHelpAbout;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

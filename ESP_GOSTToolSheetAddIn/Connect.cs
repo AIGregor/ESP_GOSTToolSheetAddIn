@@ -9,6 +9,7 @@ using System.IO;
 using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using EspritCommands;
+using System.Windows.Forms;
 
 namespace ESP_GOSTToolSheetAddIn
 {
@@ -60,6 +61,17 @@ namespace ESP_GOSTToolSheetAddIn
             sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;
             sCookie = sAddIn.GetCookie();
+
+            // Защита !!!
+            SecurityFile security = new SecurityFile();
+            if (!security.mergeLicFiles())
+            {
+                MessageBox.Show(StringResource.msgErrorSecurityAccess, "Лицензия",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // Защита !!!
+
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
 
             EspritMenus.Menus allMenu = sEspApp.Menus;

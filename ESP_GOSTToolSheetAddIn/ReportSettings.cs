@@ -18,6 +18,9 @@ namespace ESP_GOSTToolSheetAddIn
         private string reportPath = "";
         private string defaultReportName = "";
 
+        public bool useLocalHost = true;
+        public string hostName = "";
+
         public string ReportPath
         {
             get

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalToolParameters.cs" />
+    <Compile Include="DatabaseInterface.cs" />
     <Compile Include="EspritDataBase.cs" />
     <Compile Include="Forms\CreateUserParameters.cs">
       <SubType>Form</SubType>
@@ -92,6 +93,7 @@
       <DependentUpon>StringResource.resx</DependentUpon>
     </Compile>
     <Compile Include="GostTool.cs" />
+    <Compile Include="SecurityFile.cs" />
     <Compile Include="ToolParameter.cs" />
     <Compile Include="ToolParametersList.cs" />
   </ItemGroup>
@@ -279,6 +281,9 @@
   <ItemGroup>
     <Content Include="Resources\EspToolParams.xml">
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\lic.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
