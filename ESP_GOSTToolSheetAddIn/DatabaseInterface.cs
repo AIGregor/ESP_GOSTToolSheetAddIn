@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
+//TODO: загрузить все параметры инструмента из БД по найденному ID которые больше 80 000
+//TODO: добавить найденные параметры в структуру параметров отчета
+//TODO: сохранить пользовательсике парметры в БД из структуры отчета
+
 namespace ESP_GOSTToolSheetAddIn
 {
     class DatabaseInterface
