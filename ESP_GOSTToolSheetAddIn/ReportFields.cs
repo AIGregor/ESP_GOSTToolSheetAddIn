@@ -34,6 +34,8 @@ namespace ESP_GOSTToolSheetAddIn
 
         object misValue = System.Reflection.Missing.Value;
 
+        public DatabaseInterface dataBase = new DatabaseInterface();
+
         public string FIODev
         {
             get

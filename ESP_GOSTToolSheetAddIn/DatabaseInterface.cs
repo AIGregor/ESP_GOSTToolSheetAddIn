@@ -14,11 +14,16 @@ namespace ESP_GOSTToolSheetAddIn
         private string connectionString = "";
            
         // Получить ID инструмента по назаванию
-        public void getCuttingToolID(string toolDocumentID)
+        public string getCuttingToolID(string toolDocumentID)
         {
+            string CuttingToolID = "";
             try
             {
-                string query = "select * from ";
+                string query = "select fldfkCuttingToolId_tblCuttingToolParameter from tblCuttingToolParameter" +
+                    " where fldValue_tblCuttingToolParameter = 'DR 02.5'"; // + toolDocumentID;
+                            
+                if (connectionString == "")
+                    loadConnectionString();
 
                 SqlConnection conn = new SqlConnection(connectionString);
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -30,6 +35,8 @@ namespace ESP_GOSTToolSheetAddIn
                 // this will query your database and return the result to your datatable
                 da.Fill(dtToolID);
 
+                CuttingToolID = dtToolID.Rows[0][0].ToString();
+
                 conn.Close();
                 da.Dispose();
             }
@@ -37,11 +44,15 @@ namespace ESP_GOSTToolSheetAddIn
             {
 
             }
+
+            return CuttingToolID;
         }
 
-        private void getConnectionString()
+        private void loadConnectionString()
         {
             ReportSettings settings = new ReportSettings();
+            settings.loadHostSettings();
+
             if (settings.useLocalHost)
             {
                 currentMashineName = System.Environment.MachineName;

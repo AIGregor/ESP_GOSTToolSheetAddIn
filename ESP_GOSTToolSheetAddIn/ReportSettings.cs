@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Xml;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,14 +54,32 @@ namespace ESP_GOSTToolSheetAddIn
 
         public void saveSettings()
         {
-            RegistryKey currentUserKey = Registry.CurrentUser;
+        }
 
-            currentUserKey.OpenSubKey("Software\\D.P.Technology\\esprit\\AddInSettings");
-            currentUserKey.CreateSubKey("ESPRIT.ReportGost31404-86");
-            currentUserKey.SetValue("defaultRaportPath", ReportPath);
-            currentUserKey.SetValue("defaultRaportName", DefaultReportName);
+        public void loadHostSettings()
+        {
+            XmlDocument docEspritHost = new XmlDocument();
+            try
+            {
+                docEspritHost.Load("./Resources/ServerName.xml");
+            }
+            catch (Exception E)
+            {
+                //MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            currentUserKey.Close();
+            try
+            {
+                foreach (XmlNode node in docEspritHost.DocumentElement)
+                {
+                    hostName = node["HostName"].InnerText;
+                    useLocalHost = bool.Parse(node["LocalHost"].InnerText);
+                }
+            }
+            catch (Exception E)
+            {
+                //MessageBox.Show("Не удалось выполнить чтение параметров настроек подключения! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <KBMSSServer name ="ESPRIT KBMSS Server">
+    <HostName>NICK-W7</HostName>
+    <LocalHost>True</LocalHost>
+  </KBMSSServer>
+</root>

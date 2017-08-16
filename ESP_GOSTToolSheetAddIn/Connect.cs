@@ -57,12 +57,16 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
+            DatabaseInterface dataBase = new DatabaseInterface();
+            string toolDBId = dataBase.getCuttingToolID(null);
+            return;
+
             sEspApp = (Esprit.Application)Application;
             sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;
             sCookie = sAddIn.GetCookie();
 
-            // Защита !!!
+            //------------------- Защита !!!
             SecurityFile security = new SecurityFile();
             if (!security.mergeLicFiles())
             {
@@ -70,7 +74,7 @@ namespace ESP_GOSTToolSheetAddIn
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // Защита !!!
+            //-------------------  Защита !!!
 
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
 
