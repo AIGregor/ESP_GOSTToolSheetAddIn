@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using EspritTechnology;
 using ESP_GOSTToolSheetAddIn.Resources;
+//TODO: Что писать в БД для пользовательских параметров - capture или name ?
 
 namespace ESP_GOSTToolSheetAddIn
 {
     class GostTool
     {
         public ToolParametersList parameters; // Список всех параметров
-        public Technology techTool = null;
-        public String toolType = ""; // тип Mill/Turn
-        public String toolName = "";
-        public String toolLabel = "";
-        public String toolDocumentID = "";
-        public int toolID = 0;
+        public Technology techTool = null;  
+        public string toolType = "";        // тип Mill/Turn
+        public string toolName = "";        // Название инструмента в esprit
+        public string toolLabel = "";       // Название типа инструмента на русском языке
+        public string toolDocumentID = "";  // ID - Название инструмента из формы инструмента
+        public int toolID = 0;              // ID инструмента из API exprit по порядку для каждого типа, хранится в XML
+        public string dataBaseToolID = "";  // ID инструмента в БД - базе знаний
 
         private Guid toolDataBaseID = new Guid();
 
@@ -69,6 +71,8 @@ namespace ESP_GOSTToolSheetAddIn
                 if (String.Equals(parameters.getParameter(i).Type, StringResource.xmlParamUserType))
                 {
                     // TODO: Чтение парметров из БД, заполнение структуры
+                    DatabaseInterface knowledgeBase = new DatabaseInterface();
+                    knowledgeBase.fillUserParamsGostTool(this);
                 }
             }
         }
@@ -76,7 +80,6 @@ namespace ESP_GOSTToolSheetAddIn
         public int getMaxClCodeValue()
         {
             int maxClCode = 0;
-
             for (int i = 0; i < parameters.Count(); i++)
             {
                 if (maxClCode < parameters.getParameter(i).CLCode)

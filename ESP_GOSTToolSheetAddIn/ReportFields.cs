@@ -8,6 +8,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ESP_GOSTToolSheetAddIn
 {
+    /// <summary>
+    /// Класс заполнения Excel файла параметрами инструмента из внутренней структуры AdditionalToolParameters.gostReportToolsArray
+    /// </summary>
     class ReportFields
     {
         private string fIODev;          // ФИО Разработчика

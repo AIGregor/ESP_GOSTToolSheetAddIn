@@ -10,6 +10,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
     public partial class MainFrame : Form
     {
         EspritTools.Tools currentTool;
+        private int selectedToolIndex = 0;
 
         public MainFrame()
         {
@@ -48,13 +49,13 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         // Заполнение главного окна
         private void InitMainForm()
         {
-            // Загружаем параметры инструменты из файла
+            // Загружаем параметры инструмента из файла
             AdditionalToolParameters.LoadToolsParameters();
             // Собираем инструмент из текущего документа
             Esprit.Document curDocument = Connect.sEspApp.Document;
             Connect.sEspDocument = curDocument;
             currentTool = curDocument.Tools;
-            // Идум по списку инструментов в документе
+            // Идем по списку инструментов в документе
             foreach (Tool Tool in currentTool)
             {
                 // Добавляем инструмент в массив отчета
@@ -68,7 +69,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 ListViewItem newReportTool = new ListViewItem(reportTool);
                 listDocumentTools.Items.Add(newReportTool);
             }
-            // Заполнить 
+            // Заполнить таблицу параметров первого инструмента
             fillFormReportToolParameters(0);
         }
 
@@ -95,7 +96,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
         // Добавить параметры в форму 
         private void fillFormReportToolParameters(int index)
-        {
+        { 
             if (AdditionalToolParameters.gostReportToolsArray.Count == 0)
                 return;
 
@@ -104,8 +105,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             for (int j = 0; j < reportTool.parameters.Count(); j++)
             {
                 //DataGridViewRow reportParameter = new DataGridViewRow();
-                String strCapture = reportTool.parameters.getParameter(j).Capture;
-                String strValue = reportTool.parameters.getParameter(j).Value;
+                string strCapture = reportTool.parameters.getParameter(j).Capture;
+                string strValue = reportTool.parameters.getParameter(j).Value;
                 dgvReportToolParameters.Rows.Add(strCapture, strValue);
             }   
         }
@@ -114,8 +115,43 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void listDocumentTools_Click(object sender, EventArgs e)
         {
             ListView.SelectedIndexCollection selectIndex = listDocumentTools.SelectedIndices;
+            
+            // Сохраняем измененные параметры во внутреннюю структуру
+            if (selectedToolIndex != selectIndex[0])
+            {
+                updateParametersFromForm();
+            }
+
             dgvReportToolParameters.Rows.Clear();
             fillFormReportToolParameters(selectIndex[0]);
+            // сохранили текущий выделлный инструмент из списка
+            selectedToolIndex = selectIndex[0];
+
+            Trace.Write("Fill form!\n");
+        }
+
+        //TODO: Обновить структуру данными по таблице
+        private void updateParametersFromForm()
+        {
+            GostTool reportTool = AdditionalToolParameters.gostReportToolsArray[selectedToolIndex];
+
+            for (int i = 0; i < dgvReportToolParameters.Rows.Count-1; i++)
+            {
+                // пользователь добавил новый параметр
+                if (reportTool.parameters.Count() - 1 < i)
+                {
+                    ToolParameter reportUserToolParam = new ToolParameter();
+                    reportUserToolParam.Capture = dgvReportToolParameters.Rows[i].Cells[0].Value.ToString();
+                    reportUserToolParam.Value = dgvReportToolParameters.Rows[i].Cells[1].Value.ToString();
+                    reportTool.parameters.AddParameter(reportUserToolParam);
+
+                    continue;
+                }
+
+                ToolParameter oldToolParam = reportTool.parameters.getParameter(i);
+                oldToolParam.Capture = dgvReportToolParameters.Rows[i].Cells[0].Value.ToString();
+                oldToolParam.Value = dgvReportToolParameters.Rows[i].Cells[1].Value.ToString();
+            }
         }
         
         // Генерация карты наладки
@@ -189,5 +225,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             AdditionalToolParameters.gostReportFields.CNCMachineName = tbCncMachineName.Text;
         }
+
     }
 }

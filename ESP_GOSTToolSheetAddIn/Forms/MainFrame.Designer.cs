@@ -108,13 +108,13 @@
             // MenuItemSaveDataBase
             // 
             this.MenuItemSaveDataBase.Name = "MenuItemSaveDataBase";
-            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(132, 22);
             this.MenuItemSaveDataBase.Text = "Сохранить";
             // 
             // MenuItemUpdataDataBase
             // 
             this.MenuItemUpdataDataBase.Name = "MenuItemUpdataDataBase";
-            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(132, 22);
             this.MenuItemUpdataDataBase.Text = "Обновить";
             // 
             // MenuItemSettings
@@ -382,7 +382,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvReportToolParameters);
             this.splitContainer1.Size = new System.Drawing.Size(672, 331);
-            this.splitContainer1.SplitterDistance = 315;
+            this.splitContainer1.SplitterDistance = 262;
             this.splitContainer1.TabIndex = 0;
             // 
             // listDocumentTools
@@ -392,10 +392,11 @@
             this.columnHeader1});
             this.listDocumentTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listDocumentTools.FullRowSelect = true;
+            this.listDocumentTools.HideSelection = false;
             this.listDocumentTools.Location = new System.Drawing.Point(0, 0);
             this.listDocumentTools.MultiSelect = false;
             this.listDocumentTools.Name = "listDocumentTools";
-            this.listDocumentTools.Size = new System.Drawing.Size(315, 331);
+            this.listDocumentTools.Size = new System.Drawing.Size(262, 331);
             this.listDocumentTools.TabIndex = 0;
             this.listDocumentTools.UseCompatibleStateImageBehavior = false;
             this.listDocumentTools.View = System.Windows.Forms.View.Details;
@@ -404,12 +405,12 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "ID Инструмента";
-            this.columnHeader2.Width = 141;
+            this.columnHeader2.Width = 121;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Тип инструмента";
-            this.columnHeader1.Width = 177;
+            this.columnHeader1.Width = 188;
             // 
             // dgvReportToolParameters
             // 
@@ -421,7 +422,7 @@
             this.dgvReportToolParameters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReportToolParameters.Location = new System.Drawing.Point(0, 0);
             this.dgvReportToolParameters.Name = "dgvReportToolParameters";
-            this.dgvReportToolParameters.Size = new System.Drawing.Size(353, 331);
+            this.dgvReportToolParameters.Size = new System.Drawing.Size(406, 331);
             this.dgvReportToolParameters.TabIndex = 0;
             // 
             // Column1

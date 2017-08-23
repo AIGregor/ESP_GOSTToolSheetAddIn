@@ -30,8 +30,8 @@ namespace ESP_GOSTToolSheetAddIn
             bool result = false;
 
             md5LicCode = generateLicCode(Connect.sEspApp.LicenseKey);
-
-            using (StreamReader fl = new StreamReader(@"Resources\lic.txt"))
+            // eal - esprit addin license
+            using (StreamReader fl = new StreamReader(@"Resources\lic.eal"))
             {
                 while (true)
                 {

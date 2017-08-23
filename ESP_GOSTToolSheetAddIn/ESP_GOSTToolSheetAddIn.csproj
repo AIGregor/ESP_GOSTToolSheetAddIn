@@ -282,9 +282,9 @@
     <Content Include="Resources\EspToolParams.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Resources\lic.txt">
+    <None Include="Resources\lic.eal">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Resources\ServerName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
