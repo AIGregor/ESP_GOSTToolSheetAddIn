@@ -106,7 +106,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 80000.
+        ///   Looks up a localized string similar to 9900.
         /// </summary>
         internal static string startUserCLCodeNumber {
             get {

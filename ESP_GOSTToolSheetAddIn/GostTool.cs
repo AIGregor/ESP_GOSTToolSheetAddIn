@@ -20,8 +20,6 @@ namespace ESP_GOSTToolSheetAddIn
         public int toolID = 0;              // ID инструмента из API exprit по порядку для каждого типа, хранится в XML
         public string dataBaseToolID = "";  // ID инструмента в БД - базе знаний
 
-        private Guid toolDataBaseID = new Guid();
-
         public GostTool()
         {
             parameters = new ToolParametersList();
@@ -58,21 +56,28 @@ namespace ESP_GOSTToolSheetAddIn
         // Записываем значение параметра из документа в структуру
         public void addParametersValue(Tool newRepotTool)
         {
+            DatabaseInterface knowledgeBase = new DatabaseInterface();
+            if (dataBaseToolID == "")
+            {
+                string cuttingToolID = knowledgeBase.getCuttingToolID(toolDocumentID);
+                dataBaseToolID = cuttingToolID;
+            }
+
             for (int i = 0; i < parameters.Count(); i++)
             {
+                ToolParameter currentToolParameter = parameters.getParameter(i);
                 // Загрузить значения стандартных параметров
                 if (String.Equals(parameters.getParameter(i).Type, StringResource.xmlParamStandartType))
                 {
                     Technology reportTechTool = (Technology)newRepotTool;
                     Parameter curParam = reportTechTool[parameters.getParameter(i).Name];
-                    parameters.getParameter(i).Value = Convert.ToString(curParam.Value);
+                    currentToolParameter.Value = Convert.ToString(curParam.Value);
                 }
                 // Загрузить значение пользовательских параметров из базы данных
-                if (String.Equals(parameters.getParameter(i).Type, StringResource.xmlParamUserType))
+                if (String.Equals(currentToolParameter.Type, StringResource.xmlParamUserType))
                 {
-                    // TODO: Чтение парметров из БД, заполнение структуры
-                    DatabaseInterface knowledgeBase = new DatabaseInterface();
-                    knowledgeBase.fillUserParamsGostTool(this);
+                    // TODO: Чтение парметров из БД, заполнение значения                   
+                    currentToolParameter.Value = knowledgeBase.getUsersParamValue(dataBaseToolID, currentToolParameter.CLCode);
                 }
             }
         }

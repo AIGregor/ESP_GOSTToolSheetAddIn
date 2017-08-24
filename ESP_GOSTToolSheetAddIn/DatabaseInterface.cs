@@ -24,35 +24,41 @@ namespace ESP_GOSTToolSheetAddIn
             string CuttingToolID = "";
             try
             {
-                string query = "select fldfkCuttingToolId_tblCuttingToolParameter from tblCuttingToolParameter" +
-                    " where fldValue_tblCuttingToolParameter = 'DR 02.5'"; // + toolDocumentID;
-                            
+                string sqlQuery = "select fldfkCuttingToolId_tblCuttingToolParameter from tblCuttingToolParameter" +
+                    " where fldValue_tblCuttingToolParameter = @ToolDocID;";
+
                 if (connectionString == "")
                     loadConnectionString();
 
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand cmd = new SqlCommand(query, conn);
-                conn.Open();
+                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                sqlConnection.Open();
 
-                // create data adapter
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dtToolID = new DataTable();
-                // this will query your database and return the result to your datatable
-                da.Fill(dtToolID);
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.AddWithValue("@ToolDocID", toolDocumentID);
 
-                CuttingToolID = dtToolID.Rows[0][0].ToString();
+                // Получаем значение пользовательского параметра                
+                object result = cmd.ExecuteScalar();
 
-                conn.Close();
-                da.Dispose();
+                if (result != null)
+                {
+                    Guid CuttingToolGuid = new Guid();
+                    CuttingToolGuid = (Guid) result;
+                    CuttingToolID = CuttingToolGuid.ToString();
+                }               
+                             
+                sqlConnection.Close();
             }
             catch (Exception E)
             {
-
+                Console.WriteLine(E);
+                throw;
             }
 
             return CuttingToolID;
         }
 
+        // Определить соединение локально или к серверу
         private void loadConnectionString()
         {
             ReportSettings settings = new ReportSettings();
@@ -71,17 +77,24 @@ namespace ESP_GOSTToolSheetAddIn
         }
 
         //TODO - метод получения таблицы с параметрами инструмента по найденному ID
-        public DataTable getUserParamsByID(string docToolID)
+        public DataTable getUsersParamsByID(string docToolID)
         {
-            string sqlQuery = "same SQL string where CLCode > 80 000 and toolID = " + docToolID;
+            string sqlQuery = "SELECT * FROM tblCuttingToolParameter WHERE" + 
+                              " fldCLFileCode_tblCuttingToolParameter > @MaxCLCodeUsersParams AND" +
+                              " fldfkCuttingToolId_tblCuttingToolParameter = @TooID;";
             DataTable dataTable = new DataTable();
 
             try
-            {
+            {   //TODO: Check is Empty connection string 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
+                //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.AddWithValue("@MaxCLCodeUsersParams", int.Parse(StringResource.startUserCLCodeNumber));
+                cmd.Parameters.AddWithValue("@TooID", docToolID);
+
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
 
                 sqlDataAdapter.Fill(dataTable);
@@ -94,6 +107,48 @@ namespace ESP_GOSTToolSheetAddIn
             }
 
             return dataTable;
+        }
+
+        // Получить значение ОДНОГО параметра по ID  инструменту и CL коду
+        public string getUsersParamValue(string docToolID, int clCode)
+        {
+            string userParamValue = "";
+
+            if (docToolID == "" || clCode == 0)
+            {
+                return userParamValue;
+            }
+
+            string sqlQuery = "SELECT fldValue_tblCuttingToolParameter FROM tblCuttingToolParameter WHERE" +
+                  " fldCLFileCode_tblCuttingToolParameter = @CLCodeUsersParams AND" +
+                  " fldfkCuttingToolId_tblCuttingToolParameter = @TooID;";
+
+            try
+            {   //TODO: Check is Empty connection string 
+                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                sqlConnection.Open();
+
+                //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.AddWithValue("@CLCodeUsersParams", clCode);
+                cmd.Parameters.AddWithValue("@TooID", docToolID);
+
+                // Получаем значение пользовательского параметра                
+                userParamValue = (string) cmd.ExecuteScalar();
+
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            if (userParamValue == null)
+                return "";
+
+            return userParamValue;
         }
 
         //TODO - мотод заполнение значения пользовательских параметров для всех инструментов
@@ -112,7 +167,7 @@ namespace ESP_GOSTToolSheetAddIn
                     curGostTool.dataBaseToolID = cuttingToolID;
                 }
                // Получаем список пользовательских параметров из БД
-                DataTable dbUsersParams = getUserParamsByID(curGostTool.dataBaseToolID);
+                DataTable dbUsersParams = getUsersParamsByID(curGostTool.dataBaseToolID);
 
                 // проходим по всем пользовательским параметрам и заполняем значениями 
                 for (int j = 0; j < curGostTool.parameters.Count(); j++)
@@ -128,8 +183,8 @@ namespace ESP_GOSTToolSheetAddIn
             return result;
         }
 
-        // Заполнение значений пользовательских параметров только для одного инструмента
-        public bool fillUserParamsGostTool(GostTool GostTool)
+        // Заполнение значений ВСЕХ пользовательских параметров только для одного инструмента
+        public bool fillUsersParamsGostTool(GostTool GostTool)
         {
             bool result = true;
             // Получаем ID из БД по ID инструмента из документа
@@ -139,21 +194,28 @@ namespace ESP_GOSTToolSheetAddIn
                 GostTool.dataBaseToolID = cuttingToolID;
             }
             // Получаем список пользовательских параметров из БД
-            DataTable dbUsersParams = getUserParamsByID(GostTool.dataBaseToolID);
+            DataTable dbUsersParams = getUsersParamsByID(GostTool.dataBaseToolID);
+            if (dbUsersParams.Rows.Count == 0)
+                return false;
 
             // проходим по всем пользовательским параметрам и заполняем значениями 
             for (int j = 0; j < GostTool.parameters.Count(); j++)
             {
                 DataRow[] userParameterRows;
                 ToolParameter curToolParameter = GostTool.parameters.getParameter(j);
-                // поиска параметра
-                userParameterRows = dbUsersParams.Select("fldCLFileCode_tblCuttingToolParameter Like " + curToolParameter.CLCode.ToString());
-                // Сохраняем значение в структуре
-                curToolParameter.Value = userParameterRows[0][0].ToString();
+
+                if (String.Equals(curToolParameter.Type, StringResource.xmlParamUserType))
+                {
+                    // поиска параметра
+                    userParameterRows = dbUsersParams.Select("fldCLFileCode_tblCuttingToolParameter = " + curToolParameter.CLCode.ToString());
+                    
+                    // Сохраняем значение в структуре
+                    curToolParameter.Value = userParameterRows[0][0].ToString();
+                }
             }
             return result;
         }
-
+        
         //TODO - сохранение параметров инструмента из структуры в БД
         public bool saveUserToolParams(GostTool GostTool)
         {
@@ -163,21 +225,45 @@ namespace ESP_GOSTToolSheetAddIn
                 ToolParameter curToolParameter = GostTool.parameters.getParameter(j);
                 if (curToolParameter.Type == StringResource.xmlParamUserType)
                 {
-                    string sql = "INSERT INTO tblCuttingToolParameter" + 
-                                    " (fldCLFileCode_tblCuttingToolParameter, " +
-                                    " fldfkCuttingToolId_tblCuttingToolParameter," + 
-                                    " fldValue_tblCuttingToolParameter) " +
-                                    " VALUES (@CLCode, @ToolID, @Value)";
+                                        
+                    string newSQLQuery =" IF EXISTS (SELECT * FROM tblCuttingToolParameter WHERE fldCLFileCode_tblCuttingToolParameter = @CLCode" + 
+                                        "    AND fldfkCuttingToolId_tblCuttingToolParameter = @ToolID)" +
+                                        " BEGIN"  +
+                                        "    UPDATE tblCuttingToolParameter" +
+                                        "    SET fldValue_tblCuttingToolParameter = @Value" +
+                                        "    WHERE fldCLFileCode_tblCuttingToolParameter = @CLCode" + 
+                                        "       AND fldfkCuttingToolId_tblCuttingToolParameter = @ToolID" +
+                                        " END" +
+                                        " ELSE" +
+                                        " BEGIN" +
+                                        "   INSERT INTO tblCuttingToolParameter" +
+                                        "   (fldCLFileCode_tblCuttingToolParameter, " +
+                                        "   fldfkCuttingToolId_tblCuttingToolParameter," +
+                                        "   fldValue_tblCuttingToolParameter) " +
+                                        "   VALUES (@CLCode, @ToolID, @Value)" +
+                                        " END;";
+
+                    //string sql = "INSERT INTO tblCuttingToolParameter" + 
+                    //                " (fldCLFileCode_tblCuttingToolParameter, " +
+                    //                " fldfkCuttingToolId_tblCuttingToolParameter," + 
+                    //                " fldValue_tblCuttingToolParameter) " +
+                    //                " VALUES (@CLCode, @ToolID, @Value)";
+
+                    // Обязательно должен быть ID и CL код параметра инструмента
+                    if (curToolParameter.CLCode == 0 || GostTool.dataBaseToolID == "")
+                    {
+                        return false;
+                    }
 
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
 
                         SqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = sql;
+                        cmd.CommandText = newSQLQuery;
                         cmd.Parameters.AddWithValue("@CLCode", curToolParameter.CLCode);
                         cmd.Parameters.AddWithValue("@ToolID", GostTool.dataBaseToolID);
-                        cmd.Parameters.AddWithValue("@Value", curToolParameter.Capture);
+                        cmd.Parameters.AddWithValue("@Value", curToolParameter.Value);
                         cmd.ExecuteNonQuery();                        
                     }
                 }
