@@ -226,6 +226,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             AdditionalToolParameters.gostReportFields.CNCMachineName = tbCncMachineName.Text;
         }
 
+        // Кнопка на форме - сохранить все пользовательские параметры всех инструментов отчета в БД
         private void MenuItemSaveDataBase_Click(object sender, EventArgs e)
         {
             DatabaseInterface dataBase = new DatabaseInterface();
@@ -234,5 +235,27 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 dataBase.saveUserToolParams(gostTool);
             }            
         }
+
+        // Кнопка на форме - загрузить все пользовательские параметры для всех инструментов из БД
+        private void MenuItemUpdataDataBase_Click(object sender, EventArgs e)
+        {
+            DatabaseInterface dataBase = new DatabaseInterface();
+            foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
+            {
+                for (int i = 0; i < gostTool.parameters.Count(); i++)
+                {
+                    ToolParameter currentToolParameter = gostTool.parameters.getParameter(i);
+                    // Загрузить значение пользовательских параметров из базы данных
+                    if (String.Equals(currentToolParameter.Type, StringResource.xmlParamUserType))
+                    {
+                        // TODO: Чтение парметров из БД, заполнение значения                   
+                        currentToolParameter.Value = dataBase.getUsersParamValue(gostTool.dataBaseToolID, currentToolParameter.CLCode);
+                    }
+                }
+            }
+        }
+        
+        
     }
+    // end class
 }

@@ -117,6 +117,7 @@
             this.MenuItemUpdataDataBase.Name = "MenuItemUpdataDataBase";
             this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(160, 22);
             this.MenuItemUpdataDataBase.Text = "Загрузить из БЗ";
+            this.MenuItemUpdataDataBase.Click += new System.EventHandler(this.MenuItemUpdataDataBase_Click);
             // 
             // MenuItemSettings
             // 
