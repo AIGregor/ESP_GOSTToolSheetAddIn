@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdditionalToolParameters.cs" />
     <Compile Include="DatabaseInterface.cs" />
     <Compile Include="EspritDataBase.cs" />
@@ -244,6 +250,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateUserParameters.resx">
       <DependentUpon>CreateUserParameters.cs</DependentUpon>
     </EmbeddedResource>

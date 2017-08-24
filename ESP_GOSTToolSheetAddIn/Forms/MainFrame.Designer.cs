@@ -155,6 +155,7 @@
             this.MenuItemHelpAbout.Name = "MenuItemHelpAbout";
             this.MenuItemHelpAbout.Size = new System.Drawing.Size(154, 22);
             this.MenuItemHelpAbout.Text = "О дополнении";
+            this.MenuItemHelpAbout.Click += new System.EventHandler(this.MenuItemHelpAbout_Click);
             // 
             // tabControl1
             // 

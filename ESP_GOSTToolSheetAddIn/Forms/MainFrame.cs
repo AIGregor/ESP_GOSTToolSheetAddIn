@@ -254,8 +254,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 }
             }
         }
-        
-        
+
+        private void MenuItemHelpAbout_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     // end class
 }
