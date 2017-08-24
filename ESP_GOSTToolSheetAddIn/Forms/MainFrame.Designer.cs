@@ -487,6 +487,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainFrame";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ГОСТ 3.14.04-86 Карта наладки";
             this.Shown += new System.EventHandler(this.MainFrame_Shown);
             this.menuStrip1.ResumeLayout(false);

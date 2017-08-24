@@ -36,11 +36,16 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbDefaultReportName = new System.Windows.Forms.TextBox();
+            this.cbRemoteHost = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbHostName = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbReportField
             // 
-            this.tbReportField.Location = new System.Drawing.Point(15, 25);
+            this.tbReportField.Location = new System.Drawing.Point(12, 29);
             this.tbReportField.Name = "tbReportField";
             this.tbReportField.Size = new System.Drawing.Size(271, 20);
             this.tbReportField.TabIndex = 0;
@@ -56,8 +61,7 @@
             // 
             // btnSelectDistFolder
             // 
-            this.btnSelectDistFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectDistFolder.Location = new System.Drawing.Point(295, 23);
+            this.btnSelectDistFolder.Location = new System.Drawing.Point(294, 27);
             this.btnSelectDistFolder.Name = "btnSelectDistFolder";
             this.btnSelectDistFolder.Size = new System.Drawing.Size(75, 23);
             this.btnSelectDistFolder.TabIndex = 2;
@@ -68,17 +72,18 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(295, 102);
+            this.btnCancel.Location = new System.Drawing.Point(294, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(214, 102);
+            this.btnOK.Location = new System.Drawing.Point(213, 185);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
@@ -89,7 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 52);
+            this.label2.Location = new System.Drawing.Point(12, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 13);
             this.label2.TabIndex = 5;
@@ -97,16 +102,56 @@
             // 
             // tbDefaultReportName
             // 
-            this.tbDefaultReportName.Location = new System.Drawing.Point(15, 68);
+            this.tbDefaultReportName.Location = new System.Drawing.Point(12, 73);
             this.tbDefaultReportName.Name = "tbDefaultReportName";
-            this.tbDefaultReportName.Size = new System.Drawing.Size(352, 20);
+            this.tbDefaultReportName.Size = new System.Drawing.Size(357, 20);
             this.tbDefaultReportName.TabIndex = 6;
+            // 
+            // cbRemoteHost
+            // 
+            this.cbRemoteHost.AutoSize = true;
+            this.cbRemoteHost.Location = new System.Drawing.Point(6, 27);
+            this.cbRemoteHost.Name = "cbRemoteHost";
+            this.cbRemoteHost.Size = new System.Drawing.Size(216, 17);
+            this.cbRemoteHost.TabIndex = 7;
+            this.cbRemoteHost.Text = "Подключиться к удаленному серверу";
+            this.cbRemoteHost.UseVisualStyleBackColor = true;
+            this.cbRemoteHost.CheckedChanged += new System.EventHandler(this.cbRemoteHost_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.tbHostName);
+            this.groupBox1.Controls.Add(this.cbRemoteHost);
+            this.groupBox1.Location = new System.Drawing.Point(12, 99);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(357, 78);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Сетевые настройки";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Имя сервера";
+            // 
+            // tbHostName
+            // 
+            this.tbHostName.Location = new System.Drawing.Point(86, 50);
+            this.tbHostName.Name = "tbHostName";
+            this.tbHostName.Size = new System.Drawing.Size(265, 20);
+            this.tbHostName.TabIndex = 8;
             // 
             // frmReportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 136);
+            this.ClientSize = new System.Drawing.Size(381, 220);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tbDefaultReportName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOK);
@@ -118,7 +163,13 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmReportSettings";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Параметры карты наладки";
+            this.Load += new System.EventHandler(this.frmReportSettings_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,5 +185,9 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbDefaultReportName;
+        private System.Windows.Forms.CheckBox cbRemoteHost;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbHostName;
     }
 }

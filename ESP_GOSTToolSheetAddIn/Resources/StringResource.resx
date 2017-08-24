@@ -177,4 +177,10 @@
   <data name="msgErrorSecurityAccess" xml:space="preserve">
     <value>ОШИБКА. Отсутствует актуальная лицензия дополнения.  </value>
   </data>
+  <data name="strLoacalHost" xml:space="preserve">
+    <value>Локальный компьютер</value>
+  </data>
+  <data name="xmlAddinSettingsName" xml:space="preserve">
+    <value>Resources\AddinSettings.xml</value>
+  </data>
 </root>

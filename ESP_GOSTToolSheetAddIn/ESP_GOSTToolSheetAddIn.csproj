@@ -285,7 +285,7 @@
     <None Include="Resources\lic.eal">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Resources\ServerName.xml">
+    <Content Include="Resources\AddinSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

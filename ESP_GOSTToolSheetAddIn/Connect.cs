@@ -62,7 +62,7 @@ namespace ESP_GOSTToolSheetAddIn
             sAddIn = sEspApp.AddIn;
             sCookie = sAddIn.GetCookie();
 
-            //------------------- Защита !!!
+            //Защита !!!------------------- 
             SecurityFile security = new SecurityFile();
             if (!security.mergeLicFiles())
             {
@@ -70,7 +70,7 @@ namespace ESP_GOSTToolSheetAddIn
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //-------------------  Защита !!!
+            //Защита !!!-------------------  
 
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
 
@@ -80,7 +80,10 @@ namespace ESP_GOSTToolSheetAddIn
             fileMenu.Add(EspritConstants.espMenuItemType.espMenuItemCommand, StringResource.menuName, newCommand, 18);
             // привязываем вызов команды к обработчику
             sAddIn.OnCommand += OnCommand;
-            
+
+            //Загрузить все настроки плагина
+            AdditionalToolParameters.gostReportSettings.loadAllSettings();
+
            Marshal.ReleaseComObject(allMenu);
         }
 

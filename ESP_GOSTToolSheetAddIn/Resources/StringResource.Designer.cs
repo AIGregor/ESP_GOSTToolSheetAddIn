@@ -115,11 +115,29 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Локальный компьютер.
+        /// </summary>
+        internal static string strLoacalHost {
+            get {
+                return ResourceManager.GetString("strLoacalHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resources\ToolName.txt.
         /// </summary>
         internal static string txtPathToolType {
             get {
                 return ResourceManager.GetString("txtPathToolType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resources\AddinSettings.xml.
+        /// </summary>
+        internal static string xmlAddinSettingsName {
+            get {
+                return ResourceManager.GetString("xmlAddinSettingsName", resourceCulture);
             }
         }
         

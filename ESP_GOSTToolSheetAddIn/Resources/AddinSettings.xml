@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
   <KBMSSServer name ="ESPRIT KBMSS Server">
-    <HostName>NICK-W7</HostName>
+    <HostName></HostName>
     <LocalHost>True</LocalHost>
+    <DefaultReportPath>C:\</DefaultReportPath>
+    <DefaultReportName>Карта наладки ГОСТ</DefaultReportName>
   </KBMSSServer>
 </root>
