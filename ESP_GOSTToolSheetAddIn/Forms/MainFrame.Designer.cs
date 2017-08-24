@@ -108,14 +108,15 @@
             // MenuItemSaveDataBase
             // 
             this.MenuItemSaveDataBase.Name = "MenuItemSaveDataBase";
-            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(132, 22);
-            this.MenuItemSaveDataBase.Text = "Сохранить";
+            this.MenuItemSaveDataBase.Size = new System.Drawing.Size(160, 22);
+            this.MenuItemSaveDataBase.Text = "Сохранить в БЗ";
+            this.MenuItemSaveDataBase.Click += new System.EventHandler(this.MenuItemSaveDataBase_Click);
             // 
             // MenuItemUpdataDataBase
             // 
             this.MenuItemUpdataDataBase.Name = "MenuItemUpdataDataBase";
-            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(132, 22);
-            this.MenuItemUpdataDataBase.Text = "Обновить";
+            this.MenuItemUpdataDataBase.Size = new System.Drawing.Size(160, 22);
+            this.MenuItemUpdataDataBase.Text = "Загрузить из БЗ";
             // 
             // MenuItemSettings
             // 

@@ -226,5 +226,13 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             AdditionalToolParameters.gostReportFields.CNCMachineName = tbCncMachineName.Text;
         }
 
+        private void MenuItemSaveDataBase_Click(object sender, EventArgs e)
+        {
+            DatabaseInterface dataBase = new DatabaseInterface();
+            foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
+            {
+                dataBase.saveUserToolParams(gostTool);
+            }            
+        }
     }
 }
