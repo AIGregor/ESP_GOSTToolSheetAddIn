@@ -29,6 +29,7 @@ namespace ESP_GOSTToolSheetAddIn
         static public Esprit.Application sEspApp;
         static public Esprit.Document sEspDocument;
         EspritCommands.AddIn sAddIn;
+        EspritMenus.Menu fileMenu;
 
         /// <summary>
         /// 
@@ -75,7 +76,7 @@ namespace ESP_GOSTToolSheetAddIn
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
 
             EspritMenus.Menus allMenu = sEspApp.Menus;
-            EspritMenus.Menu fileMenu = allMenu[1]; // Меню "Файл"
+            fileMenu = allMenu[1]; // Меню "Файл"
             // добавляем команду в меню
             fileMenu.Add(EspritConstants.espMenuItemType.espMenuItemCommand, StringResource.menuName, newCommand, 18);
             // привязываем вызов команды к обработчику
@@ -106,7 +107,10 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnDisconnection(ext_DisconnectMode RemoveMode, ref Array custom)
         {
-            //throw new NotImplementedException();
+            fileMenu.Remove(StringResource.menuName);
+            Marshal.ReleaseComObject(fileMenu);
+            Marshal.ReleaseComObject(sAddIn);
+            Marshal.ReleaseComObject(sEspApp);
         }
 
         /// <summary>

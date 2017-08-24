@@ -163,7 +163,7 @@
     <value>ToolName</value>
   </data>
   <data name="menuName" xml:space="preserve">
-    <value>&amp;Создать Карту наладки - ГОСТ </value>
+    <value>&amp;Создать Карту Наладок... ГОСТ </value>
   </data>
   <data name="excelTemplateReportFile" xml:space="preserve">
     <value>Resources\F4.xlsx</value>

@@ -79,7 +79,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Создать Карту наладки - ГОСТ .
+        ///   Looks up a localized string similar to &amp;Создать Карту Наладок... ГОСТ .
         /// </summary>
         internal static string menuName {
             get {
