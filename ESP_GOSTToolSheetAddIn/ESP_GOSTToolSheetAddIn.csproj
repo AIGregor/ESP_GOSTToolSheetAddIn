@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>ESPRIT.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,6 +80,7 @@
     <Compile Include="Forms\MainFrame.Designer.cs">
       <DependentUpon>MainFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="NewParams\algNewParams.cs" />
     <Compile Include="Connect.cs" />
     <Compile Include="NewParams\frmNewParameters.cs">
@@ -290,6 +290,7 @@
     <None Include="Resources\ESPRIT.ico" />
     <None Include="Resources\DP-Technology-Esprit-logo.png" />
     <None Include="Resources\esprit.png" />
+    <Content Include="ESPRIT.ico" />
     <Content Include="Resources\EspToolParams.xml">
       <SubType>Designer</SubType>
     </Content>

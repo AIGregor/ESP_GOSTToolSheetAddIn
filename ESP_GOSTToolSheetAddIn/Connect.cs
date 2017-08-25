@@ -58,6 +58,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
+
             sEspApp = (Esprit.Application)Application;
             sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;

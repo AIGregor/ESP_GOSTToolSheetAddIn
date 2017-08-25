@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ESP_GOSTToolSheetAddIn.Resources;
 
 namespace ESP_GOSTToolSheetAddIn
@@ -97,7 +98,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                //MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             try
@@ -126,7 +127,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                //MessageBox.Show("Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             foreach (XmlNode node in docEspritHost.DocumentElement)
