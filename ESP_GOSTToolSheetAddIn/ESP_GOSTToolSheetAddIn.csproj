@@ -276,6 +276,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram\ClassDiagram1.cd" />
     <None Include="Resources\F4.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
