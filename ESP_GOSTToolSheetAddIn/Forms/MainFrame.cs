@@ -49,6 +49,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         // Заполнение главного окна
         private void InitMainForm()
         {
+            // Очистка данных из прошлого сеанса
+            AdditionalToolParameters.gostReportToolsArray.Clear();
+
             // Загружаем параметры инструмента из файла
             AdditionalToolParameters.LoadToolsParameters();
             // Собираем инструмент из текущего документа
@@ -156,23 +159,42 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         
         // Генерация карты наладки
         private void btnGenerate_Click(object sender, EventArgs e)
-        {           
-            GenerateFileReport("E:\\0001. ESPRIT\\Projects\\032_Отчет Звезда\\Тех. задание\\" + StringResource.excelReportFile);
-        }
-
-        private void GenerateFileReport(String distFileName)
         {
-            // Копировать рамку Excel в назначенную папку
-            CopyPatternFileTo(distFileName);
-            // Заполнение файла шаблона
-            AdditionalToolParameters.gostReportFields.FillFileReport(distFileName);
-            //AdditionalToolParameters.gostReportFields.testAddNewSheet(distFileName);
+            ReportSettings settings = AdditionalToolParameters.gostReportSettings; 
+            GenerateFileReport(settings.DefaultReportPath, settings.DefaultReportName);
         }
 
-        private void CopyPatternFileTo(String destinationFileName)
+        private void openReport(string filePath)
+        {
+            var proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = filePath;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
+        }
+
+        private void GenerateFileReport(string destFileFolder, string destFileName)
+        {
+            if (File.Exists(destFileName + destFileName))
+            {
+                destFileName = Connect.sEspDocument.Name + " " + destFileName;
+                if (File.Exists(destFileFolder + destFileName))
+                {
+                    File.Delete(destFileFolder + destFileName);
+                }
+            }
+            // Копировать рамку Excel в назначенную папку
+            CopyPatternFileTo(destFileFolder, destFileName);
+            // Заполнение файла шаблона
+            AdditionalToolParameters.gostReportFields.FillFileReport(destFileFolder + destFileName);
+            //AdditionalToolParameters.gostReportFields.testAddNewSheet(distFileName);
+
+            openReport(destFileFolder + destFileName);
+        }
+
+        private void CopyPatternFileTo(string destFileFolder, string destFileName)
         {
             FileInfo copyFI = new FileInfo(StringResource.excelTemplateReportFile);
-            copyFI.CopyTo(destinationFileName);
+            copyFI.CopyTo(destFileFolder + destFileName);
         }
 
         private void MenuItemReportSetting_Click(object sender, EventArgs e)
@@ -257,7 +279,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
         private void MenuItemHelpAbout_Click(object sender, EventArgs e)
         {
-
+            About dlgAbout = new About();
+            dlgAbout.Show();
         }
     }
     // end class

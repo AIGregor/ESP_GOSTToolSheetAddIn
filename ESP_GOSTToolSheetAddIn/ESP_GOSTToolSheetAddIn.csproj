@@ -31,6 +31,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
+    <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
+    <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="AdditionalToolParameters.cs" />
@@ -86,11 +90,6 @@
       <DependentUpon>frmNewParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ReportFields.cs" />
     <Compile Include="ReportSettings.cs" />
     <Compile Include="Resources\StringResource.Designer.cs">
@@ -250,7 +249,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="About.resx">
+    <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateUserParameters.resx">
@@ -270,7 +269,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\StringResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -288,6 +286,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ESPRIT.ico" />
+    <None Include="Resources\DP-Technology-Esprit-logo.png" />
+    <None Include="Resources\esprit.png" />
     <Content Include="Resources\EspToolParams.xml">
       <SubType>Designer</SubType>
     </Content>

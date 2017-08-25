@@ -106,6 +106,7 @@
             this.tbDefaultReportName.Name = "tbDefaultReportName";
             this.tbDefaultReportName.Size = new System.Drawing.Size(357, 20);
             this.tbDefaultReportName.TabIndex = 6;
+            this.tbDefaultReportName.MouseLeave += new System.EventHandler(this.tbDefaultReportName_MouseLeave);
             // 
             // cbRemoteHost
             // 

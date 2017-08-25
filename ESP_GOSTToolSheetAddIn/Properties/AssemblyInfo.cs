@@ -1,16 +1,17 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ESP_GOSTToolSheetAddIn")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Плагин - Карта наладки инструмента ГОСТ 3.1404-86")]
+[assembly: AssemblyDescription("Автоматическая генерация карты наладки инструмента в формате ГОСТ 3.1404-86 Форма 4")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ESP_GOSTToolSheetAddIn")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Карта наладки инструмента ГОСТ 3.1404-86")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +33,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.1.39")]
+[assembly: AssemblyFileVersion("0.0.0.1")]
+[assembly: NeutralResourcesLanguage("ru-RU")]
+

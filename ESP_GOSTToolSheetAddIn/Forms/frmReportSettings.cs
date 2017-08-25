@@ -21,7 +21,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void btnSelectDistFolder_Click(object sender, EventArgs e)
         {
             dlgDistFolderBrowser.ShowDialog();
-            tbReportField.Text = dlgDistFolderBrowser.SelectedPath;
+            tbReportField.Text = dlgDistFolderBrowser.SelectedPath + @"\";
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -62,6 +62,15 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void cbRemoteHost_CheckedChanged(object sender, EventArgs e)
         {
             tbHostName.Enabled = cbRemoteHost.Checked;
+        }
+
+        private void tbDefaultReportName_MouseLeave(object sender, EventArgs e)
+        {
+            string result = tbDefaultReportName.Text;
+            if (result.IndexOf(".xlsx") < 0)
+            {
+                tbDefaultReportName.Text = tbDefaultReportName.Text + ".xlsx";
+            }
         }
     }
 }
