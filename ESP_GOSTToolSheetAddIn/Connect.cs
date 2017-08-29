@@ -6,6 +6,7 @@ using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using System.Windows.Forms;
 using NLog;
+using System.Reflection;
 
 namespace ESP_GOSTToolSheetAddIn
 {
@@ -28,6 +29,7 @@ namespace ESP_GOSTToolSheetAddIn
         EspritMenus.Menu fileMenu;
 
         static public Logger logger = LogManager.GetCurrentClassLogger();
+        static public string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         /// <summary>
         /// 
@@ -56,8 +58,10 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
+            //Настройка логирования
             ConfigureLogger();
 
+            //Ссылки на текущий документ 
             sEspApp = (Esprit.Application)Application;
             sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;
@@ -75,16 +79,18 @@ namespace ESP_GOSTToolSheetAddIn
                 return;
             }
             //Защита !!!-------------------  
-
             logger.Info("Лицензия найдена");
 
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
-
             EspritMenus.Menus allMenu = sEspApp.Menus;
-            fileMenu = allMenu[1]; // Меню "Файл"
+            
+            // Меню "Файл"
+            fileMenu = allMenu[1]; 
+
             // добавляем команду в меню
             fileMenu.Add(EspritConstants.espMenuItemType.espMenuItemCommand, StringResource.menuName, newCommand, 18);
             logger.Info("Добавлен новый пункт меню");
+            
             // привязываем вызов команды к обработчику
             sAddIn.OnCommand += OnCommand;
 
@@ -99,10 +105,10 @@ namespace ESP_GOSTToolSheetAddIn
         void showReportMainFrame()
         {
             // Проверка файла-шаблона
-            if (!File.Exists(StringResource.xmlPathToolsParams))
+            if (!File.Exists(assemblyFolder + StringResource.xmlPathToolsParams))
             {
                 logger.Info("Создание файла шаблона параметров инструмента");
-                AdditionalToolParameters.creatPatternFile(StringResource.xmlPathToolsParams);
+                AdditionalToolParameters.creatPatternFile(assemblyFolder + StringResource.xmlPathToolsParams);
             }
             MainFrame mainFrame = new MainFrame();
             mainFrame.Show();
@@ -169,9 +175,7 @@ namespace ESP_GOSTToolSheetAddIn
         }
 
         private void ConfigureLogger()
-        {
-            logger.Info("Конфигурирование логирования");
-
+        {       
             // Step 1. Create configuration object 
             var config = new NLog.Config.LoggingConfiguration();
 
@@ -179,8 +183,8 @@ namespace ESP_GOSTToolSheetAddIn
             var fileTarget = new NLog.Targets.FileTarget();
             config.AddTarget("File", fileTarget);
 
-            // Step 3. Set target properties
-            fileTarget.FileName = Directory.GetCurrentDirectory() + @"\logs\${shortdate}.log";
+            // Step 3. Set target properties          
+            fileTarget.FileName = assemblyFolder + @"\logs\${shortdate}.log";
             fileTarget.Layout = "${longdate} ${uppercase:${level}} ${callsite} | ${message}";
 
             // Step 4. Define rules
@@ -189,6 +193,9 @@ namespace ESP_GOSTToolSheetAddIn
 
             // Step 5. Activate the configuration
             LogManager.Configuration = config;
+
+            logger.Info("Конфигурирование логирования");
+            logger.Info("Папка плагина " + assemblyFolder);
         }
 
     }

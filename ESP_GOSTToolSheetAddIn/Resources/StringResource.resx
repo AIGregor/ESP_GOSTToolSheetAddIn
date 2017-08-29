@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="msgErrorNewParam" xml:space="preserve">
-    <value>ОШИБКА! Значение нового параметра не задано !</value>
+    <value>Значение нового параметра не задано !</value>
   </data>
   <data name="txtPathToolType" xml:space="preserve">
-    <value>Resources\ToolName.txt</value>
+    <value>\Resources\ToolName.txt</value>
   </data>
   <data name="xmlElementName" xml:space="preserve">
     <value>espTool</value>
@@ -148,10 +148,10 @@
     <value>Пользовательский</value>
   </data>
   <data name="xmlPathToolsParams" xml:space="preserve">
-    <value>EspritToolsParameters.xml</value>
+    <value>\EspritToolsParameters.xml</value>
   </data>
   <data name="xmlPathPattrenFileName" xml:space="preserve">
-    <value>EspritReportParameters.xml</value>
+    <value>\EspritReportParameters.xml</value>
   </data>
   <data name="xmlToolID" xml:space="preserve">
     <value>ToolID</value>
@@ -166,7 +166,7 @@
     <value>&amp;Создать Карту Наладок... ГОСТ </value>
   </data>
   <data name="excelTemplateReportFile" xml:space="preserve">
-    <value>Resources\F4.xlsx</value>
+    <value>\Resources\F4.xlsx</value>
   </data>
   <data name="excelReportFile" xml:space="preserve">
     <value>Карта наладки ГОСТ.xlsx</value>
@@ -175,12 +175,12 @@
     <value>9900</value>
   </data>
   <data name="msgErrorSecurityAccess" xml:space="preserve">
-    <value>ОШИБКА. Отсутствует актуальная лицензия дополнения.  </value>
+    <value>Отсутствует актуальная лицензия дополнения !  </value>
   </data>
   <data name="strLoacalHost" xml:space="preserve">
     <value>Локальный компьютер</value>
   </data>
   <data name="xmlAddinSettingsName" xml:space="preserve">
-    <value>Resources\AddinSettings.xml</value>
+    <value>\Resources\AddinSettings.xml</value>
   </data>
 </root>

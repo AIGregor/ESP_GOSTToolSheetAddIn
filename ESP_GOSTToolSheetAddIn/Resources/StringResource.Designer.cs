@@ -70,7 +70,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resources\F4.xlsx.
+        ///   Looks up a localized string similar to \Resources\F4.xlsx.
         /// </summary>
         internal static string excelTemplateReportFile {
             get {
@@ -88,7 +88,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ОШИБКА! Значение нового параметра не задано !.
+        ///   Looks up a localized string similar to Значение нового параметра не задано !.
         /// </summary>
         internal static string msgErrorNewParam {
             get {
@@ -97,7 +97,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ОШИБКА. Отсутствует актуальная лицензия дополнения.  .
+        ///   Looks up a localized string similar to Отсутствует актуальная лицензия дополнения !  .
         /// </summary>
         internal static string msgErrorSecurityAccess {
             get {
@@ -124,7 +124,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resources\ToolName.txt.
+        ///   Looks up a localized string similar to \Resources\ToolName.txt.
         /// </summary>
         internal static string txtPathToolType {
             get {
@@ -133,7 +133,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resources\AddinSettings.xml.
+        ///   Looks up a localized string similar to \Resources\AddinSettings.xml.
         /// </summary>
         internal static string xmlAddinSettingsName {
             get {
@@ -214,7 +214,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EspritReportParameters.xml.
+        ///   Looks up a localized string similar to \EspritReportParameters.xml.
         /// </summary>
         internal static string xmlPathPattrenFileName {
             get {
@@ -223,7 +223,7 @@ namespace ESP_GOSTToolSheetAddIn.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EspritToolsParameters.xml.
+        ///   Looks up a localized string similar to \EspritToolsParameters.xml.
         /// </summary>
         internal static string xmlPathToolsParams {
             get {

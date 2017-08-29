@@ -14,6 +14,7 @@ using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using System.Collections;
 using System.IO;
+using System.Reflection;
 
 namespace ESP_GOSTToolSheetAddIn
 {
@@ -430,7 +431,7 @@ namespace ESP_GOSTToolSheetAddIn
             // TODO: Из массива  AdditionalToolParameters.gostToolsArray[iCurrentTool] записать все параметры в XML файл
             // который потом будет использоваться для заполнения карты наладки и
             // закрыть форму             
-            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray);
+            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray, Connect.assemblyFolder);
             this.Close();
         }
 
@@ -439,20 +440,20 @@ namespace ESP_GOSTToolSheetAddIn
         {
             //MessageBox.Show("Apply");
             //TODO: Только записать параметры в файл для текущего инструмента
-            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray);
+            AdditionalToolParameters.savePatternParameterFile( AdditionalToolParameters.gostToolsArray, Connect.assemblyFolder);
         }
 
         //----------------------------------------------------------------------------------------
         private void loadPatternParameterFile(GostTool[] toolsArray)
         {
-            if (!File.Exists(StringResource.xmlPathPattrenFileName))
+            if (!File.Exists(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName))
             {
-                AdditionalToolParameters.creatPatternFile(StringResource.xmlPathPattrenFileName);
+                AdditionalToolParameters.creatPatternFile(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
                 return;
             }
 
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load(StringResource.xmlPathPattrenFileName);
+            XmlDoc.Load(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
             // get root element
             XmlElement xmlRoot = XmlDoc.DocumentElement;
             // select all tools

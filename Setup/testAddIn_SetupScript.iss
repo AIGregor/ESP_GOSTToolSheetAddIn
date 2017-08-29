@@ -32,16 +32,24 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "E:\APIEsprit\ESPGOST\Setup\RegAddIn.reg"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "E:\APIEsprit\ESPRITLibraryADDINKDB\ESPRITLibraryADDIN\bin\Debug\ESPRITLibraryADDIN.pdb"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "E:\APIEsprit\ESPRITLibraryADDINKDB\ESPRITLibraryADDIN\bin\Debug\ESPRITLibraryADDIN.tlb"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "E:\APIEsprit\ESPRITLibraryADDINKDB\ESPRITLibraryADDIN\bin\Debug\ESPRITLibraryADDIN.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\AddinSettings.xml"; DestDir: "C:\Program Files (x86)\D.P.Technology\ESPRIT\Prog"; Flags: ignoreversion
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\Resources\AddinSettings.xml"; DestDir: "{app}\Resources"; Flags: ignoreversion
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\Resources\F4.xlsx"; DestDir: "{app}\Resources"; Flags: ignoreversion
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\Resources\lic.eal"; DestDir: "{app}\Resources"; Flags: ignoreversion
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\Resources\ToolName.txt"; DestDir: "{app}\Resources"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\NLog.xml"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\NLog.dll"; DestDir:"{app}"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\AddinSettings.xml"; DestDir: "{app}\Resources"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\F4.xlsx"; DestDir: "{app}\Resources"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\lic.eal"; DestDir: "{app}\Resources"; Flags: ignoreversion
+
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\ToolName.txt"; DestDir: "{app}\Resources"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -54,7 +62,7 @@ Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTTo
 Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: dword; ValueName: "LoadBehavior"; ValueData: "00000001"; 
 
 [Run]
-Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /codebase /tlb; WorkingDir: {app}; StatusMsg: "Registering controls ...";
+Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /codebase /tlb; WorkingDir: {app}; StatusMsg: "Registering controls ..."; Flags: runhidden
 
 [UninstallRun]
-Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /unregister; WorkingDir: {app}; StatusMsg: "Unregistering controls ...";
+Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /unregister; WorkingDir: {app}; StatusMsg: "Unregistering controls ...";  Flags: runhidden

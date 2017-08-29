@@ -197,7 +197,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
         private void CopyPatternFileTo(string destFileFolder, string destFileName)
         {
-            FileInfo copyFI = new FileInfo(StringResource.excelTemplateReportFile);
+            FileInfo copyFI = new FileInfo(Connect.assemblyFolder + StringResource.excelTemplateReportFile);
             copyFI.CopyTo(destFileFolder + destFileName);
         }
 

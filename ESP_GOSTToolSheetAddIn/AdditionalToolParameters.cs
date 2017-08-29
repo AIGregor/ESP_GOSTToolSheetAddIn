@@ -20,32 +20,13 @@ namespace ESP_GOSTToolSheetAddIn
         
         public AdditionalToolParameters() : base()
         {
-
-        }
-
-        bool loadFile(string pathFile)
-        {
-            return false;
-        }
-
-        Array getToolParameters()
-        {
-            Array std1 = new Array[1, 3, 1];
-            return std1;
-        }
-
-        void setToolParameter(int index, string name)
-        {
-        }
-
-        bool saveFile(string pathFile)
-        {
-            return false;
         }
 
          // Создание XML файла
         public static bool creatPatternFile(string FileName)
         {
+            Connect.logger.Info("Создание файла-шаблона");
+            
             //создание документа
             XmlDocument XmlDoc = new XmlDocument();
 
@@ -85,12 +66,11 @@ namespace ESP_GOSTToolSheetAddIn
                     ElementTools.SetAttribute(StringResource.xmlToolID, sToolID);
                     ElementTools.SetAttribute(StringResource.xmlToolLabel, sToolLabel);
                     root.AppendChild(ElementTools);
-
-                    //text += temp; // Пишем считанную строку в итоговую переменную.
                 }
             }
+            Connect.logger.Info("Сохранение файла-шаблона");
+            XmlDoc.Save(FileName); //сохраняем в документ
 
-            XmlDoc.Save(StringResource.xmlPathToolsParams); //сохраняем в документ
             return true;
         }
 
@@ -105,19 +85,6 @@ namespace ESP_GOSTToolSheetAddIn
                 result += sSourceString[i];
                 i++;
             }
-
-            //int tabIndx = sSourceString.IndexOf("\t");
-            //int spaceIndx = sSourceString.IndexOf(" ");
-            //int dashIndx = sSourceString.IndexOf("-");
-
-            //if (spaceIndx > 0)
-            //    tabIndx = Math.Min(tabIndx, spaceIndx);
-
-            //if (tabIndx < 0)
-            //    tabIndx = dashIndx;            
-
-            //if (tabIndx >= startName || dashIndx >= startName)
-            //    result = sSourceString.Substring(startName, Math.Min(tabIndx, dashIndx) - startName);
 
             return result;
         }
@@ -136,20 +103,20 @@ namespace ESP_GOSTToolSheetAddIn
             return result;
         }
 
-        public static bool savePatternParameterFile(GostTool[] toolsArray)
+        public static bool savePatternParameterFile(GostTool[] toolsArray, string path)
         {
             // если файл не существует
-            if (File.Exists(StringResource.xmlPathPattrenFileName))
+            if (File.Exists(path + StringResource.xmlPathPattrenFileName))
             {
-                File.Delete(StringResource.xmlPathPattrenFileName);    
+                File.Delete(path + StringResource.xmlPathPattrenFileName);    
             }
-            createPatternParameterFile(toolsArray);
+            createPatternParameterFile(toolsArray, path);
 
             return true;
         }
 
         // создание файла параметров
-        static void createPatternParameterFile(GostTool[] toolsArray)
+        static void createPatternParameterFile(GostTool[] toolsArray, string path)
         {
             //создание документа
             XmlDocument XmlDoc = new XmlDocument();
@@ -189,16 +156,16 @@ namespace ESP_GOSTToolSheetAddIn
                 }
             }
 
-            XmlDoc.Save(StringResource.xmlPathPattrenFileName); //сохраняем в документ
+            XmlDoc.Save(path + StringResource.xmlPathPattrenFileName); //сохраняем в документ
         }
 
         public static void LoadToolsParameters()
         {
             // Загружаем из файл-шаблона названия инструмента, заполняя форму.
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(StringResource.xmlPathToolsParams);
-            XmlElement xRoot = xDoc.DocumentElement;
+            xDoc.Load(Connect.assemblyFolder + StringResource.xmlPathToolsParams);
 
+            XmlElement xRoot = xDoc.DocumentElement;
             // выбор всех инструментов
             XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
 
@@ -229,14 +196,14 @@ namespace ESP_GOSTToolSheetAddIn
                 }
             }
             
-            if (!File.Exists(StringResource.xmlPathPattrenFileName))
+            if (!File.Exists(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName))
             {
-                creatPatternFile(StringResource.xmlPathPattrenFileName);
+                creatPatternFile(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
                 return;
             }
 
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load(StringResource.xmlPathPattrenFileName);
+            XmlDoc.Load(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
             // get root element
             XmlElement xmlRoot = XmlDoc.DocumentElement;
             // select all tools
@@ -276,5 +243,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             return null;
          }
+
+
     }
 }

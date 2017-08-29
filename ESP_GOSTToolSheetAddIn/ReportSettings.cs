@@ -1,11 +1,8 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Xml;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows.Forms;
+using System.IO;
 using ESP_GOSTToolSheetAddIn.Resources;
 
 namespace ESP_GOSTToolSheetAddIn
@@ -56,21 +53,24 @@ namespace ESP_GOSTToolSheetAddIn
         {
         }
 
+        //Загрузить имя хоста
         public void loadHostSettings()
         {
             if (hostName != "")
                 return;
 
+            // Загрузка
             XmlDocument docEspritHost = new XmlDocument();
             try
             {
-                docEspritHost.Load(StringResource.xmlAddinSettingsName);
+                docEspritHost.Load(Connect.assemblyFolder + StringResource.xmlAddinSettingsName);
             }
             catch (Exception E)
             {
-                //MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connect.logger.Error("Не удалось загрузить файл настроке плагина " + E.Message);
+                MessageBox.Show("Не удалось загрузить файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            // Чтение
             try
             {
                 foreach (XmlNode node in docEspritHost.DocumentElement)
@@ -81,7 +81,8 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                //MessageBox.Show("Не удалось выполнить чтение параметров настроек подключения! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connect.logger.Error("Не удалось прочитать файл настроек плагина " + E.Message);
+                MessageBox.Show("Не удалось прочитать файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -90,18 +91,18 @@ namespace ESP_GOSTToolSheetAddIn
         {
             if (hostName != "")
                 return;
-
+            // Загрузка
             XmlDocument docEspritHost = new XmlDocument();
             try
             {
-                docEspritHost.Load(StringResource.xmlAddinSettingsName);
+                docEspritHost.Load(Connect.assemblyFolder + StringResource.xmlAddinSettingsName);
             }
             catch (Exception E)
             {
-                Connect.logger.Info("Не удалось загрузить файл настроке плагина");
-                MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connect.logger.Error("Не удалось загрузить файл настроек плагина " + E.Message);
+                MessageBox.Show("Не удалось зфгрузить файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            // Чтение
             try
             {
                 foreach (XmlNode node in docEspritHost.DocumentElement)
@@ -114,7 +115,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                Connect.logger.Info("Ошибка чтения файла настроек");
+                Connect.logger.Error("Ошибка чтения файла настроек " + E.Message);
             }
         }
 
@@ -122,13 +123,15 @@ namespace ESP_GOSTToolSheetAddIn
         public void saveAllSettings()
         {
             Connect.logger.Info("Сохранение файла настроек");
+
             XmlDocument docEspritHost = new XmlDocument();
             try
             {
-                docEspritHost.Load(StringResource.xmlAddinSettingsName);
+                docEspritHost.Load(Connect.assemblyFolder + StringResource.xmlAddinSettingsName);
             }
             catch (Exception E)
             {
+                Connect.logger.Error("Ошибка загрузки настроке при сохранении " + E.Message);
                 MessageBox.Show("Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -139,7 +142,7 @@ namespace ESP_GOSTToolSheetAddIn
                 node["DefaultReportPath"].InnerText = defaultReportPath;
                 node["DefaultReportName"].InnerText = defaultReportName;
             }
-            docEspritHost.Save(StringResource.xmlAddinSettingsName);
+            docEspritHost.Save(Connect.assemblyFolder + StringResource.xmlAddinSettingsName);
         }
 
 
