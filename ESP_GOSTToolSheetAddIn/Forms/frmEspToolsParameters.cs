@@ -46,6 +46,8 @@ namespace ESP_GOSTToolSheetAddIn
             //XmlDocument xDoc = new XmlDocument();
             //xDoc.Load(StringResource.xmlPathToolsParams);
             //XmlElement xRoot = xDoc.DocumentElement;
+            
+            // TODO - Переписать метод
 
             //// выбор всех инструментов
             //XmlNodeList childnodes = xRoot.SelectNodes(StringResource.xmlElementName);
@@ -111,7 +113,7 @@ namespace ESP_GOSTToolSheetAddIn
             // Получили название класса инструмента
             // Загружаем из файл-шаблона названия инструмента, заполняя форму.
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(StringResource.xmlPathToolsParams);
+            xDoc.Load(Connect.assemblyFolder + StringResource.xmlPathToolsParams);
             XmlElement xRoot = xDoc.DocumentElement;
 
             // выбор всех инструментов "user[@name='Bill Gates']"

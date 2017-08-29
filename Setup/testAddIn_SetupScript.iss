@@ -35,7 +35,7 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 Source: "E:\APIEsprit\ESPGOST\Setup\RegAddIn.reg"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\NLog.xml"; DestDir: "{app}"; Flags: ignoreversion
 

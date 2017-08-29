@@ -178,6 +178,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
         private void GenerateFileReport(string destFileFolder, string destFileName)
         {
+            Connect.logger.Info("Генерация карты наладки инструмента");
+
             if (File.Exists(destFileName + destFileName))
             {
                 destFileName = Connect.sEspDocument.Name + " " + destFileName;
@@ -187,7 +189,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 }
             }
             // Копировать рамку Excel в назначенную папку
-            CopyPatternFileTo(destFileFolder, destFileName);
+            if (!CopyPatternFileTo(destFileFolder, destFileName))
+                return;
+
             // Заполнение файла шаблона
             AdditionalToolParameters.gostReportFields.FillFileReport(destFileFolder + destFileName);
             //AdditionalToolParameters.gostReportFields.testAddNewSheet(distFileName);
@@ -195,10 +199,24 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             openReport(destFileFolder + destFileName);
         }
 
-        private void CopyPatternFileTo(string destFileFolder, string destFileName)
+        private bool CopyPatternFileTo(string destFileFolder, string destFileName)
         {
             FileInfo copyFI = new FileInfo(Connect.assemblyFolder + StringResource.excelTemplateReportFile);
-            copyFI.CopyTo(destFileFolder + destFileName);
+
+            Connect.logger.Info("Копировать из " + Connect.assemblyFolder + StringResource.excelTemplateReportFile + 
+                " в " + destFileFolder + destFileName);
+            try
+            {
+                copyFI.CopyTo(destFileFolder + destFileName);
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Ошибка при копировании " + E.Message);
+                MessageBox.Show("Не удалось создать документ! Попробуйте изменить папку для сохранение. Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void MenuItemReportSetting_Click(object sender, EventArgs e)

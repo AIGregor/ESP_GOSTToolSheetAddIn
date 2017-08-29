@@ -44,10 +44,9 @@ namespace ESP_GOSTToolSheetAddIn
             XmlDoc.AppendChild(root); //добавляем в документ
 
             // Файла имен и создание корневых элементов
-            string text = "";
             // .net читает только UTF8 - надо преобразовывать для отображения русского текста
             Encoding enc = Encoding.GetEncoding(1251);
-            using (StreamReader fs = new StreamReader(StringResource.txtPathToolType, enc))
+            using (StreamReader fs = new StreamReader(Connect.assemblyFolder + StringResource.txtPathToolType, enc))
             {
                 while (true)
                 {
@@ -68,6 +67,7 @@ namespace ESP_GOSTToolSheetAddIn
                     root.AppendChild(ElementTools);
                 }
             }
+
             Connect.logger.Info("Сохранение файла-шаблона");
             XmlDoc.Save(FileName); //сохраняем в документ
 

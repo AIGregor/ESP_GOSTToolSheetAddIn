@@ -399,7 +399,19 @@ namespace ESP_GOSTToolSheetAddIn
 
         public void FillFileReport(string distFileName)
         {
+            Connect.logger.Info("Формирование карты наладки");
+
             excelApp = new Excel.Application();
+
+            try
+            {
+                excelWBook = excelApp.Workbooks.Open(distFileName, null, false, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", true, false, null, true, 1, 0);
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Не удалось открыть файл " + E.Message);
+                return;
+            }
             excelWBook = excelApp.Workbooks.Open(distFileName, null, false, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", true, false, null, true, 1, 0);
 
             //Снять защиту с книги после копирования
