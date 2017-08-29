@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using EspritTechnology;
 using ESP_GOSTToolSheetAddIn.Resources;
+using NLog;
 
 namespace ESP_GOSTToolSheetAddIn.Forms
 {
@@ -26,6 +27,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         // Перед тем как показать форму считываем инструмент из файла и заполняем поля
         private void MainFrame_Shown(object sender, EventArgs e)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Info("Show Main frame");
+
             InitMainForm();
             // Заполняем поля для шапки
             fillHatsFields(); 

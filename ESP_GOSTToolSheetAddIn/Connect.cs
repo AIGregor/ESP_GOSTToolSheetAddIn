@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Extensibility;
 using System.Runtime.InteropServices;
 using System.IO;
 using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
-using EspritCommands;
 using System.Windows.Forms;
+using NLog;
 
 namespace ESP_GOSTToolSheetAddIn
 {
@@ -30,6 +26,8 @@ namespace ESP_GOSTToolSheetAddIn
         static public Esprit.Document sEspDocument;
         EspritCommands.AddIn sAddIn;
         EspritMenus.Menu fileMenu;
+
+        static public Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// 
@@ -58,21 +56,27 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
+            ConfigureLogger();
 
             sEspApp = (Esprit.Application)Application;
             sEspDocument = sEspApp.Document;
             sAddIn = sEspApp.AddIn;
             sCookie = sAddIn.GetCookie();
 
+            logger.Info("Подключение плагина");
+
             //Защита !!!------------------- 
             SecurityFile security = new SecurityFile();
             if (!security.mergeLicFiles())
             {
+                logger.Error("Не найдена лицензия");
                 MessageBox.Show(StringResource.msgErrorSecurityAccess, "Лицензия",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             //Защита !!!-------------------  
+
+            logger.Info("Лицензия найдена");
 
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
 
@@ -80,13 +84,15 @@ namespace ESP_GOSTToolSheetAddIn
             fileMenu = allMenu[1]; // Меню "Файл"
             // добавляем команду в меню
             fileMenu.Add(EspritConstants.espMenuItemType.espMenuItemCommand, StringResource.menuName, newCommand, 18);
+            logger.Info("Добавлен новый пункт меню");
             // привязываем вызов команды к обработчику
             sAddIn.OnCommand += OnCommand;
 
             //Загрузить все настроки плагина
+            logger.Info("Загрузка настроек плагина");
             AdditionalToolParameters.gostReportSettings.loadAllSettings();
 
-           Marshal.ReleaseComObject(allMenu);
+            Marshal.ReleaseComObject(allMenu);
         }
 
         // Открыть главное окно
@@ -95,6 +101,7 @@ namespace ESP_GOSTToolSheetAddIn
             // Проверка файла-шаблона
             if (!File.Exists(StringResource.xmlPathToolsParams))
             {
+                logger.Info("Создание файла шаблона параметров инструмента");
                 AdditionalToolParameters.creatPatternFile(StringResource.xmlPathToolsParams);
             }
             MainFrame mainFrame = new MainFrame();
@@ -108,6 +115,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnDisconnection(ext_DisconnectMode RemoveMode, ref Array custom)
         {
+            logger.Info("Отключение плагина");
             fileMenu.Remove(StringResource.menuName);
             Marshal.ReleaseComObject(fileMenu);
             Marshal.ReleaseComObject(sAddIn);
@@ -133,6 +141,7 @@ namespace ESP_GOSTToolSheetAddIn
         {
             if (Cookie == sCookie)
             {
+                logger.Info("Вызов команды Показать Главное окно");
                 showReportMainFrame();
             }
         }
@@ -158,5 +167,29 @@ namespace ESP_GOSTToolSheetAddIn
         {
             throw new NotImplementedException();
         }
+
+        private void ConfigureLogger()
+        {
+            logger.Info("Конфигурирование логирования");
+
+            // Step 1. Create configuration object 
+            var config = new NLog.Config.LoggingConfiguration();
+
+            // Step 2. Create targets and add them to the configuration 
+            var fileTarget = new NLog.Targets.FileTarget();
+            config.AddTarget("File", fileTarget);
+
+            // Step 3. Set target properties
+            fileTarget.FileName = Directory.GetCurrentDirectory() + @"\logs\${shortdate}.log";
+            fileTarget.Layout = "${longdate} ${uppercase:${level}} ${callsite} | ${message}";
+
+            // Step 4. Define rules
+            var rule1 = new NLog.Config.LoggingRule("*", LogLevel.Debug, fileTarget);
+            config.LoggingRules.Add(rule1);
+
+            // Step 5. Activate the configuration
+            LogManager.Configuration = config;
+        }
+
     }
 }

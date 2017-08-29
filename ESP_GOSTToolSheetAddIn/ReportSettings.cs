@@ -98,6 +98,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
+                Connect.logger.Info("Не удалось загрузить файл настроке плагина");
                 MessageBox.Show("Не удалось ЗАГРУЗИТЬ файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -113,13 +114,14 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                //MessageBox.Show("Не удалось выполнить чтение параметров настроек подключения! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connect.logger.Info("Ошибка чтения файла настроек");
             }
         }
 
         // Сохранить все настройки
         public void saveAllSettings()
         {
+            Connect.logger.Info("Сохранение файла настроек");
             XmlDocument docEspritHost = new XmlDocument();
             try
             {
