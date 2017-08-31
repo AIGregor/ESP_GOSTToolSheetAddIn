@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Esprit ADD-In Карта наладки инструмента ГОСТ"
-#define MyAppVersion "0.62"
+#define MyAppVersion "0.63"
 #define MyAppPublisher "LO CNITI"
 #define MyAppURL "http://www.locniti.ru//"
 

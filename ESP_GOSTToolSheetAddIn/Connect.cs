@@ -5,7 +5,6 @@ using System.IO;
 using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using System.Windows.Forms;
-using NLog;
 using System.Reflection;
 
 namespace ESP_GOSTToolSheetAddIn
@@ -23,13 +22,13 @@ namespace ESP_GOSTToolSheetAddIn
         /// <summary>
         /// Объект запущенной программы ESPRIT
         /// </summary>
-        static public Esprit.Application sEspApp;
-        static public Esprit.Document sEspDocument;
+        public static Esprit.Application sEspApp;
+        public static Esprit.Document sEspDocument;
         EspritCommands.AddIn sAddIn;
         EspritMenus.Menu fileMenu;
 
-        static public Logger logger = LogManager.GetCurrentClassLogger();
-        static public string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static Logger logger = new Logger();
+        public static string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         /// <summary>
         /// 
@@ -37,7 +36,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnAddInsUpdate(ref Array custom)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnBeginShutdown(ref Array custom)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -142,7 +141,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnStartupComplete(ref Array custom)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         //
@@ -184,25 +183,10 @@ namespace ESP_GOSTToolSheetAddIn
 
         private void ConfigureLogger()
         {       
-            // Step 1. Create configuration object 
-            var config = new NLog.Config.LoggingConfiguration();
-
-            // Step 2. Create targets and add them to the configuration 
-            var fileTarget = new NLog.Targets.FileTarget();
-            config.AddTarget("File", fileTarget);
-
             // Step 3. Set target properties
             MessageBox.Show("Создание папкии журнала в " + assemblyFolder);
                    
-            fileTarget.FileName = assemblyFolder + @"\logs\${shortdate}.log";
-            fileTarget.Layout = "${longdate} ${uppercase:${level}} ${callsite} | ${message}";
-
-            // Step 4. Define rules
-            var rule1 = new NLog.Config.LoggingRule("*", LogLevel.Debug, fileTarget);
-            config.LoggingRules.Add(rule1);
-
-            // Step 5. Activate the configuration
-            LogManager.Configuration = config;
+            string FileName = assemblyFolder + @"\logs\${shortdate}.log";
 
             logger.Info("Конфигурирование логирования");
             logger.Info("Папка плагина " + assemblyFolder);
