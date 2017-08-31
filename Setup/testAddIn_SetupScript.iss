@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Esprit ADD-In Карта наладки инструмента ГОСТ"
-#define MyAppVersion "0.5"
+#define MyAppVersion "0.62"
 #define MyAppPublisher "LO CNITI"
 #define MyAppURL "http://www.locniti.ru//"
 
@@ -35,7 +35,7 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 Source: "E:\APIEsprit\ESPGOST\Setup\RegAddIn.reg"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Debug\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\NLog.xml"; DestDir: "{app}"; Flags: ignoreversion
 
@@ -63,6 +63,8 @@ Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTTo
 
 [Run]
 Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /codebase /tlb; WorkingDir: {app}; StatusMsg: "Registering controls ..."; Flags: runhidden
+Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: NLog.dll /codebase /tlb; WorkingDir: {app}; StatusMsg: "Registering controls ..."; Flags: runhidden
 
 [UninstallRun]
 Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /unregister; WorkingDir: {app}; StatusMsg: "Unregistering controls ...";  Flags: runhidden
+Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: NLog.dll /unregister; WorkingDir: {app}; StatusMsg: "Unregistering controls ..."; Flags: runhidden

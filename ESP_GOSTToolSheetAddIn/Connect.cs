@@ -58,17 +58,25 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
-            //Настройка логирования
-            ConfigureLogger();
+            MessageBox.Show("Подключение !");
 
-            //Ссылки на текущий документ 
-            sEspApp = (Esprit.Application)Application;
-            sEspDocument = sEspApp.Document;
-            sAddIn = sEspApp.AddIn;
-            sCookie = sAddIn.GetCookie();
+            try
+            {
+                //Настройка логирования
+                ConfigureLogger();
 
-            logger.Info("Подключение плагина");
+                //Ссылки на текущий документ 
+                sEspApp = (Esprit.Application)Application;
+                sEspDocument = sEspApp.Document;
+                sAddIn = sEspApp.AddIn;
+                sCookie = sAddIn.GetCookie();
 
+                logger.Info("Подключение плагина");
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("Не удалось подключить дополнение : " + E.Message);
+            }
             //Защита !!!------------------- 
             SecurityFile security = new SecurityFile();
             if (!security.mergeLicFiles())
@@ -183,7 +191,9 @@ namespace ESP_GOSTToolSheetAddIn
             var fileTarget = new NLog.Targets.FileTarget();
             config.AddTarget("File", fileTarget);
 
-            // Step 3. Set target properties          
+            // Step 3. Set target properties
+            MessageBox.Show("Создание папкии журнала в " + assemblyFolder);
+                   
             fileTarget.FileName = assemblyFolder + @"\logs\${shortdate}.log";
             fileTarget.Layout = "${longdate} ${uppercase:${level}} ${callsite} | ${message}";
 
