@@ -184,9 +184,10 @@ namespace ESP_GOSTToolSheetAddIn
         private void ConfigureLogger()
         {       
             // Step 3. Set target properties
-            MessageBox.Show("Создание папкии журнала в " + assemblyFolder);
-                   
-            string FileName = assemblyFolder + @"\logs\${shortdate}.log";
+            MessageBox.Show("Создание папки журнала в " + assemblyFolder);
+                
+            string FileName = assemblyFolder + @"\logs";
+            logger.logFilePath = FileName;
 
             logger.Info("Конфигурирование логирования");
             logger.Info("Папка плагина " + assemblyFolder);
