@@ -36,7 +36,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnAddInsUpdate(ref Array custom)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnBeginShutdown(ref Array custom)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -57,8 +57,6 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnConnection(object Application, ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
         {
-            MessageBox.Show("Подключение !");
-
             try
             {
                 //Настройка логирования
@@ -76,16 +74,17 @@ namespace ESP_GOSTToolSheetAddIn
             {
                 MessageBox.Show("Не удалось подключить дополнение : " + E.Message);
             }
+
             //Защита !!!------------------- 
             SecurityFile security = new SecurityFile();
             if (!security.mergeLicFiles())
             {
                 logger.Error("Не найдена лицензия");
-                MessageBox.Show(StringResource.msgErrorSecurityAccess, "Лицензия",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringResource.msgErrorSecurityAccess, "Лицензия", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             //Защита !!!-------------------  
+
             logger.Info("Лицензия найдена");
 
             newCommand = sAddIn.AddCommand(sCookie, 1, StringResource.menuName);
@@ -141,7 +140,7 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="custom"></param>
         public void OnStartupComplete(ref Array custom)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         //
@@ -178,18 +177,16 @@ namespace ESP_GOSTToolSheetAddIn
         /// <param name="UserId"></param>
         public void OnContextHelp(int Cookie, int UserId)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void ConfigureLogger()
         {       
-            // Step 3. Set target properties
-            MessageBox.Show("Создание папки журнала в " + assemblyFolder);
-                
+            // Изменить путь сохранения             
             string FileName = assemblyFolder + @"\logs";
             logger.logFilePath = FileName;
 
-            logger.Info("Конфигурирование логирования");
+            logger.Info("Конфигурирование логирования завершено");
             logger.Info("Папка плагина " + assemblyFolder);
         }
 

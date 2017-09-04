@@ -26,7 +26,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         // Перед тем как показать форму считываем инструмент из файла и заполняем поля
         private void MainFrame_Shown(object sender, EventArgs e)
         {
-            Connect.logger.Info("Show Main frame");
+            Connect.logger.Info("Выполнение отображения Главного окна");
 
             InitMainForm();
             // Заполняем поля для шапки

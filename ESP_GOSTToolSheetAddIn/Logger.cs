@@ -50,7 +50,13 @@ namespace ESP_GOSTToolSheetAddIn
             DateTime toDay = DateTime.Now;
             string timeString = toDay.ToString("s");
 
-            string fileName = DateTime.Today.ToString("yyyy-mm-dd") + extention;
+            string fileName = DateTime.Today.ToString("yyyy-MM-dd") + extention;
+            string path = Path.Combine(logFilePath, fileName);
+
+            if (!File.Exists(path))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+            }                
 
             resultString += timeString;
             resultString += String.Concat(" ",logType, " ");
@@ -60,6 +66,5 @@ namespace ESP_GOSTToolSheetAddIn
 
             file.Close();
         }
-
     }
 }

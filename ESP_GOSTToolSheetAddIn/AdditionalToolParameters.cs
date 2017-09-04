@@ -46,26 +46,33 @@ namespace ESP_GOSTToolSheetAddIn
             // Файла имен и создание корневых элементов
             // .net читает только UTF8 - надо преобразовывать для отображения русского текста
             Encoding enc = Encoding.GetEncoding(1251);
-            using (StreamReader fs = new StreamReader(Connect.assemblyFolder + StringResource.txtPathToolType, enc))
+            try
             {
-                while (true)
+                using (StreamReader fs = new StreamReader(Connect.assemblyFolder + StringResource.txtPathToolType, enc))
                 {
-                    // Читаем строку из файла во временную переменную.
-                    string temp = fs.ReadLine();
+                    while (true)
+                    {
+                        // Читаем строку из файла во временную переменную.
+                        string temp = fs.ReadLine();
 
-                    if (temp == null)
-                        break; // Если достигнут конец файла, прерываем считывание.
+                        if (temp == null)
+                            break; // Если достигнут конец файла, прерываем считывание.
 
-                    string sToolName = getToolName(temp);
-                    string sToolID = getToolID(temp);
-                    string sToolLabel = getToolLable(temp);
+                        string sToolName = getToolName(temp);
+                        string sToolID = getToolID(temp);
+                        string sToolLabel = getToolLable(temp);
 
-                    XmlElement ElementTools = XmlDoc.CreateElement(StringResource.xmlElementName); //создание корневого элемента
-                    ElementTools.SetAttribute(StringResource.xmlToolName, sToolName); //создание атрибута
-                    ElementTools.SetAttribute(StringResource.xmlToolID, sToolID);
-                    ElementTools.SetAttribute(StringResource.xmlToolLabel, sToolLabel);
-                    root.AppendChild(ElementTools);
+                        XmlElement ElementTools = XmlDoc.CreateElement(StringResource.xmlElementName); //создание корневого элемента
+                        ElementTools.SetAttribute(StringResource.xmlToolName, sToolName); //создание атрибута
+                        ElementTools.SetAttribute(StringResource.xmlToolID, sToolID);
+                        ElementTools.SetAttribute(StringResource.xmlToolLabel, sToolLabel);
+                        root.AppendChild(ElementTools);
+                    }
                 }
+            }
+            catch (Exception E)
+            {                
+                Connect.logger.Error("Ошибка при создании файл-шаблона \n" + E.Message);
             }
 
             Connect.logger.Info("Сохранение файла-шаблона");
@@ -155,7 +162,7 @@ namespace ESP_GOSTToolSheetAddIn
                     ElementTools.AppendChild(elementParameter);
                 }
             }
-
+            Connect.logger.Info("Создание файла параметров в папку " + path + StringResource.xmlPathPattrenFileName);
             XmlDoc.Save(path + StringResource.xmlPathPattrenFileName); //сохраняем в документ
         }
 
@@ -163,7 +170,14 @@ namespace ESP_GOSTToolSheetAddIn
         {
             // Загружаем из файл-шаблона названия инструмента, заполняя форму.
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(Connect.assemblyFolder + StringResource.xmlPathToolsParams);
+            try
+            {
+                xDoc.Load(Connect.assemblyFolder + StringResource.xmlPathToolsParams);
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Ошибка при загрузке файла-шаблона параметров инструмента \n" + E.Message);
+            }
 
             XmlElement xRoot = xDoc.DocumentElement;
             // выбор всех инструментов
@@ -195,11 +209,18 @@ namespace ESP_GOSTToolSheetAddIn
                     i++;
                 }
             }
-            
-            if (!File.Exists(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName))
+
+            try
             {
-                creatPatternFile(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
-                return;
+                if (!File.Exists(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName))
+                {
+                    creatPatternFile(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
+                    return;
+                }
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Файл-шаблон инструментов отсутствует. Ошибка при создании файла\n" + E.Message);
             }
 
             XmlDocument XmlDoc = new XmlDocument();

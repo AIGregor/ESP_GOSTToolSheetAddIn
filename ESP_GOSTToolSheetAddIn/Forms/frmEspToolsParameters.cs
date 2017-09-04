@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using EspritTechnology;
-using EspritTools;
 using ESP_GOSTToolSheetAddIn.Resources;
 using ESP_GOSTToolSheetAddIn.Forms;
 using System.Collections;
 using System.IO;
-using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace ESP_GOSTToolSheetAddIn
 {
-    
+
     /// <summary>
     ///     Класс-форма редактирования параметров инструмента, которые необходимо загрузить в карту наладки
     /// </summary>
@@ -285,7 +278,8 @@ namespace ESP_GOSTToolSheetAddIn
                 listEspStandardParameters.Items.Add(newItem);
             }
 
-            listEspStandardParameters.Sort();                                   
+            listEspStandardParameters.Sort();
+            Marshal.ReleaseComObject(espTool);
             // MessageBox.Show(listEspStandardParameters.Items.Count.ToString());
         }
 

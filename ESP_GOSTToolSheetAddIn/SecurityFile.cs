@@ -26,8 +26,15 @@ namespace ESP_GOSTToolSheetAddIn
         // Сравнение файла лицензии и лицензии документа
         public bool mergeLicFiles()
         {
-            bool result = false;            
-            md5LicCode = generateLicCode(Connect.sEspApp.LicenseKey);
+            bool result = false;
+            try
+            {
+                md5LicCode = generateLicCode(Connect.sEspApp.LicenseKey);
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Не удадлось найти текущую лицензию. \n" + E.Message);
+            }
             // eal - esprit addin license
             Connect.logger.Info("Чтение файла лицензии");
 
@@ -53,7 +60,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                Connect.logger.Error("Ошибка при проверке лицензии " + E.Message);
+                Connect.logger.Error("Ошибка при проверке лицензии \n" + E.Message);
             }
 
             return result;
