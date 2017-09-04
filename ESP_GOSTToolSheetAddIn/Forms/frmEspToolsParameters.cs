@@ -80,7 +80,9 @@ namespace ESP_GOSTToolSheetAddIn
             // Выделяем первый инструмент в списке
             lstTools.SelectedIndex = 0;
             //Заполняем список параметров инструментов для первого интсремента в списке
-            fillFrmList(AdditionalToolParameters.gostToolsArray[0].toolName);                        
+            //fillFrmList(AdditionalToolParameters.gostToolsArray[0].toolName);
+            fillFrmParametersList(AdditionalToolParameters.gostToolsArray[0].toolName);
+
             // Загрузить параметры из файла
             //loadPatternParameterFile( AdditionalToolParameters.gostToolsArray);
             // Заполнить список параметров инструменты, которые надо отобразить в отчете
@@ -96,7 +98,8 @@ namespace ESP_GOSTToolSheetAddIn
         {
             listEspGostParams.Items.Add(e.Data.ToString());
         }
-//----------------------------------------------------------------------------------------
+        
+        //----------------------------------------------------------------------------------------
         // Выбор инструмента из списка
         private void lstTools_Click(object sender, EventArgs e)
         {
@@ -117,7 +120,9 @@ namespace ESP_GOSTToolSheetAddIn
             XmlAttributeCollection xmlCollection = childNode.Attributes;
             string sClassName = xmlCollection.Item(0).Value;
 
-            fillFrmList(sClassName);
+            //fillFrmList(sClassName);
+            fillFrmParametersList(sClassName);
+
             listEspGostParams.Items.Clear();
             fillFrmReportList(sClassName);
 
@@ -151,136 +156,96 @@ namespace ESP_GOSTToolSheetAddIn
 
         }
 
-        //----------------------------------------------------------------------------------------
-        // Заполнение списка на форме стандартных параметров инструмента
-        void fillFrmList(string sClassName)
+        void fillFrmParametersList(string technologyName)
         {
-            //TODO: Переписать - Tutorial 144:  A Closer Look at the Parameter Object
-            Technology espTool = null;
+            TechnologyUtility techUtil = Connect.sEspDocument.TechnologyUtility;
+            EspritTechnology.ITechnology espTech = null;
 
-            switch (sClassName)
-            {
-                case "ToolMillEndMill":
-                    ToolMillEndMill espToolMillEndMill = new ToolMillEndMill();
-                    espTool = (Technology) espToolMillEndMill;
-                    break;
-                case "ToolMillDrill":
-                    ToolMillDrill espToolMillDrill = new ToolMillDrill();
-                    espTool = (Technology) espToolMillDrill;
-                    break;
-                case "ToolMillCenterDrill":
-                    ToolMillCenterDrill espToolMillCenterDrill = new ToolMillCenterDrill();
-                    espTool = (Technology)espToolMillCenterDrill;
-                    break;
-                case "ToolMillTap":
-                    ToolMillTap espToolMillTap = new ToolMillTap();
-                    espTool = (Technology)espToolMillTap;
-                    break;
-                case "ToolMillReamer":
-                    ToolMillReamer ToolMillReamer = new ToolMillReamer();
-                    espTool = (Technology)ToolMillReamer;
-                    break;
-                case "ToolMillBoringBar":
-                    ToolMillBoringBar ToolMillBoringBar = new ToolMillBoringBar();
-                    espTool = (Technology)ToolMillBoringBar;
-                    break;
-                case "ToolMillBullNose":
-                    ToolMillBullNose ToolMillBullNose = new ToolMillBullNose();
-                    espTool = (Technology)ToolMillBullNose;
-                    break;
-                case "ToolMillFaceMill":
-                    ToolMillFaceMill ToolMillFaceMill = new ToolMillFaceMill();
-                    espTool = (Technology)ToolMillFaceMill;
-                    break;
-                case "ToolMillBallMill":
-                    ToolMillBallMill ToolMillBallMill = new ToolMillBallMill();
-                    espTool = (Technology)ToolMillBallMill;
-                    break;
-                case "ToolMillTaperRadiusEndMill":
-                    ToolMillTaperRadiusEndMill ToolMillTaperRadiusEndMill = new ToolMillTaperRadiusEndMill();
-                    espTool = (Technology)ToolMillTaperRadiusEndMill;
-                    break;
-                case "ToolMillChamferMill":
-                    ToolMillChamferMill ToolMillChamferMill = new ToolMillChamferMill();
-                    espTool = (Technology)ToolMillChamferMill;
-                    break;
-                case "ToolMillCornerRoundMill":
-                    ToolMillCornerRoundMill ToolMillCornerRoundMill = new ToolMillCornerRoundMill();
-                    espTool = (Technology)ToolMillCornerRoundMill;
-                    break;
-                case "ToolMillDoveTail":
-                    ToolMillDoveTail ToolMillDoveTail = new ToolMillDoveTail();
-                    espTool = (Technology)ToolMillDoveTail;
-                    break;
-                case "ToolMillCustom":
-                    ToolMillCustom ToolMillCustom = new ToolMillCustom();
-                    espTool = (Technology)ToolMillCustom;
-                    break;
-                case "ToolLatheCustom":
-                    ToolLatheCustom ToolLatheCustom = new ToolLatheCustom();
-                    espTool = (Technology)ToolLatheCustom;
-                    break;
-                case "ToolLatheTurning":
-                    ToolLatheTurning ToolLatheTurning = new ToolLatheTurning();
-                    espTool = (Technology)ToolLatheTurning;
-                    break;
-                case "ToolLatheGroove":
-                    ToolLatheGroove ToolLatherGroove = new ToolLatheGroove();
-                    espTool = (Technology) ToolLatherGroove;
-                    break;
-                case "ToolLatheTopNotch":
-                    ToolLatheTopNotch ToolLatheTopNotch = new ToolLatheTopNotch();
-                    espTool = (Technology)ToolLatheTopNotch;
-                    break;
-                case "ToolLatheLayDown":
-                    ToolLatheLayDown ToolLatheLayDown = new ToolLatheLayDown();
-                    espTool = (Technology)ToolLatheLayDown;
-                    break;
-                case "ToolMillThreadMill":
-                    ToolMillThreadMill ToolMillThreadMill = new ToolMillThreadMill();
-                    espTool = (Technology)ToolMillThreadMill;
-                    break;
-                case "ToolLatheMiniTurning":
-                    ToolLatheMiniTurning ToolLatheMiniTurning = new ToolLatheMiniTurning();
-                    espTool = (Technology)ToolLatheMiniTurning;
-                    break;
-                case "ToolLatheMiniGrooving":
-                    ToolLatheMiniGrooving ToolLatheMiniGrooving = new ToolLatheMiniGrooving();
-                    espTool = (Technology)ToolLatheMiniGrooving;
-                    break;
-                case "ToolLatheMiniBoring":
-                    ToolLatheMiniBoring ToolLatheMiniBoring = new ToolLatheMiniBoring();
-                    espTool = (Technology)ToolLatheMiniBoring;
-                    break;
-                case "ToolMillSlotMill":
-                    ToolMillSlotMill ToolMillSlotMill = new ToolMillSlotMill();
-                    espTool = (Technology)ToolMillSlotMill;
-                    break;
-                case "ToolMillUndercutMill":
-                    ToolMillUndercutMill ToolMillUndercutMill = new ToolMillUndercutMill();
-                    espTool = (Technology)ToolMillUndercutMill;
-                    break;
-            }
-            // Очистить форму
             listEspStandardParameters.Items.Clear();
 
-            IEnumerator enumerator = espTool.GetEnumerator();
-            while (enumerator.MoveNext())
+            try
             {
-                Parameter item = (Parameter)enumerator.Current;
+                espTech = techUtil.CreateTechnology(getTechnologyType(technologyName), Connect.sEspDocument.SystemUnit);
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("Ошмбка при создании технологии \n" + E.Message);
+            }
 
+            if (espTech == null)
+                MessageBox.Show("espTool is NULL !!!");
+
+            for (int iParam = 1; iParam < espTech.Count; iParam++)
+            {
                 string[] arrParams = new string[3];
-                arrParams[0] = item.Caption;
-                arrParams[1] = item.Name;
-                arrParams[2] = item.ClCode.ToString();
+                arrParams[0] = espTech[iParam].Caption;
+                arrParams[1] = espTech[iParam].Name;
+                arrParams[2] = espTech[iParam].ClCode.ToString();
 
                 ListViewItem newItem = new ListViewItem(arrParams);
                 listEspStandardParameters.Items.Add(newItem);
             }
+        }
 
-            listEspStandardParameters.Sort();
-            Marshal.ReleaseComObject(espTool);
-            // MessageBox.Show(listEspStandardParameters.Items.Count.ToString());
+        //----------------------------------------------------------------------------------------
+        // Заполнение списка на форме стандартных параметров инструмента
+        private EspritConstants.espTechnologyType getTechnologyType(string sClassName)
+        {
+            switch (sClassName)
+            {
+                case "ToolMillEndMill":
+                    return EspritConstants.espTechnologyType.espToolMillEndMill;
+                case "ToolMillDrill":
+                    return EspritConstants.espTechnologyType.espToolMillDrill;
+                case "ToolMillCenterDrill":
+                    return EspritConstants.espTechnologyType.espToolMillCenterDrill;
+                case "ToolMillTap":
+                    return EspritConstants.espTechnologyType.espToolMillTap;
+                case "ToolMillReamer":
+                    return EspritConstants.espTechnologyType.espToolMillReamer;
+                case "ToolMillBoringBar":
+                    return EspritConstants.espTechnologyType.espToolMillBoringBar;
+                case "ToolMillBullNose":
+                    return EspritConstants.espTechnologyType.espToolMillBullNose;
+                case "ToolMillFaceMill":
+                    return EspritConstants.espTechnologyType.espToolMillFaceMill;
+                case "ToolMillBallMill":
+                    return EspritConstants.espTechnologyType.espToolMillBallMill;
+                case "ToolMillTaperRadiusEndMill":
+                    return EspritConstants.espTechnologyType.espToolMillTaperRadiusEndMill;
+                case "ToolMillChamferMill":
+                    return EspritConstants.espTechnologyType.espToolMillChamferMill;
+                case "ToolMillCornerRoundMill":
+                    return EspritConstants.espTechnologyType.espToolMillCornerRoundMill;
+                case "ToolMillDoveTail":
+                    return EspritConstants.espTechnologyType.espToolMillDoveTail;
+                case "ToolMillCustom":
+                    return EspritConstants.espTechnologyType.espToolMillCustom;
+                case "ToolLatheCustom":
+                    return EspritConstants.espTechnologyType.espToolLatheCustom;
+                case "ToolLatheTurning":
+                    return EspritConstants.espTechnologyType.espToolLatheTurning;
+                case "ToolLatheGroove":
+                    return EspritConstants.espTechnologyType.espToolLatheGroove;
+                case "ToolLatheTopNotch":
+                    return EspritConstants.espTechnologyType.espToolLatheTopNotch;
+                case "ToolLatheLayDown":
+                    return EspritConstants.espTechnologyType.espToolLatheLayDown;
+                case "ToolMillThreadMill":
+                    return EspritConstants.espTechnologyType.espToolMillThreadMill;
+                case "ToolLatheMiniTurning":
+                    return EspritConstants.espTechnologyType.espToolLatheMiniTurning;
+                case "ToolLatheMiniGrooving":
+                    return EspritConstants.espTechnologyType.espToolLatheMiniGrooving;
+                case "ToolLatheMiniBoring":
+                    return EspritConstants.espTechnologyType.espToolLatheMiniBoring;
+                case "ToolMillSlotMill":
+                    return EspritConstants.espTechnologyType.espToolMillSlotMill;
+                case "ToolMillUndercutMill":
+                    return EspritConstants.espTechnologyType.espToolMillUndercutMill;
+                default :
+                    return EspritConstants.espTechnologyType.espToolMillCustom;
+            }
         }
 
         //----------------------------------------------------------------------------------------

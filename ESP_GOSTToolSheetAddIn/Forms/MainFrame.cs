@@ -56,10 +56,12 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             // Загружаем параметры инструмента из файла
             AdditionalToolParameters.LoadToolsParameters();
+
             // Собираем инструмент из текущего документа
             Esprit.Document curDocument = Connect.sEspApp.Document;
             Connect.sEspDocument = curDocument;
             currentTool = curDocument.Tools;
+
             // Идем по списку инструментов в документе
             foreach (Tool Tool in currentTool)
             {
@@ -74,6 +76,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 ListViewItem newReportTool = new ListViewItem(reportTool);
                 listDocumentTools.Items.Add(newReportTool);
             }
+
             // Заполнить таблицу параметров первого инструмента
             fillFormReportToolParameters(0);
         }

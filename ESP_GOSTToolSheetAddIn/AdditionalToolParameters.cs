@@ -168,6 +168,7 @@ namespace ESP_GOSTToolSheetAddIn
 
         public static void LoadToolsParameters()
         {
+            Connect.logger.Info("Загрузка инструмента - LoadToolsParameters");
             // Загружаем из файл-шаблона названия инструмента, заполняя форму.
             XmlDocument xDoc = new XmlDocument();
             try
@@ -188,9 +189,16 @@ namespace ESP_GOSTToolSheetAddIn
             {
                 Array.Clear(gostToolsArray, 0, gostToolsArray.Length);
             }
+            Connect.logger.Info("childnodes.Count " + childnodes.Count.ToString());
 
+            if (childnodes.Count <= 0)
+            {
+                Connect.logger.Error("Файл параметров инструментов пуст.");
+                return;
+            }
             // Создание массива инструментов
             gostToolsArray = new GostTool[childnodes.Count - 1];
+
             int i = 0;
             foreach (XmlNode node in childnodes)
             {
@@ -202,11 +210,15 @@ namespace ESP_GOSTToolSheetAddIn
                     XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
                     string sToolName = singleNodeName.Value;
 
+                    if (i > gostToolsArray.Length-1)
+                        break;
+
                     gostToolsArray[i] = new GostTool();
                     gostToolsArray[i].toolID = iToolId;
                     gostToolsArray[i].toolLabel = sToolLabel;
                     gostToolsArray[i].toolName = sToolName;
                     i++;
+                    Connect.logger.Info(String.Format("Index = {0}, childnodes.Count {1}", i, childnodes.Count));
                 }
             }
 
@@ -223,6 +235,9 @@ namespace ESP_GOSTToolSheetAddIn
                 Connect.logger.Error("Файл-шаблон инструментов отсутствует. Ошибка при создании файла\n" + E.Message);
             }
 
+            Connect.logger.Info("Заполнение параметров для отчета");
+
+            // Чтение параметров для отчета
             XmlDocument XmlDoc = new XmlDocument();
             XmlDoc.Load(Connect.assemblyFolder + StringResource.xmlPathPattrenFileName);
             // get root element
@@ -232,6 +247,10 @@ namespace ESP_GOSTToolSheetAddIn
             int index = 0;
             foreach (XmlNode nodeTool in allToolsList)
             {
+                if (index > allToolsList.Count - 1)
+                    break;
+                Connect.logger.Info(String.Format("Текущее значение {0}", index));
+
                 XmlNode singleNodeName = nodeTool.SelectSingleNode("@" + StringResource.xmlToolName);
                 string sToolName = singleNodeName.Value;
                 if (String.Equals(sToolName, gostToolsArray[index].toolName))
@@ -249,7 +268,9 @@ namespace ESP_GOSTToolSheetAddIn
                     }
                 }
                 index++;
+                Connect.logger.Info(String.Format("Index = {0}, allToolsList.Count {1}, gostToolsArray.length {2}", index, allToolsList.Count, gostToolsArray.Length));
             }
+            Connect.logger.Info("Заполнение параметров для отчета закончено");
         }
 
         public static GostTool getGostTool(int toolType)

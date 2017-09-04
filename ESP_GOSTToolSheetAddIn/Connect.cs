@@ -27,6 +27,7 @@ namespace ESP_GOSTToolSheetAddIn
         EspritCommands.AddIn sAddIn;
         EspritMenus.Menu fileMenu;
 
+        private MainFrame mainFrame;
         public static Logger logger = new Logger();
         public static string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -116,7 +117,7 @@ namespace ESP_GOSTToolSheetAddIn
                 logger.Info("Создание файла шаблона параметров инструмента");
                 AdditionalToolParameters.creatPatternFile(assemblyFolder + StringResource.xmlPathToolsParams);
             }
-            MainFrame mainFrame = new MainFrame();
+            mainFrame = new MainFrame();
             mainFrame.Show();
         }
 
@@ -128,6 +129,10 @@ namespace ESP_GOSTToolSheetAddIn
         public void OnDisconnection(ext_DisconnectMode RemoveMode, ref Array custom)
         {
             logger.Info("Отключение плагина");
+            
+            // Закрыть главное окно
+            mainFrame.Close();
+
             fileMenu.Remove(StringResource.menuName);
             Marshal.ReleaseComObject(fileMenu);
             Marshal.ReleaseComObject(sAddIn);
