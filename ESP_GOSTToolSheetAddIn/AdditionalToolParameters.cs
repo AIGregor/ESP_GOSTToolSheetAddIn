@@ -197,29 +197,28 @@ namespace ESP_GOSTToolSheetAddIn
                 return;
             }
             // Создание массива инструментов
-            gostToolsArray = new GostTool[childnodes.Count - 1];
+            // Пропускаем 0-й элемент чтобы не учитывать неизвестный инструмент
+            gostToolsArray = new GostTool[childnodes.Count];
 
             int i = 0;
             foreach (XmlNode node in childnodes)
             {
                 int iToolId = int.Parse(node.SelectSingleNode("@" + StringResource.xmlToolID).Value);
-                if (iToolId != 0)
-                {
-                    XmlNode singleNodeLable = node.SelectSingleNode("@" + StringResource.xmlToolLabel);
-                    string sToolLabel = singleNodeLable.Value;
-                    XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
-                    string sToolName = singleNodeName.Value;
 
-                    if (i > gostToolsArray.Length-1)
-                        break;
+                XmlNode singleNodeLable = node.SelectSingleNode("@" + StringResource.xmlToolLabel);
+                string sToolLabel = singleNodeLable.Value;
+                XmlNode singleNodeName = node.SelectSingleNode("@" + StringResource.xmlToolName);
+                string sToolName = singleNodeName.Value;
 
-                    gostToolsArray[i] = new GostTool();
-                    gostToolsArray[i].toolID = iToolId;
-                    gostToolsArray[i].toolLabel = sToolLabel;
-                    gostToolsArray[i].toolName = sToolName;
-                    i++;
-                    Connect.logger.Info(String.Format("Index = {0}, childnodes.Count {1}", i, childnodes.Count));
-                }
+                if (i > gostToolsArray.Length)
+                    break;
+
+                gostToolsArray[i] = new GostTool();
+                gostToolsArray[i].toolID = iToolId;
+                gostToolsArray[i].toolLabel = sToolLabel;
+                gostToolsArray[i].toolName = sToolName;
+                i++;
+                Connect.logger.Info(String.Format("Index = {0}, childnodes.Count {1}", i, childnodes.Count));
             }
 
             try
@@ -245,30 +244,30 @@ namespace ESP_GOSTToolSheetAddIn
             // select all tools
             XmlNodeList allToolsList = xmlRoot.SelectNodes(StringResource.xmlElementName);
             int index = 0;
-            foreach (XmlNode nodeTool in allToolsList)
+
+            for (int node = 0; node < allToolsList.Count; node++)
             {
-                if (index > allToolsList.Count - 1)
-                    break;
-                Connect.logger.Info(String.Format("Текущее значение {0}", index));
+                XmlNode nodeTool = allToolsList[node];
+                Connect.logger.Info(String.Format("Текущее значение {0}", node));
 
                 XmlNode singleNodeName = nodeTool.SelectSingleNode("@" + StringResource.xmlToolName);
                 string sToolName = singleNodeName.Value;
-                if (String.Equals(sToolName, gostToolsArray[index].toolName))
+
+                if (string.Equals(sToolName, gostToolsArray[node].toolName))
                 {
                     XmlNodeList parametersList = nodeTool.ChildNodes;
                     for (int j = 0; j < parametersList.Count; j++)
                     {
                         ToolParameter newParam = new ToolParameter();
-                        newParam.Name = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterName).Value;
-                        newParam.Capture = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterCapture).Value;
-                        newParam.Type = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterType).Value;
-                        newParam.CLCode = int.Parse(parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterClCode).Value);
+                        newParam.Name       = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterName).Value;
+                        newParam.Capture    = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterCapture).Value;
+                        newParam.Type       = parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterType).Value;
+                        newParam.CLCode     = int.Parse(parametersList[j].SelectSingleNode("@" + StringResource.xmlParameterClCode).Value);
 
-                        gostToolsArray[index].addParameter(newParam);
+                        gostToolsArray[node].addParameter(newParam);
                     }
                 }
-                index++;
-                Connect.logger.Info(String.Format("Index = {0}, allToolsList.Count {1}, gostToolsArray.length {2}", index, allToolsList.Count, gostToolsArray.Length));
+                Connect.logger.Info(String.Format("Index = {0}, allToolsList.Count {1}, gostToolsArray.length {2}", index, allToolsList.Count, gostToolsArray.Length));            
             }
             Connect.logger.Info("Заполнение параметров для отчета закончено");
         }

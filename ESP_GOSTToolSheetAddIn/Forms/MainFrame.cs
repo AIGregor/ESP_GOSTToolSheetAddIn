@@ -274,11 +274,20 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         // Кнопка на форме - сохранить все пользовательские параметры всех инструментов отчета в БД
         private void MenuItemSaveDataBase_Click(object sender, EventArgs e)
         {
+            //Сохранить параметры из формы для теккущего документа
+            updateParametersFromForm();
+
+            //Сохранить в БД
             DatabaseInterface dataBase = new DatabaseInterface();
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
-                dataBase.saveUserToolParams(gostTool);
-            }            
+                bool result = dataBase.saveUserToolParams(gostTool);
+
+                if (!result)
+                    Connect.logger.Warning(string.Format("Пользовательские параметры инструмента с ID {0} не сохранены !", gostTool.toolDocumentID));
+            }
+            //Информирование о завершении сохранения
+            MessageBox.Show("Сохранение в Базу Знаний завершено.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);          
         }
 
         // Кнопка на форме - загрузить все пользовательские параметры для всех инструментов из БД
@@ -298,6 +307,14 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                     }
                 }
             }
+            //очистить форму от старых записей
+            dgvReportToolParameters.Rows.Clear();
+
+            //заполнить форму после загрузки параметров из БД
+            fillFormReportToolParameters(selectedToolIndex);
+            
+            //Информирование о завершении загрузки
+            MessageBox.Show("Загрузка из Базы Знаний завершена.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void MenuItemHelpAbout_Click(object sender, EventArgs e)

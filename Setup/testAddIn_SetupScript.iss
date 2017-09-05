@@ -34,17 +34,11 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 [Files]
 
 Source: "E:\APIEsprit\ESPGOST\Setup\RegAddIn.reg"; DestDir: "{app}"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\ESP_GOSTToolSheetAddIn.dll"; DestDir: "{app}"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\AddinSettings.xml"; DestDir: "{app}\Resources"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\F4.xlsx"; DestDir: "{app}\Resources"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\lic.eal"; DestDir: "{app}\Resources"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\ToolName.txt"; DestDir: "{app}\Resources"; Flags: ignoreversion
-
 Source: "E:\APIEsprit\ESPGOST\ESP_GOSTToolSheetAddIn\bin\Release\Resources\FontsGOSTtypeB.ttf"; DestDir: "{fonts}"; FontInstall: "GOST type B"; Flags: onlyifdoesntexist uninsneveruninstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

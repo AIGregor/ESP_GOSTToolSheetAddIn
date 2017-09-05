@@ -4,6 +4,6 @@
     <HostName></HostName>
     <LocalHost>True</LocalHost>
     <DefaultReportPath>C:\</DefaultReportPath>
-    <DefaultReportName>Карта наладки ГОСТ</DefaultReportName>
+    <DefaultReportName>Карта наладки ГОСТ.xlsx</DefaultReportName>
   </KBMSSServer>
 </root>

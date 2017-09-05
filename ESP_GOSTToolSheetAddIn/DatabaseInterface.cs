@@ -84,6 +84,9 @@ namespace ESP_GOSTToolSheetAddIn
                               " fldfkCuttingToolId_tblCuttingToolParameter = @TooID;";
             DataTable dataTable = new DataTable();
 
+            if (connectionString == "")
+                loadConnectionString();
+
             try
             {   //TODO: Check is Empty connection string 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -122,6 +125,9 @@ namespace ESP_GOSTToolSheetAddIn
             string sqlQuery = "SELECT fldValue_tblCuttingToolParameter FROM tblCuttingToolParameter WHERE" +
                   " fldCLFileCode_tblCuttingToolParameter = @CLCodeUsersParams AND" +
                   " fldfkCuttingToolId_tblCuttingToolParameter = @TooID;";
+
+            if (connectionString == "")
+                loadConnectionString();
 
             try
             {   //TODO: Check is Empty connection string 
@@ -255,6 +261,9 @@ namespace ESP_GOSTToolSheetAddIn
                         return false;
                     }
 
+                    if (connectionString == "")
+                        loadConnectionString();
+
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
@@ -264,7 +273,9 @@ namespace ESP_GOSTToolSheetAddIn
                         cmd.Parameters.AddWithValue("@CLCode", curToolParameter.CLCode);
                         cmd.Parameters.AddWithValue("@ToolID", GostTool.dataBaseToolID);
                         cmd.Parameters.AddWithValue("@Value", curToolParameter.Value);
-                        cmd.ExecuteNonQuery();                        
+                        cmd.ExecuteNonQuery();
+
+                        conn.Close();
                     }
                 }
             }

@@ -1,4 +1,3 @@
-0 = ToolToolUnknown				- Неизвестный инструмент* - нет интсрумента
 1 = ToolMillEndMill				- Концевая фреза
 2 = ToolMillDrill				- Сверло
 3 = ToolMillCenterDrill			- Центровка
