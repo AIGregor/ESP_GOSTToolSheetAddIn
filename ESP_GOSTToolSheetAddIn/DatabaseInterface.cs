@@ -32,7 +32,15 @@ namespace ESP_GOSTToolSheetAddIn
 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
                 SqlCommand cmd = sqlConnection.CreateCommand();
-                sqlConnection.Open();
+
+                try
+                {
+                    sqlConnection.Open();
+                }
+                catch (Exception E)
+                {
+                    Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                }
 
                 cmd.CommandText = sqlQuery;
                 cmd.Parameters.AddWithValue("@ToolDocID", toolDocumentID);
@@ -90,7 +98,14 @@ namespace ESP_GOSTToolSheetAddIn
             try
             {   //TODO: Check is Empty connection string 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
+                }
+                catch (Exception E)
+                {
+                    Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                }
 
                 //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
                 SqlCommand cmd = sqlConnection.CreateCommand();
@@ -132,7 +147,14 @@ namespace ESP_GOSTToolSheetAddIn
             try
             {   //TODO: Check is Empty connection string 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
+                }
+                catch (Exception E)
+                {
+                    Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                }
 
                 //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
                 SqlCommand cmd = sqlConnection.CreateCommand();
@@ -263,11 +285,17 @@ namespace ESP_GOSTToolSheetAddIn
 
                     if (connectionString == "")
                         loadConnectionString();
-
+                    
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
-                        conn.Open();
-
+                        try
+                        {
+                            conn.Open();
+                        }
+                        catch (Exception E)
+                        {
+                            Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                        }
                         SqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = newSQLQuery;
                         cmd.Parameters.AddWithValue("@CLCode", curToolParameter.CLCode);
@@ -278,6 +306,7 @@ namespace ESP_GOSTToolSheetAddIn
                         conn.Close();
                     }
                 }
+
             }
             return true;
         }

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GOSTSetupSheets"
-#define MyAppVersion "0.82 log"
+#define MyAppVersion " v0.9"
 #define MyAppPublisher "LO CNITI"
 #define MyAppURL "http://www.locniti.ru//"
 
