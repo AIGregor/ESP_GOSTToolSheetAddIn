@@ -207,6 +207,7 @@
             this.btnSaveInFile.TabStop = false;
             this.btnSaveInFile.Text = "Сохранить в текущем файле";
             this.btnSaveInFile.UseVisualStyleBackColor = true;
+            this.btnSaveInFile.Click += new System.EventHandler(this.btnSaveInFile_Click);
             // 
             // tbFIOControl
             // 

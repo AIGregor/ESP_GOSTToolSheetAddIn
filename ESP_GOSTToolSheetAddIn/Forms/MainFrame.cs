@@ -181,13 +181,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             Connect.logger.Info("Генерация карты наладки инструмента");
 
-            if (File.Exists(destFileName + destFileName))
+            if (File.Exists(destFileFolder + destFileName))
             {
-                destFileName = Connect.sEspDocument.Name + " " + destFileName;
-                if (File.Exists(destFileFolder + destFileName))
-                {
-                    File.Delete(destFileFolder + destFileName);
-                }
+                DialogResult result = MessageBox.Show(
+                    "Файл с таким именем уже существует. Заменить файл ?", 
+                    "Предупреждение", MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.No)
+                    return;
+
+                File.Delete(destFileFolder + destFileName);
             }
             // Копировать рамку Excel в назначенную папку
             if (!CopyPatternFileTo(destFileFolder, destFileName))
@@ -195,7 +199,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             // Заполнение файла шаблона
             AdditionalToolParameters.gostReportFields.FillFileReport(destFileFolder + destFileName);
-            //AdditionalToolParameters.gostReportFields.testAddNewSheet(distFileName);
 
             openReport(destFileFolder + destFileName);
         }
@@ -321,6 +324,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             About dlgAbout = new About();
             dlgAbout.Show();
+        }
+
+        private void btnSaveInFile_Click(object sender, EventArgs e)
+        {
+            Connect.sEspDocument.Save();
         }
     }
     // end class

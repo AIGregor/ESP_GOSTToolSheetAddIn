@@ -59,6 +59,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 fIOChecker = value;
+                saveFields();
             }
         }
 
@@ -72,6 +73,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 fIOAccepter = value;
+                saveFields();
             }
         }
 
@@ -85,6 +87,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 fIONormChecker = value;
+                saveFields();
             }
         }
 
@@ -126,6 +129,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 detailDesignation = value;
+                saveFields();
             }
         }
 
@@ -139,6 +143,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 cNCProgName = value;
+                saveFields();
             }
         }
 
@@ -152,6 +157,7 @@ namespace ESP_GOSTToolSheetAddIn
             set
             {
                 cNCMachineName = value;
+                saveFields();
             }
         }
 
@@ -173,6 +179,7 @@ namespace ESP_GOSTToolSheetAddIn
 
         public ReportFields()
         {
+
         }
 
         private void fillFIODev()
@@ -205,7 +212,7 @@ namespace ESP_GOSTToolSheetAddIn
 
         private void fillDetailDesignation()
         {
-            excelWSheet.Range["R7", "R9"].Value2 = DetailDesignation;
+            excelWSheet.Range["M7", "R9"].Value2 = DetailDesignation;
         }
 
         private void fillCNCProgName()
@@ -213,7 +220,7 @@ namespace ESP_GOSTToolSheetAddIn
             incNumber();
             excelWSheet.Range["A" + currentRow.ToString(), "A" + currentRow.ToString()].Value2 = "У " + getFormatedNumber();
             excelWSheet.Range["B" + currentRow.ToString(), "D" + currentRow.ToString()].Value2 = "-";
-            excelWSheet.Range["G" + currentRow.ToString(), "Q" + currentRow.ToString()].Value2 = CNCProgName;
+            excelWSheet.Range["G" + currentRow.ToString(), "Q" + currentRow.ToString()].Value2 = "Управляющая программа: " + CNCProgName;
         }
 
         private void fillCNCMachineName()
@@ -221,7 +228,7 @@ namespace ESP_GOSTToolSheetAddIn
             incNumber();
             excelWSheet.Range["A" + currentRow.ToString(), "A" + currentRow.ToString()].Value2 = getFormatedNumber();
             excelWSheet.Range["B" + currentRow.ToString(), "D" + currentRow.ToString()].Value2 = "-";
-            excelWSheet.Range["G" + currentRow.ToString(), "Q" + currentRow.ToString()].Value2 = CNCMachineName;
+            excelWSheet.Range["G" + currentRow.ToString(), "Q" + currentRow.ToString()].Value2 = "Станок: " + CNCMachineName;
         }
 
         private void fillTool(GostTool gostTool)
@@ -357,6 +364,56 @@ namespace ESP_GOSTToolSheetAddIn
             // TODO: Заполнить до конца кто где должен храниться
             fIODev = Connect.sEspDocument.DocumentProperties.Author;
             companyName = Connect.sEspDocument.DocumentProperties.Company;
+            getCommonFields();
+        }
+
+        private void getCommonFields()
+        {
+            string commonFields = Connect.sEspDocument.DocumentProperties.Notes;
+            commonFields.IndexOf("\r");
+
+            string[] splitter = new string[1] { "\r\n" };
+
+            string[] fields = commonFields.Split(splitter, StringSplitOptions.None);
+
+            if (fields.Length < 7)
+                return;
+
+            fIOChecker          = fields[0];
+            fIOAccepter         = fields[1];
+            fIONormChecker      = fields[2];
+
+            detailName          = fields[3];
+            detailDesignation   = fields[4];
+            cNCProgName         = fields[5];
+            cNCMachineName      = fields[6];
+        }
+
+        private string stringFromArrey(ref string[] fields)
+        {
+            string result = "";
+
+            foreach (string str in fields)
+            {
+                result += str + "\r\n";
+            }            
+            return result;
+        }
+
+        private void saveFields()
+        {
+            string[] fields = new string[7];
+            fields[0] = fIOChecker;
+            fields[1] = fIOAccepter;
+            fields[2] = fIONormChecker;
+            
+            fields[3] = detailName;
+            fields[4] = detailDesignation;
+            fields[5] = cNCProgName;
+            fields[6] = cNCMachineName;
+
+            string temp = stringFromArrey(ref fields);
+            Connect.sEspDocument.DocumentProperties.Notes = stringFromArrey(ref fields);
         }
 
         public void testAddNewSheet(string distFileName)
@@ -396,6 +453,7 @@ namespace ESP_GOSTToolSheetAddIn
         public void FillFileReport(string distFileName)
         {
             Connect.logger.Info("Формирование карты наладки");
+            setInnerParams();
 
             excelApp = new Excel.Application();
 
@@ -464,6 +522,16 @@ namespace ESP_GOSTToolSheetAddIn
             releaseOdject(excelWSheet);
             releaseOdject(excelWBook);
             releaseOdject(excelApp);
+        }
+
+        private void setInnerParams()
+        {
+            currentNumber = 0;
+            currentSheetNumber = 1;
+            totalSheetNumber = 0;
+            totalRowNumber = 0;
+            currentRow = 13;
+            mainSheet = true;
         }
 
         private void releaseOdject(object obj)

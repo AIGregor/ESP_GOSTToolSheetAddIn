@@ -131,7 +131,8 @@ namespace ESP_GOSTToolSheetAddIn
             logger.Info("Отключение плагина");
             
             // Закрыть главное окно
-            mainFrame.Close();
+            if (mainFrame != null)
+                mainFrame.Close();
 
             fileMenu.Remove(StringResource.menuName);
             Marshal.ReleaseComObject(fileMenu);
