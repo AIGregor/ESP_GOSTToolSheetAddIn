@@ -89,8 +89,6 @@ namespace ESP_GOSTToolSheetAddIn
         // Загрузить все настройки
         public void loadAllSettings()
         {
-            if (hostName != "")
-                return;
             // Загрузка
             XmlDocument docEspritHost = new XmlDocument();
             try

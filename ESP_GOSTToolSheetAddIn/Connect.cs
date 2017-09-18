@@ -118,7 +118,7 @@ namespace ESP_GOSTToolSheetAddIn
                 AdditionalToolParameters.creatPatternFile(assemblyFolder + StringResource.xmlPathToolsParams);
             }
             mainFrame = new MainFrame();
-            mainFrame.Show();
+            mainFrame.ShowDialog();
         }
 
         /// <summary>

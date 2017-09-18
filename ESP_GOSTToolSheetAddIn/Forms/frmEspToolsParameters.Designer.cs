@@ -64,7 +64,7 @@
             this.lstTools.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lstTools.Name = "lstTools";
             this.lstTools.Size = new System.Drawing.Size(249, 420);
-            this.lstTools.TabIndex = 5;
+            this.lstTools.TabIndex = 0;
             this.lstTools.Click += new System.EventHandler(this.lstTools_Click);
             // 
             // btnCancel
@@ -73,7 +73,7 @@
             this.btnCancel.Location = new System.Drawing.Point(477, 388);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 23);
-            this.btnCancel.TabIndex = 10;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -89,7 +89,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(249, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(395, 25);
-            this.toolStrip1.TabIndex = 12;
+            this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripAdd
@@ -146,7 +146,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.listEspGostParams);
             this.splitContainer1.Size = new System.Drawing.Size(374, 354);
             this.splitContainer1.SplitterDistance = 193;
-            this.splitContainer1.TabIndex = 15;
+            this.splitContainer1.TabIndex = 2;
             // 
             // listEspStandardParameters
             // 
@@ -161,7 +161,7 @@
             this.listEspStandardParameters.Location = new System.Drawing.Point(0, 0);
             this.listEspStandardParameters.Name = "listEspStandardParameters";
             this.listEspStandardParameters.Size = new System.Drawing.Size(193, 354);
-            this.listEspStandardParameters.TabIndex = 17;
+            this.listEspStandardParameters.TabIndex = 0;
             this.listEspStandardParameters.UseCompatibleStateImageBehavior = false;
             this.listEspStandardParameters.View = System.Windows.Forms.View.Details;
             // 
@@ -194,7 +194,7 @@
             this.listEspGostParams.Location = new System.Drawing.Point(0, 0);
             this.listEspGostParams.Name = "listEspGostParams";
             this.listEspGostParams.Size = new System.Drawing.Size(177, 354);
-            this.listEspGostParams.TabIndex = 18;
+            this.listEspGostParams.TabIndex = 0;
             this.listEspGostParams.UseCompatibleStateImageBehavior = false;
             this.listEspGostParams.View = System.Windows.Forms.View.Details;
             // 
@@ -223,7 +223,7 @@
             this.btnOK.Location = new System.Drawing.Point(395, 388);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(76, 23);
-            this.btnOK.TabIndex = 10;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -234,7 +234,7 @@
             this.btnApply.Location = new System.Drawing.Point(556, 388);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(76, 23);
-            this.btnApply.TabIndex = 10;
+            this.btnApply.TabIndex = 5;
             this.btnApply.Text = "Применить";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);

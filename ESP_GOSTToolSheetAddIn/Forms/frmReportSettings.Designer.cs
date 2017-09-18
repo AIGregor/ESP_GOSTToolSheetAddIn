@@ -48,7 +48,7 @@
             this.tbReportField.Location = new System.Drawing.Point(12, 29);
             this.tbReportField.Name = "tbReportField";
             this.tbReportField.Size = new System.Drawing.Size(271, 20);
-            this.tbReportField.TabIndex = 0;
+            this.tbReportField.TabIndex = 1;
             // 
             // label1
             // 
@@ -56,7 +56,7 @@
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Папка для сохранения отчета";
             // 
             // btnSelectDistFolder
@@ -75,7 +75,7 @@
             this.btnCancel.Location = new System.Drawing.Point(294, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -86,7 +86,7 @@
             this.btnOK.Location = new System.Drawing.Point(213, 185);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 4;
+            this.btnOK.TabIndex = 6;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -97,7 +97,7 @@
             this.label2.Location = new System.Drawing.Point(12, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 13);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Имя файла отчета по умолчанию";
             // 
             // tbDefaultReportName
@@ -105,7 +105,7 @@
             this.tbDefaultReportName.Location = new System.Drawing.Point(12, 73);
             this.tbDefaultReportName.Name = "tbDefaultReportName";
             this.tbDefaultReportName.Size = new System.Drawing.Size(357, 20);
-            this.tbDefaultReportName.TabIndex = 6;
+            this.tbDefaultReportName.TabIndex = 4;
             this.tbDefaultReportName.MouseLeave += new System.EventHandler(this.tbDefaultReportName_MouseLeave);
             // 
             // cbRemoteHost
@@ -114,7 +114,7 @@
             this.cbRemoteHost.Location = new System.Drawing.Point(6, 27);
             this.cbRemoteHost.Name = "cbRemoteHost";
             this.cbRemoteHost.Size = new System.Drawing.Size(216, 17);
-            this.cbRemoteHost.TabIndex = 7;
+            this.cbRemoteHost.TabIndex = 0;
             this.cbRemoteHost.Text = "Подключиться к удаленному серверу";
             this.cbRemoteHost.UseVisualStyleBackColor = true;
             this.cbRemoteHost.CheckedChanged += new System.EventHandler(this.cbRemoteHost_CheckedChanged);
@@ -127,7 +127,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 99);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(357, 78);
-            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Сетевые настройки";
             // 
@@ -137,7 +137,7 @@
             this.label3.Location = new System.Drawing.Point(6, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 13);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 1;
             this.label3.Text = "Имя сервера";
             // 
             // tbHostName
@@ -145,7 +145,7 @@
             this.tbHostName.Location = new System.Drawing.Point(86, 50);
             this.tbHostName.Name = "tbHostName";
             this.tbHostName.Size = new System.Drawing.Size(265, 20);
-            this.tbHostName.TabIndex = 8;
+            this.tbHostName.TabIndex = 2;
             // 
             // frmReportSettings
             // 
