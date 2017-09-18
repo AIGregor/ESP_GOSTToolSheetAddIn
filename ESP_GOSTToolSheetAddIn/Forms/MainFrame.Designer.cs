@@ -204,7 +204,6 @@
             this.btnSaveInFile.Name = "btnSaveInFile";
             this.btnSaveInFile.Size = new System.Drawing.Size(194, 29);
             this.btnSaveInFile.TabIndex = 9;
-            this.btnSaveInFile.TabStop = false;
             this.btnSaveInFile.Text = "Сохранить в текущем файле";
             this.btnSaveInFile.UseVisualStyleBackColor = true;
             this.btnSaveInFile.Click += new System.EventHandler(this.btnSaveInFile_Click);
