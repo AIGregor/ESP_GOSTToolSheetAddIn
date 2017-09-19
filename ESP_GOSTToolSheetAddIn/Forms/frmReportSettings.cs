@@ -45,13 +45,14 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             tbDefaultReportName.Text = AdditionalToolParameters.gostReportSettings.DefaultReportName;
 
             if (AdditionalToolParameters.gostReportSettings.useLocalHost)
-                tbHostName.Text = StringResource.strLoacalHost;
+                tbHostName.Text = "";
             else
                 tbHostName.Text = AdditionalToolParameters.gostReportSettings.hostName;
 
             cbRemoteHost.Checked = !AdditionalToolParameters.gostReportSettings.useLocalHost;
 
             tbHostName.Enabled = cbRemoteHost.Checked;
+            btnTestConnection.Enabled = cbRemoteHost.Checked;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void cbRemoteHost_CheckedChanged(object sender, EventArgs e)
         {
             tbHostName.Enabled = cbRemoteHost.Checked;
+            btnTestConnection.Enabled = cbRemoteHost.Checked;
         }
 
         private void tbDefaultReportName_MouseLeave(object sender, EventArgs e)
@@ -70,6 +72,26 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             if (result.IndexOf(".xlsx") < 0)
             {
                 tbDefaultReportName.Text = tbDefaultReportName.Text + ".xlsx";
+            }
+        }
+
+
+        /// <summary>
+        /// Тестирование соединения с базой данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTestConnection_Click(object sender, EventArgs e)
+        {
+            DatabaseInterface dataBase = new DatabaseInterface();
+
+            if (dataBase.testConnection())
+            {
+                MessageBox.Show("Соединение успешно установлено.", "Тестирование соединения", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Не удалось подключиться к Базе Знаний", "Тестирование соединения", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

@@ -76,8 +76,9 @@ namespace ESP_GOSTToolSheetAddIn
                 // Загрузить значение пользовательских параметров из базы данных
                 if (String.Equals(currentToolParameter.Type, StringResource.xmlParamUserType))
                 {
-                    // TODO: Чтение парметров из БД, заполнение значения                   
-                    currentToolParameter.Value = knowledgeBase.getUsersParamValue(dataBaseToolID, currentToolParameter.CLCode);
+                    // TODO: Чтение парметров из БД, заполнение значения
+                    if (dataBaseToolID != null)
+                        currentToolParameter.Value = knowledgeBase.getUsersParamValue(dataBaseToolID, currentToolParameter.CLCode);
                 }
             }
         }

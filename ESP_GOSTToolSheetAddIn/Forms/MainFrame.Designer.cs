@@ -72,6 +72,9 @@
             this.dtReportParams = new System.Data.DataTable();
             this.dColParamName = new System.Data.DataColumn();
             this.dColParamValue = new System.Data.DataColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLineProgressbar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusLineStatusLable = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -83,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportToolParameters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsReportParameters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtReportParams)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -165,7 +169,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 77);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(686, 363);
+            this.tabControl1.Size = new System.Drawing.Size(686, 343);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage3
@@ -192,15 +196,16 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(678, 337);
+            this.tabPage3.Size = new System.Drawing.Size(678, 317);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Параметры карты наладки";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // btnSaveInFile
             // 
+            this.btnSaveInFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveInFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSaveInFile.Location = new System.Drawing.Point(478, 302);
+            this.btnSaveInFile.Location = new System.Drawing.Point(478, 282);
             this.btnSaveInFile.Name = "btnSaveInFile";
             this.btnSaveInFile.Size = new System.Drawing.Size(194, 29);
             this.btnSaveInFile.TabIndex = 9;
@@ -477,11 +482,36 @@
             this.dColParamValue.Caption = "Значение параметра";
             this.dColParamValue.ColumnName = "clmParameterValue";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLineStatusLable,
+            this.statusLineProgressbar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 430);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(708, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLineProgressbar
+            // 
+            this.statusLineProgressbar.Name = "statusLineProgressbar";
+            this.statusLineProgressbar.Size = new System.Drawing.Size(450, 16);
+            this.statusLineProgressbar.Visible = false;
+            // 
+            // statusLineStatusLable
+            // 
+            this.statusLineStatusLable.Name = "statusLineStatusLable";
+            this.statusLineStatusLable.Size = new System.Drawing.Size(118, 17);
+            this.statusLineStatusLable.Text = "toolStripStatusLabel1";
+            this.statusLineStatusLable.Visible = false;
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 452);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
@@ -506,6 +536,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvReportToolParameters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsReportParameters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtReportParams)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -555,5 +587,8 @@
         private System.Data.DataTable dtReportParams;
         private System.Data.DataColumn dColParamName;
         private System.Data.DataColumn dColParamValue;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLineStatusLable;
+        private System.Windows.Forms.ToolStripProgressBar statusLineProgressbar;
     }
 }

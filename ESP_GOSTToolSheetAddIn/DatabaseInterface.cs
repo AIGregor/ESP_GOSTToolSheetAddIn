@@ -40,6 +40,7 @@ namespace ESP_GOSTToolSheetAddIn
                 catch (Exception E)
                 {
                     Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                    return null;
                 }
 
                 cmd.CommandText = sqlQuery;
@@ -105,6 +106,7 @@ namespace ESP_GOSTToolSheetAddIn
                 catch (Exception E)
                 {
                     Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                    return null;
                 }
 
                 //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
@@ -154,6 +156,7 @@ namespace ESP_GOSTToolSheetAddIn
                 catch (Exception E)
                 {
                     Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                    return null;
                 }
 
                 //SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection);
@@ -197,6 +200,9 @@ namespace ESP_GOSTToolSheetAddIn
                // Получаем список пользовательских параметров из БД
                 DataTable dbUsersParams = getUsersParamsByID(curGostTool.dataBaseToolID);
 
+                if (dbUsersParams == null)
+                    return false;
+
                 // проходим по всем пользовательским параметрам и заполняем значениями 
                 for (int j = 0; j < curGostTool.parameters.Count(); j++)
                 {
@@ -219,11 +225,12 @@ namespace ESP_GOSTToolSheetAddIn
             if (GostTool.dataBaseToolID == "")
             {
                 string cuttingToolID = getCuttingToolID(GostTool.toolDocumentID);
-                GostTool.dataBaseToolID = cuttingToolID;
+                if (cuttingToolID != null)
+                    GostTool.dataBaseToolID = cuttingToolID;
             }
             // Получаем список пользовательских параметров из БД
             DataTable dbUsersParams = getUsersParamsByID(GostTool.dataBaseToolID);
-            if (dbUsersParams.Rows.Count == 0)
+            if (dbUsersParams != null && dbUsersParams.Rows.Count == 0)
                 return false;
 
             // проходим по всем пользовательским параметрам и заполняем значениями 
@@ -295,6 +302,7 @@ namespace ESP_GOSTToolSheetAddIn
                         catch (Exception E)
                         {
                             Connect.logger.Error("Не удалось подключиться к БД! Error " + E.Message);
+                            return false;
                         }
                         SqlCommand cmd = conn.CreateCommand();
                         cmd.CommandText = newSQLQuery;
@@ -314,6 +322,27 @@ namespace ESP_GOSTToolSheetAddIn
         private bool isToolParamExist(ToolParameter toolParam)
         {
             bool result = false;
+            return result;
+        }
+
+
+        /// <summary>
+        /// Тестирование подключения к БД
+        /// </summary>
+        /// <returns></returns>
+        public bool testConnection()
+        {
+            bool result = true;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection.Open();
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Тестирование соединения. Не удалось подключиться к БД. WARNING " + E.Message);
+                result = false;
+            }
             return result;
         }
 

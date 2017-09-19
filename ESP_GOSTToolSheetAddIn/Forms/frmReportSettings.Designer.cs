@@ -40,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbHostName = new System.Windows.Forms.TextBox();
+            this.btnTestConnection = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,6 +125,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.tbHostName);
             this.groupBox1.Controls.Add(this.cbRemoteHost);
+            this.groupBox1.Controls.Add(this.btnTestConnection);
             this.groupBox1.Location = new System.Drawing.Point(12, 99);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(357, 78);
@@ -146,6 +148,16 @@
             this.tbHostName.Name = "tbHostName";
             this.tbHostName.Size = new System.Drawing.Size(265, 20);
             this.tbHostName.TabIndex = 2;
+            // 
+            // btnTestConnection
+            // 
+            this.btnTestConnection.Location = new System.Drawing.Point(276, 21);
+            this.btnTestConnection.Name = "btnTestConnection";
+            this.btnTestConnection.Size = new System.Drawing.Size(75, 23);
+            this.btnTestConnection.TabIndex = 2;
+            this.btnTestConnection.Text = "Тест";
+            this.btnTestConnection.UseVisualStyleBackColor = true;
+            this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
             // 
             // frmReportSettings
             // 
@@ -190,5 +202,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbHostName;
+        private System.Windows.Forms.Button btnTestConnection;
     }
 }

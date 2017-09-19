@@ -305,8 +305,10 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                     // Загрузить значение пользовательских параметров из базы данных
                     if (String.Equals(currentToolParameter.Type, StringResource.xmlParamUserType))
                     {
-                        // TODO: Чтение парметров из БД, заполнение значения                   
-                        currentToolParameter.Value = dataBase.getUsersParamValue(gostTool.dataBaseToolID, currentToolParameter.CLCode);
+                        // TODO: Чтение парметров из БД, заполнение значения
+                        string strResult = dataBase.getUsersParamValue(gostTool.dataBaseToolID, currentToolParameter.CLCode);
+                        if (strResult != null)
+                            currentToolParameter.Value = strResult;
                     }
                 }
             }
