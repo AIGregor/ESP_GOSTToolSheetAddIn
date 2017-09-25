@@ -35,6 +35,8 @@ namespace ESP_GOSTToolSheetAddIn
             toolLabel = previousGostTool.toolLabel;
             toolDocumentID = previousGostTool.toolDocumentID;
             toolID = previousGostTool.toolID;
+
+            Connect.logger.Info(String.Format("Создан инструмент : {0}", toolID));
         }
 
         public void addParameter(ToolParameter newParameter)
@@ -59,6 +61,7 @@ namespace ESP_GOSTToolSheetAddIn
             DatabaseInterface knowledgeBase = new DatabaseInterface();
             if (dataBaseToolID == "")
             {
+                Connect.logger.Info("Получение ID инструмента в БД");
                 string cuttingToolID = knowledgeBase.getCuttingToolID(toolDocumentID);
                 dataBaseToolID = cuttingToolID;
             }

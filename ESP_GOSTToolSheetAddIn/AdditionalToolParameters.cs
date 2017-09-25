@@ -218,7 +218,7 @@ namespace ESP_GOSTToolSheetAddIn
                 gostToolsArray[i].toolLabel = sToolLabel;
                 gostToolsArray[i].toolName = sToolName;
                 i++;
-                Connect.logger.Info(String.Format("Index = {0}, childnodes.Count {1}", i, childnodes.Count));
+                //Connect.logger.Info(String.Format("Index = {0}, childnodes.Count {1}", i, childnodes.Count));
             }
 
             try
@@ -248,7 +248,7 @@ namespace ESP_GOSTToolSheetAddIn
             for (int node = 0; node < allToolsList.Count; node++)
             {
                 XmlNode nodeTool = allToolsList[node];
-                Connect.logger.Info(String.Format("Текущее значение {0}", node));
+                //Connect.logger.Info(String.Format("Текущее значение {0}", node));
 
                 XmlNode singleNodeName = nodeTool.SelectSingleNode("@" + StringResource.xmlToolName);
                 string sToolName = singleNodeName.Value;
@@ -267,7 +267,7 @@ namespace ESP_GOSTToolSheetAddIn
                         gostToolsArray[node].addParameter(newParam);
                     }
                 }
-                Connect.logger.Info(String.Format("Index = {0}, allToolsList.Count {1}, gostToolsArray.length {2}", index, allToolsList.Count, gostToolsArray.Length));            
+                //Connect.logger.Info(String.Format("Index = {0}, allToolsList.Count {1}, gostToolsArray.length {2}", index, allToolsList.Count, gostToolsArray.Length));            
             }
             Connect.logger.Info("Заполнение параметров для отчета закончено");
         }

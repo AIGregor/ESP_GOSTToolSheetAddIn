@@ -73,8 +73,8 @@
             this.dColParamName = new System.Data.DataColumn();
             this.dColParamValue = new System.Data.DataColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusLineProgressbar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLineStatusLable = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLineProgressbar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -372,7 +372,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(678, 337);
+            this.tabPage1.Size = new System.Drawing.Size(678, 317);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Текущий документ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -390,7 +390,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvReportToolParameters);
-            this.splitContainer1.Size = new System.Drawing.Size(672, 331);
+            this.splitContainer1.Size = new System.Drawing.Size(672, 311);
             this.splitContainer1.SplitterDistance = 262;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -405,7 +405,7 @@
             this.listDocumentTools.Location = new System.Drawing.Point(0, 0);
             this.listDocumentTools.MultiSelect = false;
             this.listDocumentTools.Name = "listDocumentTools";
-            this.listDocumentTools.Size = new System.Drawing.Size(262, 331);
+            this.listDocumentTools.Size = new System.Drawing.Size(262, 311);
             this.listDocumentTools.TabIndex = 0;
             this.listDocumentTools.UseCompatibleStateImageBehavior = false;
             this.listDocumentTools.View = System.Windows.Forms.View.Details;
@@ -431,7 +431,7 @@
             this.dgvReportToolParameters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReportToolParameters.Location = new System.Drawing.Point(0, 0);
             this.dgvReportToolParameters.Name = "dgvReportToolParameters";
-            this.dgvReportToolParameters.Size = new System.Drawing.Size(406, 331);
+            this.dgvReportToolParameters.Size = new System.Drawing.Size(406, 311);
             this.dgvReportToolParameters.TabIndex = 0;
             // 
             // Column1
@@ -493,18 +493,18 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // statusLineProgressbar
-            // 
-            this.statusLineProgressbar.Name = "statusLineProgressbar";
-            this.statusLineProgressbar.Size = new System.Drawing.Size(450, 16);
-            this.statusLineProgressbar.Visible = false;
-            // 
             // statusLineStatusLable
             // 
             this.statusLineStatusLable.Name = "statusLineStatusLable";
             this.statusLineStatusLable.Size = new System.Drawing.Size(118, 17);
             this.statusLineStatusLable.Text = "toolStripStatusLabel1";
             this.statusLineStatusLable.Visible = false;
+            // 
+            // statusLineProgressbar
+            // 
+            this.statusLineProgressbar.Name = "statusLineProgressbar";
+            this.statusLineProgressbar.Size = new System.Drawing.Size(450, 16);
+            this.statusLineProgressbar.Visible = false;
             // 
             // MainFrame
             // 

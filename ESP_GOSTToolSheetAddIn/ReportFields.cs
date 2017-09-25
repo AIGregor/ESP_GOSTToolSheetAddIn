@@ -454,8 +454,15 @@ namespace ESP_GOSTToolSheetAddIn
         {
             Connect.logger.Info("Формирование карты наладки");
             setInnerParams();
-
-            excelApp = new Excel.Application();
+            try
+            {
+                excelApp = new Excel.Application();
+            }
+            catch (Exception E)
+            {
+                Connect.logger.Error("Не удалось создать Excel приложение. Error :" + E.Message);
+                return;
+            }
 
             try
             {

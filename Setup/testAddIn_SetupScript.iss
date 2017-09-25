@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GOSTSetupSheets"
-#define MyAppVersion " v0.9"
+#define MyAppVersion " v0.903"
 #define MyAppPublisher "LO CNITI"
 #define MyAppURL "http://www.locniti.ru//"
 
@@ -47,9 +47,9 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 
 ; Создание записей в регистре 
 [Registry]
-Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: string; ValueName: "Description"; ValueData: "Автоматическое формирование карты наладка по ГОСТ 3.1404-86 в формате файла EXCEL"; 
-Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: string; ValueName: "FriendlyName"; ValueData: "ГОСТ - Карта наладки инструмента";  
-Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: dword; ValueName: "LoadBehavior"; ValueData: "00000001"; 
+Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: string; ValueName: "Description"; ValueData: "Автоматическое формирование карты наладка по ГОСТ 3.1404-86 в формате файла EXCEL";  Flags: uninsdeletekey 
+Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: string; ValueName: "FriendlyName"; ValueData: "ГОСТ - Карта наладки инструмента";  Flags: uninsdeletekey  
+Root: HKLM; Subkey:"Software\Wow6432Node\D.P.Technology\esprit\AddIns\ESP_GOSTToolSheetAddIn.Connect"; ValueType: dword; ValueName: "LoadBehavior"; ValueData: "00000001";  Flags: uninsdeletekey 
 
 [Run]
 Filename:"{reg:HKLM\SOFTWARE\Microsoft\.NETFramework,InstallRoot}\v4.0.30319\RegAsm.exe"; Parameters: ESP_GOSTToolSheetAddIn.dll /codebase /tlb; WorkingDir: {app}; StatusMsg: "Registering controls ..."; Flags: runhidden

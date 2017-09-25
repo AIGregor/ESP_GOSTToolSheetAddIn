@@ -59,6 +59,12 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             // Собираем инструмент из текущего документа
             Esprit.Document curDocument = Connect.sEspApp.Document;
+
+            if (curDocument == null)
+            {
+                Connect.logger.Error("Инициализация формы: пустая ссылка на документ");
+            }                
+
             Connect.sEspDocument = curDocument;
             currentTool = curDocument.Tools;
 
@@ -66,7 +72,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             foreach (Tool Tool in currentTool)
             {
                 // Добавляем инструмент в массив отчета
+                Connect.logger.Info("Инициализация главного окна. Добавление инструмента в список для отчета");
                 addReportTool(Tool);
+                Connect.logger.Info("Инициализация главного окна. Инструмент обавлен в список для отчета");
 
                 Technology toolTech = (Technology)Tool;
                 string[] reportTool = new string[2];
@@ -74,10 +82,12 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 reportTool[1] = toolTech.Name;
 
                 ListViewItem newReportTool = new ListViewItem(reportTool);
+                Connect.logger.Info("Инициализация главного окна. Добавление инструмента на форму");
                 listDocumentTools.Items.Add(newReportTool);
             }
 
             // Заполнить таблицу параметров первого инструмента
+            Connect.logger.Info("Инициализация главного окна. Заполнение параметров первого инструмента");
             fillFormReportToolParameters(0);
         }
 
@@ -87,18 +97,25 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             if (newReportTool == null)
                 return;
 
-            Trace.WriteLine("Tool style - " + newReportTool.ToolStyle);
+            Connect.logger.Info(String.Format("Инициализация главного окна. Добавление инструмента : {0}", newReportTool.ToolID));
+
             GostTool gostReportTool = new GostTool(AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle));
             //gostReportTool = AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle);
-            
+            if (gostReportTool == null)
+                return;
+
             // Сохраняем ID инструмента
             gostReportTool.toolDocumentID = newReportTool.ToolID;
             // Сохраняем Capture
             Technology toolTech = (Technology) newReportTool;
             gostReportTool.toolType = toolTech.Name;
+
             // Записать значения параметров из инструмента
+            Connect.logger.Info("Загрузка значений параметров");
             gostReportTool.addParametersValue(newReportTool);
+
             // Добавить инструмент для отчета в массив
+            Connect.logger.Info("Добавление инструмента в список для отчета");
             AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);                       
         }
 
@@ -109,14 +126,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 return;
 
             GostTool reportTool = AdditionalToolParameters.gostReportToolsArray[index];
+            Connect.logger.Info(String.Format("Заполнение параметров инструмента: {0}", reportTool.toolDocumentID));
 
             for (int j = 0; j < reportTool.parameters.Count(); j++)
             {
                 //DataGridViewRow reportParameter = new DataGridViewRow();
                 string strCapture = reportTool.parameters.getParameter(j).Capture;
                 string strValue = reportTool.parameters.getParameter(j).Value;
-                dgvReportToolParameters.Rows.Add(strCapture, strValue);
-            }   
+
+                if (dgvReportToolParameters != null)
+                    dgvReportToolParameters.Rows.Add(strCapture, strValue);
+            }
         }
 
         // Загружаем парметры выбранного инструмента

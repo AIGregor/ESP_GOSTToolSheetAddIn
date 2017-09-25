@@ -35,6 +35,7 @@ namespace ESP_GOSTToolSheetAddIn
 
                 try
                 {
+                    Connect.logger.Info("Подключение к БД");
                     sqlConnection.Open();
                 }
                 catch (Exception E)
@@ -60,8 +61,8 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                Console.WriteLine(E);
-                throw;
+                Connect.logger.Error("Общая ошибка при получении ID инструмента по назаванию! Error " + E.Message);
+                return null;
             }
 
             return CuttingToolID;
@@ -132,6 +133,8 @@ namespace ESP_GOSTToolSheetAddIn
         // Получить значение ОДНОГО параметра по ID  инструменту и CL коду
         public string getUsersParamValue(string docToolID, int clCode)
         {
+            Connect.logger.Info("Загрузка значения параметра инструмента из БД");
+
             string userParamValue = "";
 
             if (docToolID == "" || clCode == 0)
@@ -172,8 +175,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Connect.logger.Error("Общая ошибка при загрузке значения параметра инструмента из БД" + e.Message);
             }
 
             if (userParamValue == null)
