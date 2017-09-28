@@ -169,7 +169,7 @@ namespace ESP_GOSTToolSheetAddIn
             }
             catch (Exception E)
             {
-                MessageBox.Show("Ошмбка при создании технологии \n" + E.Message);
+                MessageBox.Show("Ошибка при создании технологии \n" + E.Message);
             }
 
             if (espTech == null)

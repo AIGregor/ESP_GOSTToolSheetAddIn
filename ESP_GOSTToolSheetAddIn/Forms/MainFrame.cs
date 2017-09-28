@@ -66,7 +66,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             }                
 
             Connect.sEspDocument = curDocument;
-            currentTool = curDocument.Tools;
+            //currentTool = curDocument.Tools;
+            currentTool = getOperationTools();
 
             // Идем по списку инструментов в документе
             foreach (Tool Tool in currentTool)
@@ -89,6 +90,34 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             // Заполнить таблицу параметров первого инструмента
             Connect.logger.Info("Инициализация главного окна. Заполнение параметров первого инструмента");
             fillFormReportToolParameters(0);
+        }
+        /// <summary>
+        /// Получить список инструментов из операций в документе
+        /// </summary>
+        /// <returns></returns>
+        private EspritTools.Tools getOperationTools()
+        {
+            EspritTools.Tools reportTools = new EspritTools.Tools();
+
+            foreach (Esprit.Operation operation in Connect.sEspDocument.Operations)
+            {
+                if (!operation.Suppress) // Только не подавленные операции
+                {
+                    Technology operationTech = operation.Technology;
+                    Parameter toolId = operationTech["ToolId"];
+                                                           
+                    foreach (Tool docTool in Connect.sEspDocument.Tools)
+                    {
+                        if (string.Equals(docTool.ToolID, toolId.Value))
+                        {
+                            reportTools.Add(docTool);
+                        }
+                    }
+                }
+
+            }
+
+            return reportTools;
         }
 
         // Добавить инструмент в список для отчета
@@ -233,10 +262,10 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             {
                 copyFI.CopyTo(destFileFolder + destFileName);
             }
-            catch (Exception E)
+            catch (Exception) //UnauthorizedAccessException
             {
-                Connect.logger.Error("Ошибка при копировании " + E.Message);
-                MessageBox.Show("Не удалось создать документ! Попробуйте изменить папку для сохранение. Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connect.logger.Error("Не достаточно прав для доступа к папке сохранения.");
+                MessageBox.Show("Не удалось создать документ! Не достаточно прав для доступа к папке сохранения.\n Попробуйте изменить папку для сохранение.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -298,12 +327,14 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private void MenuItemSaveDataBase_Click(object sender, EventArgs e)
         {
             //Сохранить параметры из формы для теккущего документа
+            Connect.logger.Info("Сохранение значений параметров в БД. Сохранение значений введенных в форму");
             updateParametersFromForm();
 
             //Сохранить в БД
             DatabaseInterface dataBase = new DatabaseInterface();
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
+                Connect.logger.Info("Сохранение значений параметров в БД. Сохранение значений параметров инструмента : " + gostTool.toolDocumentID);
                 bool result = dataBase.saveUserToolParams(gostTool);
 
                 if (!result)
