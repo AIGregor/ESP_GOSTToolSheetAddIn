@@ -16,13 +16,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             InitializeComponent();
         }
-
         private void ShowPatternFileMenuItem_Click(object sender, EventArgs e)
         {
             frmEspToolsParameters frmSettingsToolsParams = new frmEspToolsParameters();
             frmSettingsToolsParams.ShowDialog();
         }
-
         // Перед тем как показать форму считываем инструмент из файла и заполняем поля
         private void MainFrame_Shown(object sender, EventArgs e)
         {
@@ -32,7 +30,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             // Заполняем поля для шапки
             fillHatsFields(); 
         }
-
         private void fillHatsFields()
         {
             AdditionalToolParameters.gostReportFields.getFIOFieldsFromDocument();
@@ -47,7 +44,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             tbCNCName.Text          = AdditionalToolParameters.gostReportFields.CNCProgName;
             tbCompanyName.Text      = AdditionalToolParameters.gostReportFields.CompanyName;
         }
-
         // Заполнение главного окна
         private void InitMainForm()
         {
@@ -114,9 +110,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                         }
                     }
                 }
-
             }
-
             return reportTools;
         }
 
@@ -147,7 +141,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             Connect.logger.Info("Добавление инструмента в список для отчета");
             AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);                       
         }
-
         // Добавить параметры в форму 
         private void fillFormReportToolParameters(int index)
         { 
@@ -167,7 +160,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                     dgvReportToolParameters.Rows.Add(strCapture, strValue);
             }
         }
-
         // Загружаем парметры выбранного инструмента
         private void listDocumentTools_Click(object sender, EventArgs e)
         {
@@ -186,7 +178,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             Trace.Write("Fill form!\n");
         }
-
         //TODO: Обновить структуру данными по таблице
         private void updateParametersFromForm()
         {
@@ -209,15 +200,13 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 oldToolParam.Capture = dgvReportToolParameters.Rows[i].Cells[0].Value.ToString();
                 oldToolParam.Value = dgvReportToolParameters.Rows[i].Cells[1].Value.ToString();
             }
-        }
-        
+        }        
         // Генерация карты наладки
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             ReportSettings settings = AdditionalToolParameters.gostReportSettings; 
             GenerateFileReport(settings.DefaultReportPath, settings.DefaultReportName);
         }
-
         private void openReport(string filePath)
         {
             var proc = new System.Diagnostics.Process();
@@ -225,7 +214,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             proc.StartInfo.UseShellExecute = true;
             proc.Start();
         }
-
         private void GenerateFileReport(string destFileFolder, string destFileName)
         {
             Connect.logger.Info("Генерация карты наладки инструмента");
@@ -239,8 +227,20 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
                 if (result == DialogResult.No)
                     return;
-
-                File.Delete(destFileFolder + destFileName);
+                try
+                {
+                    File.Delete(destFileFolder + destFileName);
+                }
+                catch (Exception E)
+                {
+                    Connect.logger.Error("Ошибка удаления файла карты наладки");
+                    if (E is UnauthorizedAccessException)
+                    {
+                        Connect.logger.Error("Не достаточно прав для доступа к папке сохранения.");
+                        MessageBox.Show("Не удалось создать документ!\nНе достаточно прав для доступа к папке сохранения.\n\nПопробуйте изменить папку для сохранение.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }                
             }
             // Копировать рамку Excel в назначенную папку
             if (!CopyPatternFileTo(destFileFolder, destFileName))
@@ -251,7 +251,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             openReport(destFileFolder + destFileName);
         }
-
         private bool CopyPatternFileTo(string destFileFolder, string destFileName)
         {
             FileInfo copyFI = new FileInfo(Connect.assemblyFolder + StringResource.excelTemplateReportFile);
@@ -262,67 +261,58 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             {
                 copyFI.CopyTo(destFileFolder + destFileName);
             }
-            catch (Exception) //UnauthorizedAccessException
+            catch (Exception E)
             {
                 Connect.logger.Error("Не достаточно прав для доступа к папке сохранения.");
-                MessageBox.Show("Не удалось создать документ! Не достаточно прав для доступа к папке сохранения.\n Попробуйте изменить папку для сохранение.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (E is UnauthorizedAccessException)
+                {
+                    MessageBox.Show("Не удалось создать документ!\nНе достаточно прав для доступа к папке сохранения.\n\nПопробуйте изменить папку для сохранение.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return false;
             }
-
             return true;
         }
-
         private void MenuItemReportSetting_Click(object sender, EventArgs e)
         {
             frmReportSettings reportSettings = new frmReportSettings();
             reportSettings.ShowDialog();
         }
-
         private void tbFIODev_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.FIODev = tbFIODev.Text;
         }
-
         private void tbFIOCheck_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.FIOChecker = tbFIOCheck.Text;
         }
-
         private void tbFIOAccept_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.FIOAccepter = tbFIOAccept.Text;
         }
-
         private void tbFIOControl_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.FIONormChecker = tbFIOControl.Text;
         }
-
         private void tbCompanyName_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.CompanyName = tbCompanyName.Text;
         }
-
         private void tbDetailName_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.DetailName = tbDetailName.Text;
         }
-
         private void tbDetailSign_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.DetailDesignation = tbDetailSign.Text;
         }
-
         private void tbCNCName_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.CNCProgName = tbCNCName.Text;
         }
-
         private void tbCncMachineName_Leave(object sender, EventArgs e)
         {
             AdditionalToolParameters.gostReportFields.CNCMachineName = tbCncMachineName.Text;
         }
-
         // Кнопка на форме - сохранить все пользовательские параметры всех инструментов отчета в БД
         private void MenuItemSaveDataBase_Click(object sender, EventArgs e)
         {
@@ -343,7 +333,6 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             //Информирование о завершении сохранения
             MessageBox.Show("Сохранение в Базу Знаний завершено.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);          
         }
-
         // Кнопка на форме - загрузить все пользовательские параметры для всех инструментов из БД
         private void MenuItemUpdataDataBase_Click(object sender, EventArgs e)
         {
@@ -372,13 +361,11 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             //Информирование о завершении загрузки
             MessageBox.Show("Загрузка из Базы Знаний завершена.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void MenuItemHelpAbout_Click(object sender, EventArgs e)
         {
             About dlgAbout = new About();
             dlgAbout.Show();
         }
-
         private void btnSaveInFile_Click(object sender, EventArgs e)
         {
             Connect.sEspDocument.Save();
