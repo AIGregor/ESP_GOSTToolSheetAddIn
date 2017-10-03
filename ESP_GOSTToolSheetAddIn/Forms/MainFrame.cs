@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using EspritTechnology;
 using ESP_GOSTToolSheetAddIn.Resources;
+using System.Collections.Generic;
 
 namespace ESP_GOSTToolSheetAddIn.Forms
 {
@@ -94,6 +95,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         private EspritTools.Tools getOperationTools()
         {
             EspritTools.Tools reportTools = new EspritTools.Tools();
+            HashSet<string> operationToolSet = new HashSet<string>();
 
             foreach (Esprit.Operation operation in Connect.sEspDocument.Operations)
             {
@@ -101,12 +103,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 {
                     Technology operationTech = operation.Technology;
                     Parameter toolId = operationTech["ToolId"];
-                                                           
+
+                    // Пропускаем повторно используемый инструмент
+                    if (operationToolSet.Contains(toolId.Value))
+                        continue;
+                                                                               
                     foreach (Tool docTool in Connect.sEspDocument.Tools)
                     {
                         if (string.Equals(docTool.ToolID, toolId.Value))
                         {
                             reportTools.Add(docTool);
+                            operationToolSet.Add(toolId.Value);
                         }
                     }
                 }
@@ -168,7 +175,9 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             // Сохраняем измененные параметры во внутреннюю структуру
             if (selectedToolIndex != selectIndex[0])
             {
-                updateParametersFromForm();
+                // Есть пустые поля в таблице 
+                if (!updateParametersFromForm())
+                    return;                
             }
 
             dgvReportToolParameters.Rows.Clear();
@@ -179,7 +188,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             Trace.Write("Fill form!\n");
         }
         //TODO: Обновить структуру данными по таблице
-        private void updateParametersFromForm()
+        private bool updateParametersFromForm()
         {
             GostTool reportTool = AdditionalToolParameters.gostReportToolsArray[selectedToolIndex];
 
@@ -196,10 +205,20 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                     continue;
                 }
 
+                object objCapture = dgvReportToolParameters.Rows[i].Cells[0].Value;
+                object objValue = dgvReportToolParameters.Rows[i].Cells[1].Value;
+
+                if (objValue == null || objCapture == null)
+                {
+                    MessageBox.Show("Некоторые параметры инструмента не заданы. Введите новое значение. ", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                                
                 ToolParameter oldToolParam = reportTool.parameters.getParameter(i);
-                oldToolParam.Capture = dgvReportToolParameters.Rows[i].Cells[0].Value.ToString();
-                oldToolParam.Value = dgvReportToolParameters.Rows[i].Cells[1].Value.ToString();
+                oldToolParam.Capture = objCapture.ToString();
+                oldToolParam.Value = objValue.ToString();
             }
+            return true;
         }        
         // Генерация карты наладки
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -318,7 +337,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             //Сохранить параметры из формы для теккущего документа
             Connect.logger.Info("Сохранение значений параметров в БД. Сохранение значений введенных в форму");
-            updateParametersFromForm();
+            if (!updateParametersFromForm())
+                return;
 
             //Сохранить в БД
             DatabaseInterface dataBase = new DatabaseInterface();

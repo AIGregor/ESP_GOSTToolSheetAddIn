@@ -379,6 +379,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.CausesValidation = false;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
