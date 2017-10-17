@@ -56,14 +56,18 @@ namespace ESP_GOSTToolSheetAddIn
         }
 
         // Записываем значение параметра из документа в структуру
-        public void addParametersValue(Tool newRepotTool)
+        public bool addParametersValue(Tool newRepotTool, bool loadUserParams)
         {
+            bool result = true;
             DatabaseInterface knowledgeBase = new DatabaseInterface();
-            if (dataBaseToolID == "")
+            if (dataBaseToolID == "" && loadUserParams)
             {
                 Connect.logger.Info("Получение ID инструмента в БД");
                 string cuttingToolID = knowledgeBase.getCuttingToolID(toolDocumentID);
                 dataBaseToolID = cuttingToolID;
+
+                if (dataBaseToolID == null)
+                    result = false;
             }
 
             for (int i = 0; i < parameters.Count(); i++)
@@ -80,10 +84,12 @@ namespace ESP_GOSTToolSheetAddIn
                 if (String.Equals(currentToolParameter.Type, StringResource.xmlParamUserType))
                 {
                     // TODO: Чтение парметров из БД, заполнение значения
-                    if (dataBaseToolID != null)
+                    if (dataBaseToolID != null && loadUserParams)
                         currentToolParameter.Value = knowledgeBase.getUsersParamValue(dataBaseToolID, currentToolParameter.CLCode);
                 }
             }
+
+            return result;
         }
 
         public int getMaxClCodeValue()

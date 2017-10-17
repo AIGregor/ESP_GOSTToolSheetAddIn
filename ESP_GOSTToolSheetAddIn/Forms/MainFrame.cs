@@ -63,15 +63,27 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             }                
 
             Connect.sEspDocument = curDocument;
+            // Идем по списку инструментов в документе
             //currentTool = curDocument.Tools;
+
+            // Идем по списку инструментов в операциях
             currentTool = getOperationTools();
 
-            // Идем по списку инструментов в документе
+            // Пытаться загрузить пользовательские параметры
+            bool bLoadUserParams = true;
+
             foreach (Tool Tool in currentTool)
             {
                 // Добавляем инструмент в массив отчета
                 Connect.logger.Info("Инициализация главного окна. Добавление инструмента в список для отчета");
-                addReportTool(Tool);
+
+                if (!addReportTool(Tool, bLoadUserParams) && bLoadUserParams)
+                {
+                    MessageBox.Show("Превышено время ожидания подключения в Базе данных.\nЗначения дополнительных параметров не будут загружены.", 
+                        "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    bLoadUserParams = false;
+                }
+
                 Connect.logger.Info("Инициализация главного окна. Инструмент обавлен в список для отчета");
 
                 Technology toolTech = (Technology)Tool;
@@ -102,7 +114,16 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 if (!operation.Suppress) // Только не подавленные операции
                 {
                     Technology operationTech = operation.Technology;
-                    Parameter toolId = operationTech["ToolId"];
+                    Parameter toolId = null;
+                    //TODO - в некоторых операциях нет инструмента
+                    try
+                    {
+                        toolId = operationTech["ToolId"];
+                    }
+                    catch
+                    {
+                        continue;
+                    }                    
 
                     // Пропускаем повторно используемый инструмент
                     if (operationToolSet.Contains(toolId.Value))
@@ -122,17 +143,18 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         }
 
         // Добавить инструмент в список для отчета
-        private void addReportTool(Tool newReportTool)
+        private bool addReportTool(Tool newReportTool, bool loadUserParams)
         {
+            bool result = true;
             if (newReportTool == null)
-                return;
+                return false;
 
             Connect.logger.Info(String.Format("Инициализация главного окна. Добавление инструмента : {0}", newReportTool.ToolID));
 
             GostTool gostReportTool = new GostTool(AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle));
             //gostReportTool = AdditionalToolParameters.getGostTool( (int) newReportTool.ToolStyle);
             if (gostReportTool == null)
-                return;
+                return false;
 
             // Сохраняем ID инструмента
             gostReportTool.toolDocumentID = newReportTool.ToolID;
@@ -142,11 +164,14 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             // Записать значения параметров из инструмента
             Connect.logger.Info("Загрузка значений параметров");
-            gostReportTool.addParametersValue(newReportTool);
+            if (!gostReportTool.addParametersValue(newReportTool, loadUserParams))
+                result = false;
 
             // Добавить инструмент для отчета в массив
             Connect.logger.Info("Добавление инструмента в список для отчета");
-            AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);                       
+            AdditionalToolParameters.gostReportToolsArray.Add(gostReportTool);
+
+            return result;                      
         }
         // Добавить параметры в форму 
         private void fillFormReportToolParameters(int index)
@@ -210,7 +235,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
                 if (objValue == null || objCapture == null)
                 {
-                    MessageBox.Show("Некоторые параметры инструмента не заданы. Введите новое значение. ", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Некоторые параметры инструмента не заданы.\nВведите новое значение.", "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                                 
@@ -342,21 +367,31 @@ namespace ESP_GOSTToolSheetAddIn.Forms
 
             //Сохранить в БД
             DatabaseInterface dataBase = new DatabaseInterface();
+            bool bResultAll = true;
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
                 Connect.logger.Info("Сохранение значений параметров в БД. Сохранение значений параметров инструмента : " + gostTool.toolDocumentID);
                 bool result = dataBase.saveUserToolParams(gostTool);
 
                 if (!result)
+                {
                     Connect.logger.Warning(string.Format("Пользовательские параметры инструмента с ID {0} не сохранены !", gostTool.toolDocumentID));
+                    bResultAll = false;
+                }
+                
             }
             //Информирование о завершении сохранения
-            MessageBox.Show("Сохранение в Базу Знаний завершено.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);          
+            if (bResultAll)            
+                MessageBox.Show("Сохранение в Базу Знаний завершено.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else            
+                MessageBox.Show("Сохранение в Базу Знаний не выполненно.\n Подробнее смотрите в лог файле.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Error);            
         }
+
         // Кнопка на форме - загрузить все пользовательские параметры для всех инструментов из БД
         private void MenuItemUpdataDataBase_Click(object sender, EventArgs e)
         {
             DatabaseInterface dataBase = new DatabaseInterface();
+            bool bResultAll = true;
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
                 for (int i = 0; i < gostTool.parameters.Count(); i++)
@@ -368,7 +403,15 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                         // TODO: Чтение парметров из БД, заполнение значения
                         string strResult = dataBase.getUsersParamValue(gostTool.dataBaseToolID, currentToolParameter.CLCode);
                         if (strResult != null)
+                        {
                             currentToolParameter.Value = strResult;
+                        }
+                        else
+                        {
+                            bResultAll = false;
+                            MessageBox.Show("Загрузка из Базы Знаний не выполнена\n Подробнее смотрите в лог файле.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }                        
                     }
                 }
             }

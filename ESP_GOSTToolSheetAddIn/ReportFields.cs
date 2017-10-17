@@ -361,32 +361,49 @@ namespace ESP_GOSTToolSheetAddIn
 
         public void getFIOFieldsFromDocument()
         {
+            // Очисть перед загрузкой
+            clearFIOFields();
             // TODO: Заполнить до конца кто где должен храниться
             fIODev = Connect.sEspDocument.DocumentProperties.Author;
             companyName = Connect.sEspDocument.DocumentProperties.Company;
             getCommonFields();
         }
 
+        private void clearFIOFields()
+        {
+            fIODev              = "";
+            companyName         = "";
+            fIOChecker          = "";
+            fIOAccepter         = "";
+            fIONormChecker      = "";
+
+            detailName          = "";
+            detailDesignation   = "";
+            cNCProgName         = "";
+            cNCMachineName      = "";
+        }
+
         private void getCommonFields()
         {
             string commonFields = Connect.sEspDocument.DocumentProperties.Notes;
-            commonFields.IndexOf("\r");
+
+            if (commonFields == "")
+                return;
 
             string[] splitter = new string[1] { "\r\n" };
 
             string[] fields = commonFields.Split(splitter, StringSplitOptions.None);
+            int index = 0;
+            int length = fields.Length;
 
-            if (fields.Length < 7)
-                return;
+            fIOChecker          = index < length ? fields[index++] : null;
+            fIOAccepter         = index < length ? fields[index++] : null;
+            fIONormChecker      = index < length ? fields[index++] : null;
 
-            fIOChecker          = fields[0];
-            fIOAccepter         = fields[1];
-            fIONormChecker      = fields[2];
-
-            detailName          = fields[3];
-            detailDesignation   = fields[4];
-            cNCProgName         = fields[5];
-            cNCMachineName      = fields[6];
+            detailName          = index < length ? fields[index++] : null;
+            detailDesignation   = index < length ? fields[index++] : null;
+            cNCProgName         = index < length ? fields[index++] : null;
+            cNCMachineName      = index < length ? fields[index++] : null;
         }
 
         private string stringFromArrey(ref string[] fields)

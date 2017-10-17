@@ -243,7 +243,6 @@ namespace ESP_GOSTToolSheetAddIn
             XmlElement xmlRoot = XmlDoc.DocumentElement;
             // select all tools
             XmlNodeList allToolsList = xmlRoot.SelectNodes(StringResource.xmlElementName);
-            int index = 0;
 
             for (int node = 0; node < allToolsList.Count; node++)
             {

@@ -68,7 +68,7 @@ namespace ESP_GOSTToolSheetAddIn
             catch (Exception E)
             {
                 Connect.logger.Error("Не удалось загрузить файл настроке плагина " + E.Message);
-                MessageBox.Show("Не удалось загрузить файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Не удалось загрузить файл настроек подключения к Базе Знаний!\nТекст ошибки: " + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             // Чтение
             try
@@ -82,7 +82,7 @@ namespace ESP_GOSTToolSheetAddIn
             catch (Exception E)
             {
                 Connect.logger.Error("Не удалось прочитать файл настроек плагина " + E.Message);
-                MessageBox.Show("Не удалось прочитать файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Не удалось прочитать файл настроек подключения к Базе Знаний!\nТекст ошибки: " + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -98,7 +98,7 @@ namespace ESP_GOSTToolSheetAddIn
             catch (Exception E)
             {
                 Connect.logger.Error("Не удалось загрузить файл настроек плагина " + E.Message);
-                MessageBox.Show("Не удалось зфгрузить файл настроек подключения к Базе Знаний! Текст ошибки:" + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Не удалось зфгрузить файл настроек подключения к Базе Знаний!\nТекст ошибки: " + E.ToString(), "ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             // Чтение
             try

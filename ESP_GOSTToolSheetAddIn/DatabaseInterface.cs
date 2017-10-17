@@ -77,12 +77,12 @@ namespace ESP_GOSTToolSheetAddIn
             if (settings.useLocalHost)
             {
                 currentMashineName = System.Environment.MachineName;
-                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=3", currentMashineName);
+                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName);
             }
             else
             {
                 currentMashineName = settings.hostName;
-                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=3", currentMashineName);
+                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName);
             }
         }
 

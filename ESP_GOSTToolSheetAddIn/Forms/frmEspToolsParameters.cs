@@ -18,7 +18,6 @@ namespace ESP_GOSTToolSheetAddIn
     public partial class frmEspToolsParameters : Form
     {
         GostTool[] localArreyTool = AdditionalToolParameters.gostToolsArray;
-        Technology g_espTool = null;
 
         public frmEspToolsParameters()
         {
