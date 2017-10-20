@@ -15,11 +15,11 @@ namespace ESP_GOSTToolSheetAddIn
         {
             InitializeComponent();
             this.Text = String.Format("{0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors
@@ -101,11 +101,6 @@ namespace ESP_GOSTToolSheetAddIn
             }
         }
         #endregion
-
-        private void labelVersion_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void okButton_Click(object sender, EventArgs e)
         {

@@ -38,11 +38,11 @@
             this.tbDefaultReportName = new System.Windows.Forms.TextBox();
             this.cbRemoteHost = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tbSQLServerName = new System.Windows.Forms.TextBox();
             this.tbHostName = new System.Windows.Forms.TextBox();
             this.btnTestConnection = new System.Windows.Forms.Button();
-            this.tbSQLServerName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,6 +138,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Сетевые настройки";
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Имя базы данных";
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -147,6 +157,14 @@
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Имя сервера";
+            // 
+            // tbSQLServerName
+            // 
+            this.tbSQLServerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSQLServerName.Location = new System.Drawing.Point(110, 28);
+            this.tbSQLServerName.Name = "tbSQLServerName";
+            this.tbSQLServerName.Size = new System.Drawing.Size(241, 20);
+            this.tbSQLServerName.TabIndex = 0;
             // 
             // tbHostName
             // 
@@ -166,24 +184,6 @@
             this.btnTestConnection.Text = "Тест";
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
-            // 
-            // tbSQLServerName
-            // 
-            this.tbSQLServerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSQLServerName.Location = new System.Drawing.Point(110, 28);
-            this.tbSQLServerName.Name = "tbSQLServerName";
-            this.tbSQLServerName.Size = new System.Drawing.Size(241, 20);
-            this.tbSQLServerName.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 31);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Имя SQL сервера";
             // 
             // frmReportSettings
             // 
