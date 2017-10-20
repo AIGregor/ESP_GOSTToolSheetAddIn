@@ -29,6 +29,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             AdditionalToolParameters.gostReportSettings.DefaultReportPath = tbReportField.Text;
             AdditionalToolParameters.gostReportSettings.DefaultReportName = tbDefaultReportName.Text;
             AdditionalToolParameters.gostReportSettings.useLocalHost = !cbRemoteHost.Checked;
+            AdditionalToolParameters.gostReportSettings.sqlServerName = tbSQLServerName.Text;
 
             if (cbRemoteHost.Checked)
                 AdditionalToolParameters.gostReportSettings.hostName = tbHostName.Text;
@@ -43,6 +44,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             tbReportField.Text = AdditionalToolParameters.gostReportSettings.DefaultReportPath;
             tbDefaultReportName.Text = AdditionalToolParameters.gostReportSettings.DefaultReportName;
+            tbSQLServerName.Text = AdditionalToolParameters.gostReportSettings.sqlServerName;
 
             if (AdditionalToolParameters.gostReportSettings.useLocalHost)
                 tbHostName.Text = "";

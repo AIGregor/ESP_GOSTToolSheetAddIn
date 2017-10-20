@@ -2,6 +2,7 @@
 <root>
   <KBMSSServer name ="ESPRIT KBMSS Server">
     <HostName></HostName>
+    <SQLServerName>KBMSS</SQLServerName>
     <LocalHost>True</LocalHost>
     <DefaultReportPath>C:\</DefaultReportPath>
     <DefaultReportName>Карта наладки ГОСТ.xlsx</DefaultReportName>

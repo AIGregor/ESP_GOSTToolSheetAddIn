@@ -41,6 +41,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbHostName = new System.Windows.Forms.TextBox();
             this.btnTestConnection = new System.Windows.Forms.Button();
+            this.tbSQLServerName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(294, 185);
+            this.btnCancel.Location = new System.Drawing.Point(294, 214);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -84,7 +86,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(213, 185);
+            this.btnOK.Location = new System.Drawing.Point(213, 214);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 6;
@@ -111,8 +113,9 @@
             // 
             // cbRemoteHost
             // 
+            this.cbRemoteHost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbRemoteHost.AutoSize = true;
-            this.cbRemoteHost.Location = new System.Drawing.Point(6, 27);
+            this.cbRemoteHost.Location = new System.Drawing.Point(6, 60);
             this.cbRemoteHost.Name = "cbRemoteHost";
             this.cbRemoteHost.Size = new System.Drawing.Size(216, 17);
             this.cbRemoteHost.TabIndex = 0;
@@ -122,21 +125,24 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.tbSQLServerName);
             this.groupBox1.Controls.Add(this.tbHostName);
             this.groupBox1.Controls.Add(this.cbRemoteHost);
             this.groupBox1.Controls.Add(this.btnTestConnection);
             this.groupBox1.Location = new System.Drawing.Point(12, 99);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(357, 78);
+            this.groupBox1.Size = new System.Drawing.Size(357, 109);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Сетевые настройки";
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 53);
+            this.label3.Location = new System.Drawing.Point(6, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 1;
@@ -144,26 +150,46 @@
             // 
             // tbHostName
             // 
-            this.tbHostName.Location = new System.Drawing.Point(86, 50);
+            this.tbHostName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbHostName.Location = new System.Drawing.Point(86, 83);
             this.tbHostName.Name = "tbHostName";
             this.tbHostName.Size = new System.Drawing.Size(265, 20);
             this.tbHostName.TabIndex = 2;
             // 
             // btnTestConnection
             // 
-            this.btnTestConnection.Location = new System.Drawing.Point(276, 21);
+            this.btnTestConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTestConnection.Location = new System.Drawing.Point(276, 54);
             this.btnTestConnection.Name = "btnTestConnection";
             this.btnTestConnection.Size = new System.Drawing.Size(75, 23);
-            this.btnTestConnection.TabIndex = 2;
+            this.btnTestConnection.TabIndex = 1;
             this.btnTestConnection.Text = "Тест";
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
+            // 
+            // tbSQLServerName
+            // 
+            this.tbSQLServerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSQLServerName.Location = new System.Drawing.Point(110, 28);
+            this.tbSQLServerName.Name = "tbSQLServerName";
+            this.tbSQLServerName.Size = new System.Drawing.Size(241, 20);
+            this.tbSQLServerName.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Имя SQL сервера";
             // 
             // frmReportSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 220);
+            this.ClientSize = new System.Drawing.Size(381, 249);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tbDefaultReportName);
             this.Controls.Add(this.label2);
@@ -203,5 +229,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbHostName;
         private System.Windows.Forms.Button btnTestConnection;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbSQLServerName;
     }
 }

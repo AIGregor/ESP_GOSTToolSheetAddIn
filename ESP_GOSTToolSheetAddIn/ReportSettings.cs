@@ -18,6 +18,7 @@ namespace ESP_GOSTToolSheetAddIn
 
         public bool useLocalHost = true;
         public string hostName = "";
+        public string sqlServerName = "";
 
         public string DefaultReportPath
         {
@@ -77,6 +78,7 @@ namespace ESP_GOSTToolSheetAddIn
                 {
                     hostName = node["HostName"].InnerText;
                     useLocalHost = bool.Parse(node["LocalHost"].InnerText);
+                    sqlServerName = node["SQLServerName"].InnerText;
                 }
             }
             catch (Exception E)
@@ -109,6 +111,7 @@ namespace ESP_GOSTToolSheetAddIn
                     useLocalHost = bool.Parse(node["LocalHost"].InnerText);
                     defaultReportPath = node["DefaultReportPath"].InnerText;
                     defaultReportName = node["DefaultReportName"].InnerText;
+                    sqlServerName = node["SQLServerName"].InnerText;
                 }
             }
             catch (Exception E)
@@ -139,6 +142,7 @@ namespace ESP_GOSTToolSheetAddIn
                 node["LocalHost"].InnerText = useLocalHost.ToString();
                 node["DefaultReportPath"].InnerText = defaultReportPath;
                 node["DefaultReportName"].InnerText = defaultReportName;
+                node["SQLServerName"].InnerText = sqlServerName;
             }
             docEspritHost.Save(Connect.assemblyFolder + StringResource.xmlAddinSettingsName);
         }

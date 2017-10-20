@@ -74,15 +74,19 @@ namespace ESP_GOSTToolSheetAddIn
             ReportSettings settings = new ReportSettings();
             settings.loadHostSettings();
 
+            string sqlServer = settings.sqlServerName;
+            if (string.Equals(sqlServer, ""))
+                sqlServer = "KBMSS";
+
             if (settings.useLocalHost)
             {
                 currentMashineName = System.Environment.MachineName;
-                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName);
+                connectionString = string.Format("Data Source={0}\\{1};Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName, sqlServer);
             }
             else
             {
                 currentMashineName = settings.hostName;
-                connectionString = string.Format("Data Source={0}\\KBMSS;Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName);
+                connectionString = string.Format("Data Source={0}\\{1};Initial Catalog=KBM;Persist Security Info=True;User ID=sa;Password=KBMsa64125#; Connection Timeout=1", currentMashineName, sqlServer);
             }
         }
 
@@ -139,7 +143,7 @@ namespace ESP_GOSTToolSheetAddIn
 
             if (docToolID == "" || clCode == 0)
             {
-                return userParamValue;
+                return null;
             }
 
             string sqlQuery = "SELECT fldValue_tblCuttingToolParameter FROM tblCuttingToolParameter WHERE" +
