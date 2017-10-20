@@ -106,5 +106,10 @@ namespace ESP_GOSTToolSheetAddIn
         {
             Close();
         }
+
+        private void About_Load(object sender, EventArgs e)
+        {
+            labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
+        }
     }
 }

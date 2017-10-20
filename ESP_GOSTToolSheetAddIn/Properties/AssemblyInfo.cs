@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Плагин - Карта наладки инструмента ГОСТ 3.1404-86")]
 [assembly: AssemblyDescription("Автоматическая генерация карты наладки инструмента в формате ГОСТ 3.1404-86 Форма 4")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Центральный офис АО ЛО ЦНИТИ")]
 [assembly: AssemblyProduct("Карта наладки инструмента ГОСТ 3.1404-86")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]

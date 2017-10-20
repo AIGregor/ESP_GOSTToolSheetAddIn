@@ -46,7 +46,7 @@
             this.labelProductName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelProductName.Location = new System.Drawing.Point(170, 9);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelProductName.MaximumSize = new System.Drawing.Size(296, 17);
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(296, 17);
             this.labelProductName.TabIndex = 29;
@@ -55,9 +55,9 @@
             // labelVersion
             // 
             this.labelVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelVersion.Location = new System.Drawing.Point(170, 35);
+            this.labelVersion.Location = new System.Drawing.Point(170, 34);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelVersion.MaximumSize = new System.Drawing.Size(296, 17);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(296, 17);
             this.labelVersion.TabIndex = 28;
@@ -68,7 +68,7 @@
             this.labelCopyright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCopyright.Location = new System.Drawing.Point(170, 61);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelCopyright.MaximumSize = new System.Drawing.Size(296, 17);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(296, 17);
             this.labelCopyright.TabIndex = 30;
@@ -79,7 +79,7 @@
             this.labelCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCompanyName.Location = new System.Drawing.Point(170, 87);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
+            this.labelCompanyName.MaximumSize = new System.Drawing.Size(296, 17);
             this.labelCompanyName.Name = "labelCompanyName";
             this.labelCompanyName.Size = new System.Drawing.Size(296, 17);
             this.labelCompanyName.TabIndex = 31;
@@ -94,7 +94,7 @@
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.Size = new System.Drawing.Size(296, 71);
+            this.textBoxDescription.Size = new System.Drawing.Size(296, 46);
             this.textBoxDescription.TabIndex = 32;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "Description";
@@ -122,7 +122,7 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(9, 106);
+            this.textBox1.Location = new System.Drawing.Point(15, 104);
             this.textBox1.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -130,14 +130,14 @@
             this.textBox1.Size = new System.Drawing.Size(190, 112);
             this.textBox1.TabIndex = 33;
             this.textBox1.TabStop = false;
-            this.textBox1.Text = "\r\nЦентральный офис \r\nАО \"ЛО ЦНИТИ\"\r\nhttp://www.locniti.ru\r\n\r\nТел./факс: (812) 408" +
-    "-77-17\r\nСлужба технической \r\nподдержки: support@locniti.ru";
+            this.textBox1.Text = "\r\nhttp://www.locniti.ru\r\n\r\nТел./факс: (812) 408-77-17\r\nСлужба технической \r\nподде" +
+    "ржки: support@locniti.ru";
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(391, 188);
+            this.okButton.Location = new System.Drawing.Point(391, 161);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 24);
             this.okButton.TabIndex = 34;
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 224);
+            this.ClientSize = new System.Drawing.Size(478, 197);
             this.Controls.Add(this.labelProductName);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelCopyright);
@@ -167,6 +167,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "О дополнении";
+            this.Load += new System.EventHandler(this.About_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
