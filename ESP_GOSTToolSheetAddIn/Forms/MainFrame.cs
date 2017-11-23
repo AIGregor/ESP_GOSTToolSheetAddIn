@@ -368,6 +368,7 @@ namespace ESP_GOSTToolSheetAddIn.Forms
             //Сохранить в БД
             DatabaseInterface dataBase = new DatabaseInterface();
             bool bResultAll = true;
+            string breakToolsList = "";
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
                 Connect.logger.Info("Сохранение значений параметров в БД. Сохранение значений параметров инструмента : " + gostTool.toolDocumentID);
@@ -376,15 +377,17 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                 if (!result)
                 {
                     Connect.logger.Warning(string.Format("Пользовательские параметры инструмента с ID {0} не сохранены !", gostTool.toolDocumentID));
+                    breakToolsList += gostTool.toolDocumentID + "\n\t";
                     bResultAll = false;
                 }
                 
             }
             //Информирование о завершении сохранения
             if (bResultAll)            
-                MessageBox.Show("Сохранение в Базу Знаний завершено.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else            
-                MessageBox.Show("Сохранение в Базу Знаний не выполненно.\n Подробнее смотрите в лог файле.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Error);            
+                MessageBox.Show("Сохранение в Базу Знаний завершено успешно.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Сохранение в Базу Знаний завершено.\n\nСледующие инструменты не удалось найти в БД, поэтому их пользовательские параметры не сохранены.\n\n\t" + breakToolsList +
+                    "\nВозможно инструмент отсутствует в БД или ID инструмента не совпадает с ID из БД.\n", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Warning);           
         }
 
         // Кнопка на форме - загрузить все пользовательские параметры для всех инструментов из БД
@@ -392,6 +395,8 @@ namespace ESP_GOSTToolSheetAddIn.Forms
         {
             DatabaseInterface dataBase = new DatabaseInterface();
             bool bResultAll = true;
+            bool bCurResult = true;
+            string breakToolsList = "";
             foreach (GostTool gostTool in AdditionalToolParameters.gostReportToolsArray)
             {
                 for (int i = 0; i < gostTool.parameters.Count(); i++)
@@ -409,21 +414,33 @@ namespace ESP_GOSTToolSheetAddIn.Forms
                         else
                         {
                             bResultAll = false;
-                            MessageBox.Show("Загрузка из Базы Знаний не выполнена\n Подробнее смотрите в лог файле.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }                        
+                            bCurResult = false;
+                            //return;
+                        }                       
                     }
                 }
+
+                if (!bCurResult)
+                {
+                    breakToolsList += gostTool.toolDocumentID + "\n\t";
+                    bCurResult = true;
+                }
+
             }
             //очистить форму от старых записей
             dgvReportToolParameters.Rows.Clear();
 
             //заполнить форму после загрузки параметров из БД
             fillFormReportToolParameters(selectedToolIndex);
-            
+
             //Информирование о завершении загрузки
-            MessageBox.Show("Загрузка из Базы Знаний завершена.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (bResultAll)
+                MessageBox.Show("Загрузка из Базы Знаний завершена.", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Загрузка из Базы Знаний завершена.\n\nСледующие инструменты не удалось найти в БД, поэтому их пользовательские параметры не были загружены.\n\n\t" + breakToolsList +
+                    "\nВозможно инструмент отсутствует в БД или ID инструмента не совпадает с ID из БД.\n", "База Знаний Esprit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
         private void MenuItemHelpAbout_Click(object sender, EventArgs e)
         {
             About dlgAbout = new About();
